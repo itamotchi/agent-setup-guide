@@ -68,8 +68,9 @@ nothing; these instead:
 - `cat ~/.claude/.credentials.json` in Bash: refused by the deny rule
   without a prompt is the pass. A prompt (the read block's) means the
   `~/` line does not match: refuse it, and fix the rules' form first.
-- `powershell -Command "echo x"` refused; `curl --version` refused; asked,
-  the session names no PowerShell tool among its tools.
+- `powershell -Command "echo x"` refused; `curl --version` refused; `gh
+  auth status` refused; asked, the session names no PowerShell tool
+  among its tools.
 - The rules' id command prints an id (`openssl` in Git Bash: not
   verified).
 - An outside Read and a Write of a new file outside the session's folders

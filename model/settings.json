@@ -1,5 +1,5 @@
 {
-  "_comment": "Template, Claude Code on macOS (environments/claude-code-macos.md): the fragment to MERGE into ~/.claude/settings.json; the other keys of the user's file stay as they are. One way to set it, not a requirement (guide.md). In this file a path is ~/… or //abs — a bare /… would be relative to ~/.claude/. The two ask lines put before the user as a permission prompt, in every mode, every write under ~/.claude and every start of a session by a session. No hooks. The write block (blockWritesOutsideWorkingDirectories, v2.1.314+) refuses the file tools outside the session's folders and refuses Claude Code settings files to the agent everywhere: once it is on, the user pastes each change to this file themselves and the agent reads it back. The read block (blockReadsOutsideWorkingDirectories, v2.1.257+) keeps reads to the session's folders. The sandbox runs each Bash command under macOS Seatbelt — writes in the session's folders and temp alone, with the read block reads there alone, no host unless named per command and approved; the four excluded commands run outside it because git's credential comes through gh, whose folder sandboxed commands cannot read. The mcp__ccd_* and Cd lines name tools of the Claude desktop app.",
+  "_comment": "Template, Claude Code on macOS (environments/claude-code-macos.md): the fragment to MERGE into ~/.claude/settings.json; the other keys of the user's file stay as they are. One way to set it, not a requirement (guide.md). In this file a path is ~/… or //abs — a bare /… would be relative to ~/.claude/. gh auth and git credential are denied whole: each can print a token (gh auth token, gh auth status --show-token, git credential fill), a rule matches a command's start, and signing in and out are the user's acts. The two ask lines put before the user as a permission prompt, in every mode, every write under ~/.claude and every start of a session by a session. No hooks. The write block (blockWritesOutsideWorkingDirectories, v2.1.314+) refuses the file tools outside the session's folders and refuses Claude Code settings files to the agent everywhere: once it is on, the user pastes each change to this file themselves and the agent reads it back. The read block (blockReadsOutsideWorkingDirectories, v2.1.257+) keeps reads to the session's folders. The sandbox runs each Bash command under macOS Seatbelt — writes in the session's folders and temp alone, with the read block reads there alone, no host unless named per command and approved; the four excluded commands run outside it because git's credential comes through gh, whose folder sandboxed commands cannot read. The mcp__ccd_* and Cd lines name tools of the Claude desktop app.",
   "autoMemoryEnabled": false,
   "permissions": {
     "deny": [
@@ -25,6 +25,8 @@
       "Bash(wget:*)",
       "Bash(ssh:*)",
       "Bash(scp:*)",
+      "Bash(gh auth:*)",
+      "Bash(git credential:*)",
       "Bash(security:*)",
       "Bash(claude:*)",
       "Bash(codex:*)",

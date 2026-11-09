@@ -30,6 +30,8 @@
       "Bash(wget:*)",
       "Bash(ssh:*)",
       "Bash(scp:*)",
+      "Bash(gh auth:*)",
+      "Bash(git credential:*)",
       "Bash(powershell:*)",
       "Bash(pwsh:*)",
       "Bash(cmd:*)",
