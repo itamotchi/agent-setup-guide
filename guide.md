@@ -112,7 +112,13 @@ user.
 10. **Prompts.** An approval prompt protects only if the user understands
     it. The agent says, before an action, what it is about to do and why;
     a user who does not understand a prompt refuses it, and the agent
-    explains afterwards.
+    explains afterwards. It protects, too, only while the user still reads
+    it: many prompts lead to approval fatigue, where "people stop paying
+    close attention to what they're approving" — Anthropic found that
+    users accepted 93% of Claude Code's prompts ("Claude Code auto mode",
+    2026-03-25). Fewer prompts protect more: stop few things, and let the
+    sandbox take the routine where there is one; a reviewer model,
+    § 2.14.
 11. **Change.** Features arrive and change with each version. A check
     that passed may not hold after an update; re-check then.
 12. **A vault built for another tool.** A vault's enforced rules belong
@@ -142,12 +148,20 @@ user.
     sandbox may keep `.git` read-only), the vault's scripts, a push.
     Letting these past costs more than it looks: a commit runs the
     vault's git hooks and a script runs code from the folder, both kept
-    where the agent may write, so a rule that runs such a command outside
-    the sandbox without asking lets whatever the agent put there run
-    unbounded. The user decides command by command: approve each time,
-    run it themselves, or allow it knowing that cost — and who answers
-    the approvals: some tools can send them to a reviewer model instead
-    of the user.
+    where the agent may write, so whatever lets such a command out of the
+    sandbox lets whatever the agent put there run unbounded. The ways: a
+    rule that allows it without asking; approving each time, which holds
+    only while the prompts stay few enough to read (§ 2.10); a reviewer
+    model answering in the user's place (Claude Code's auto mode, Codex's
+    Auto-review), which spares the prompts but is a model — Anthropic
+    reports that its own let 17% of real overeager actions through in its
+    tests, and that it may take an earlier yes as consent for more than
+    was meant (the same post); or the user running it themselves. Neither
+    a rule, a tired reader nor a reviewer is a boundary: what must hold
+    goes where no model decides — deny rules, which no reviewer overrides
+    (Codex: `forbidden` rules), the sandbox for what stays inside it, the
+    vault's commit and push checks. The user decides, command by command,
+    knowing this.
 
 ## 3. What the user decides
 
@@ -161,7 +175,9 @@ before anything is written.
    the user will actually read: a mode that prompts more than that is
    not safer. Who answers them — the user, or a reviewer the tool offers
    in the user's place — and which commands, if any, may pass the sandbox
-   without asking (§ 2.14).
+   without asking (§ 2.14). Proposed: no more prompts than the user will
+   read; a reviewer for the routine where the tool has one; what is never
+   done (§ 3.3) in deny rules, which no reviewer overrides.
 3. **What is never done.** The secrets never read; the commands never
    run; the acts never taken.
 4. **Acts outside.** Whether sending, installing, signing in, pushing
