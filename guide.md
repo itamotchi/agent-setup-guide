@@ -104,7 +104,8 @@ user.
    run as the user; where the tool lets a project value override a user
    value, the project's wins. A user's deny rules usually cannot be
    removed by a project. Read a vault's project settings before trusting
-   the folder.
+   the folder. A vault's enforced rules belong to the tool it was built
+   for: another tool reads its instructions but runs none of its hooks.
 9. **Who writes the settings files.** Some tools refuse the agent's
    writes to their own settings files, by design. Then the agent drafts,
    shows the whole file, the user applies it, and the agent reads it
