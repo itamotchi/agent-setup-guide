@@ -136,6 +136,17 @@ user.
     change the vault's rules. A hook in the user's own settings runs in
     every folder (Claude Code's and Codex's do): one meant for a single
     vault checks where it is running and does nothing elsewhere.
+14. **A vault's procedure and the sandbox.** A vault's procedure may
+    expect the agent to run what the user's sandbox stops: a commit (a
+    sandbox may keep `.git` read-only), the vault's scripts, a push.
+    Letting these past costs more than it looks: a commit runs the
+    vault's git hooks and a script runs code from the folder, both kept
+    where the agent may write, so a rule that runs such a command outside
+    the sandbox without asking lets whatever the agent put there run
+    unbounded. The user decides command by command: approve each time,
+    run it themselves, or allow it knowing that cost — and who answers
+    the approvals: some tools can send them to a reviewer model instead
+    of the user.
 
 ## 3. What the user decides
 
@@ -147,7 +158,9 @@ before anything is written.
    shell commands are kept from reading and writing outside them.
 2. **How much it does unasked.** The approval mode. Ask how many prompts
    the user will actually read: a mode that prompts more than that is
-   not safer.
+   not safer. Who answers them — the user, or a reviewer the tool offers
+   in the user's place — and which commands, if any, may pass the sandbox
+   without asking (§ 2.14).
 3. **What is never done.** The secrets never read; the commands never
    run; the acts never taken.
 4. **Acts outside.** Whether sending, installing, signing in, pushing

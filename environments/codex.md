@@ -37,7 +37,26 @@ Codex CLI 0.162.0.
   a folder not under version control — this guide downloaded as a ZIP —
   starts `read-only`, and Codex may start `read-only` until the folder is
   trusted (an onboarding prompt or `/permissions`). Network access is off
-  by default.
+  by default. Inside `workspace-write`, `<writable_root>/.git` is
+  read-only, and `.codex`, `.agents` and `.aws` when they exist,
+  recursively: a `git add` or `git commit` needs an escalation.
+- **Who answers approvals** (the same page). By default the user
+  (`approvals_reviewer = "user"`); with `approvals_reviewer =
+  "auto_review"`, "eligible approval requests are reviewed by Auto-review
+  instead of surfacing to the user" — sandbox escalations, network
+  requests, app and MCP tool calls. It needs `on-request` or granular
+  approvals; failures and timeouts block.
+- **Command rules** (the rules page; "experimental"). `.rules` files in
+  `rules/` beside each config layer (`~/.codex/rules/default.rules`; a
+  repository's `.codex/rules/` only when trusted). `prefix_rule(pattern =
+  [...], decision = ...)`: `allow` — "Run the command outside the sandbox
+  without prompting"; `prompt`; `forbidden`; the strictest match wins.
+  Matching is by exact argument prefix; a plain chain inside `bash -lc`
+  is split, anything more is matched whole; PowerShell is not mentioned.
+  A command added to the allow list in the TUI is written to the user's
+  `default.rules`, and with Smart approvals (the default) Codex may
+  propose a rule during an escalation. `codex execpolicy check --rules
+  <file> -- <command>` shows the decision.
 - **Settings.** The user's `config.toml` is in `CODEX_HOME` (`~/.codex`;
   on Windows, for example, `C:\Users\<name>\.codex`); a repository may
   carry `.codex/config.toml`; `trust_level = "untrusted"` for a project
@@ -61,6 +80,24 @@ Codex CLI 0.162.0.
   guardrail, not a complete enforcement boundary"; "Some specialized tool
   paths can opt out of the default hook path"; hosted tools such as web
   search are not covered.
+
+## From a trial on Windows (2026-11-09)
+
+A vault's setup run by Codex on Windows, reported by the agent; the
+user's harness had not been set by this guide.
+
+- `codex-cli 0.167.0-alpha.3.2` (an alpha); before the version line,
+  warnings that cleaning a temporary folder and creating a PATH alias
+  were denied. Windows reported as "Windows 10 Pro 25H2, build
+  26200.9711" — build 26200 is Windows 11 25H2, so the name is likely
+  the registry's old product name (not checked). The shell PowerShell;
+  the sandbox reported as "managed workspace-write", its kind (`mxc`,
+  `elevated`, `unelevated`) not reported; approvals `auto_review`.
+- `python3` could not start inside the sandbox (access denied) and ran
+  escalated; the cause was not found. `git add` stopped at
+  `.git/index.lock` (permission denied), as the protected `.git` above
+  predicts. No hook was set. The vault's procedure, written for Git
+  Bash, was run in PowerShell.
 
 ## From a research report made for this guide (2026-11-09)
 
@@ -94,8 +131,8 @@ kept: `guide.md` § 2.12, § 2.13, § 3.8.
 ## Not known here
 
 Whether Codex may write its own `config.toml`, and whether such a write
-is protected; the syntax of its command rules (the execution policy) and
-how they match; how a repository's `.codex/config.toml` combines with
+is protected; how command rules match PowerShell commands; why a
+program may fail to start inside the Windows sandbox; how a repository's `.codex/config.toml` combines with
 the user's, and whether it can loosen it; where its login is stored on
 Windows; which shell a `Bash` hook sees on Windows (the hooks page does
 not say).
