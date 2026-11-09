@@ -104,8 +104,7 @@ user.
    run as the user; where the tool lets a project value override a user
    value, the project's wins. A user's deny rules usually cannot be
    removed by a project. Read a vault's project settings before trusting
-   the folder. A vault's enforced rules belong to the tool it was built
-   for: another tool reads its instructions but runs none of its hooks.
+   the folder. A vault built for another tool: § 2.12.
 9. **Who writes the settings files.** Some tools refuse the agent's
    writes to their own settings files, by design. Then the agent drafts,
    shows the whole file, the user applies it, and the agent reads it
@@ -116,6 +115,27 @@ user.
     explains afterwards.
 11. **Change.** Features arrive and change with each version. A check
     that passed may not hold after an update; re-check then.
+12. **A vault built for another tool.** A vault's enforced rules belong
+    to the tool it was built for: another tool reads its instruction file
+    but runs none of its hooks. The vault's hook program can be wired into
+    the user's own tool only where that tool has hooks, and even then it
+    may not understand it: another tool names its edit tool differently,
+    passes its arguments in another shape, or runs commands in another
+    shell, and what the program does not recognise it lets through. It
+    also runs the vault's code with the user's rights on every action.
+    What holds whatever the tool — git's own hooks on a commit (a
+    pre-commit), checks at push or on the server — is where such a vault
+    keeps its rules; its documents say which it relies on.
+13. **The user's settings stay out of the vault.** What a user sets for
+    a vault — an adapter for its hooks, their tool's configuration — is
+    theirs, not the vault's: kept in the user's own configuration, outside
+    the clone. Where the tool reads such a file only from inside the
+    folder, it is kept out of commits by git's local exclude file
+    (`.git/info/exclude`), not by the vault's `.gitignore`, which is the
+    vault's to change; committed, it would reach every other writer and
+    change the vault's rules. A hook in the user's own settings runs in
+    every folder (Claude Code's and Codex's do): one meant for a single
+    vault checks where it is running and does nothing elsewhere.
 
 ## 3. What the user decides
 
@@ -139,7 +159,15 @@ before anything is written.
    are asked; what is said before a write; how a disagreement is
    settled. These go in the user-level instruction file, which holds
    lines about the person — not about a vault, not about the tool.
-8. **How it is checked, and when it is looked at again.**
+8. **A vault built for another tool** (§ 2.12). Whether to adapt its
+   hooks to the user's tool — an adapter the agent writes, kept out of
+   the vault (§ 2.13), shown to work by step 6 of § 4 for each way of
+   writing (the edit tool and the shell) — or to tell the user what is
+   lost and rely on the vault's commit and push checks. Proposed: rely on
+   those checks, unless the user wants the earlier stop and the agent can
+   show the adapter working; an adapter that lets writes through unseen
+   gives a false assurance.
+9. **How it is checked, and when it is looked at again.**
 
 ## 4. How to proceed
 
@@ -169,8 +197,12 @@ settings.
    whose `AGENTS.md` would lead it back into the setup — so that the
    settings are tried as they will be used. Try what should be refused —
    read a secret, run a denied command, write outside the folder, start
-   another agent — and show each refusal. Anything not refused is said;
-   the user decides whether to fix it or accept it.
+   another agent — and show each refusal. A refusal counts by its
+   message, which says what refused: a permission rule, the sandbox, a
+   hook, the user declining a prompt — or the agent declining by itself
+   after reading an instruction, which shows nothing about the enforced
+   settings. Record each message as it stands. Anything not refused is
+   said; the user decides whether to fix it or accept it.
 7. **Record** what was decided and why, where the user keeps such notes.
 
 ## 5. A report back

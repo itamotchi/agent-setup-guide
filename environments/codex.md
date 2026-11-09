@@ -45,6 +45,22 @@ Codex CLI 0.162.0.
 - **Instructions.** A global `AGENTS.md` in Codex's home, then each
   `AGENTS.md` from the project root down to the folder opened; later ones
   come later in the prompt and override.
+- **Hooks** (the hooks page). In `hooks.json` or `[hooks]` tables in
+  `config.toml`, at `~/.codex/` or a repository's `.codex/`; every
+  matching hook from every layer runs, none replaces another. A
+  project's hooks load only when its `.codex/` layer is trusted, and
+  hooks other than managed ones run only after review and trust in
+  `/hooks`. A `PreToolUse` hook sees shell commands as `Bash` and file
+  edits as `apply_patch` (`tool_name: "apply_patch"`; a matcher may also
+  say `Edit` or `Write`). To deny: `hookSpecificOutput` with
+  `permissionDecision: "deny"` and a reason, or exit code 2 with the
+  reason on stderr; `"ask"` is not yet supported. A matcher filters by
+  tool name, not by path, and no per-folder setting is documented.
+  `commandWindows` gives a Windows-only command; the page's example runs
+  `py -3`. Its limits, in its words: "Treat tool hooks as a useful
+  guardrail, not a complete enforcement boundary"; "Some specialized tool
+  paths can opt out of the default hook path"; hosted tools such as web
+  search are not covered.
 
 ## From a research report made for this guide (2026-11-09)
 
@@ -53,8 +69,6 @@ Citing the Codex docs of 2026; not checked here:
 - Permission profiles (Beta): read, write and deny levels; built-in
   read-only, workspace and full access; the docs say to set the default
   explicitly.
-- Its hooks are "not a complete enforcement boundary" (the docs, as
-  quoted there).
 - No guided set-up or interview is recorded.
 
 ## A vault built for Claude Code
@@ -68,10 +82,20 @@ push or on the server. Whether a vault accepts Codex, and how it
 enforces its rules there, is that vault's to decide; nothing in this
 guide requires one tool.
 
+A vault's hook program written for Claude Code checks Claude Code's
+tool names (`Edit`, `Write`, `Bash` …); under Codex an edit arrives as
+`apply_patch` and passes a program that does not look for that name
+(found in one vault's program by its session, 2026-11-09). An adapter
+would also have to read `apply_patch`'s input and the commands of the
+shell Codex runs on Windows, which a program written for bash may
+misread (not checked here). Whether to adapt, and where an adapter is
+kept: `guide.md` § 2.12, § 2.13, § 3.8.
+
 ## Not known here
 
 Whether Codex may write its own `config.toml`, and whether such a write
 is protected; the syntax of its command rules (the execution policy) and
 how they match; how a repository's `.codex/config.toml` combines with
 the user's, and whether it can loosen it; where its login is stored on
-Windows.
+Windows; which shell a `Bash` hook sees on Windows (the hooks page does
+not say).
