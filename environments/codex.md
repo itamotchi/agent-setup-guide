@@ -60,10 +60,13 @@ Citing the Codex docs of 2026; not checked here:
 ## A vault built for Claude Code
 
 A vault whose enforced rules are Claude Code's hooks
-(`.claude/settings.json`) is not enforced under Codex: Codex reads the
-vault's `AGENTS.md` but runs none of those hooks. Git's own hooks (a
-pre-commit set by `core.hooksPath`) still run on a commit. Open such a
-vault with the tool it was built for.
+(`.claude/settings.json`) loses, under Codex, what those hooks do in the
+session: Codex reads the vault's `AGENTS.md` but runs none of them. What
+does not depend on the agent tool still holds — git's own hooks (a
+pre-commit set by `core.hooksPath`) on a commit, and any check made at
+push or on the server. Whether a vault accepts Codex, and how it
+enforces its rules there, is that vault's to decide; nothing in this
+guide requires one tool.
 
 ## Not known here
 
