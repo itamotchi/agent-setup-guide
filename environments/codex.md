@@ -98,6 +98,9 @@ user's harness had not been set by this guide.
   `.git/index.lock` (permission denied), as the protected `.git` above
   predicts. No hook was set. The vault's procedure, written for Git
   Bash, was run in PowerShell.
+- An escalated `git commit` ran the vault's pre-commit, which refused a
+  change to a tracked file it protects. Auto-review approved the
+  escalation; no prompt reached the user.
 
 ## From a research report made for this guide (2026-11-09)
 

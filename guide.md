@@ -125,7 +125,8 @@ user.
     also runs the vault's code with the user's rights on every action.
     What holds whatever the tool — git's own hooks on a commit (a
     pre-commit), checks at push or on the server — is where such a vault
-    keeps its rules; its documents say which it relies on.
+    keeps its rules, as far as those checks reach; its documents say
+    which it relies on and what each covers.
 13. **The user's settings stay out of the vault.** What a user sets for
     a vault — an adapter for its hooks, their tool's configuration — is
     theirs, not the vault's: kept in the user's own configuration, outside
