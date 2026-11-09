@@ -1,0 +1,12 @@
+{
+  "_comment": "Template, optional: the five protection lines for ONE folder's .claude/settings.local.json (gitignored). A session opened on that folder can then not edit the agent's files by the tool path; a session opened on another folder still can. Not in the default: Claude Code already treats .claude as a protected path (the classifier in Auto, a prompt in Manual and Accept edits). In local settings a leading / is relative to the folder.",
+  "permissions": {
+    "deny": [
+      "Edit(~/.claude/CLAUDE.md)",
+      "Edit(~/.claude/settings.json)",
+      "Edit(~/.claude/rules/**)",
+      "Edit(~/.claude/hooks/**)",
+      "Edit(/.claude/settings.local.json)"
+    ]
+  }
+}

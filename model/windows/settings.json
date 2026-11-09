@@ -1,0 +1,53 @@
+{
+  "_comment": "Template, Windows variant (native Windows with Git for Windows; environments/claude-code-windows.md), drafted 2026-11-09, not yet run on a machine: the fragment to MERGE into %USERPROFILE%\\.claude\\settings.json (~/.claude/settings.json). It is model/settings.json less the sandbox, which does not run on native Windows: Claude Code runs commands unsandboxed there, with no warning, and failIfUnavailable would stop it at startup (the sandboxing page). Changed for Windows: brew and security (macOS) out; winget in; powershell, pwsh and cmd denied from Bash; _netrc beside .netrc; gh's folder is %APPDATA%\\GitHub CLI on Windows (gh help environment), in place of ~/.config/gh; Claude Code's own login is the file ~/.claude/.credentials.json on Windows (the authentication page), not the Keychain. The PowerShell tool is turned off by env: with Git Bash it is on by default for claude.ai and Console accounts, and a Bash rule does not restrict it (the tools reference). Paths are written ~/… as in the Mac model; the docs do not say how ~ expands on Windows or how a space in a rule's path is matched, so the checks try a deny line on the machine (environments/claude-code-windows.md). Everything else as model/settings.json's comment says.",
+  "autoMemoryEnabled": false,
+  "env": {
+    "CLAUDE_CODE_USE_POWERSHELL_TOOL": "0"
+  },
+  "permissions": {
+    "deny": [
+      "Read(~/.ssh/**)",
+      "Edit(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Edit(~/.aws/**)",
+      "Read(~/.gnupg/**)",
+      "Edit(~/.gnupg/**)",
+      "Read(~/.netrc)",
+      "Edit(~/.netrc)",
+      "Read(~/_netrc)",
+      "Edit(~/_netrc)",
+      "Read(~/AppData/Roaming/GitHub CLI/**)",
+      "Edit(~/AppData/Roaming/GitHub CLI/**)",
+      "Read(~/.claude/.credentials.json)",
+      "Edit(~/.claude/.credentials.json)",
+      "Bash(sudo:*)",
+      "Bash(pip:*)",
+      "Bash(pip3:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(winget:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(powershell:*)",
+      "Bash(pwsh:*)",
+      "Bash(cmd:*)",
+      "Bash(claude:*)",
+      "Bash(codex:*)",
+      "mcp__ccd_directory__request_directory",
+      "mcp__ccd_directory__change_directory",
+      "Cd",
+      "mcp__ccd_session_mgmt__set_session_permission_mode",
+      "mcp__ccd_session__hand_off_to_session",
+      "mcp__ccd_session__move_to_cloud",
+      "mcp__ccd_session_mgmt__set_remote_control"
+    ],
+    "ask": [
+      "Edit(~/.claude/**)",
+      "mcp__ccd_session__start_session"
+    ],
+    "blockReadsOutsideWorkingDirectories": true,
+    "blockWritesOutsideWorkingDirectories": true
+  }
+}
