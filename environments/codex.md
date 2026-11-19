@@ -1,7 +1,11 @@
 # Codex
 
-Little has been checked here. The first trial of `guide.md` is Codex on
-Windows (2026-11-09): what it finds belongs here, with sources.
+What has been found here about Codex, dated and sourced: the docs as
+read on 2026-11-09, a vault's setup on Windows (2026-11-09), trials in
+the ChatGPT desktop app on macOS (2026-11-19). Observations, not
+settings to copy: which settings and guardrails a user has is theirs to
+decide with their agent (`guide.md`). Where a note and the docs differ,
+the docs win; Codex changes with each version.
 
 ## From the Codex docs (read 2026-11-09)
 
@@ -102,6 +106,155 @@ user's harness had not been set by this guide.
   change to a tracked file it protects. Auto-review approved the
   escalation; no prompt reached the user.
 
+## The ChatGPT desktop app on macOS (trials, 2026-11-19)
+
+One Mac, the ChatGPT desktop app version 26.1118.11504, a Business
+workspace. Codex chats were opened on a vault: a git clone whose
+`AGENTS.md` has the session pull at start, run the vault's lint script,
+list open issues with `gh`, commit and push. Codex ran the commands and
+reported them with their raw output; the reports were read against the
+docs (`learn.chatgpt.com/docs/…` and `learn.chatgpt.com/codex/…`, read
+2026-11-19; no page dated). One machine and one version: observations.
+
+- **Where Codex is.** On macOS, Codex is a mode of the ChatGPT desktop
+  app, beside Chat and Work (Work is not Codex); the docs' page is
+  "ChatGPT desktop app", its installer `Codex.dmg`. Its data folder is
+  `~/.codex` (`config.toml`, `AGENTS.md`, `rules/`); the app's settings
+  hold more than the file, and its AGENTS.md editor edits
+  `~/.codex/AGENTS.md`.
+- **The permission control** under the composer, per chat: Ask for
+  approval; Approve for me (the docs: `workspace-write`, `on-request`,
+  `approvals_reviewer = "auto_review"`); Full access (absent from the
+  menu while the General tab's Full access toggle is off); Custom (from
+  `config.toml`). **The composer's choice overrides the file**: with a
+  permission profile set in `config.toml`, Ask for approval chosen in a
+  new chat gave the preset's permissions, the file unchanged. The
+  reviewer came from the app as well: with `approvals_reviewer` removed
+  from the file, a new chat on Approve for me still showed
+  `auto_review`. The docs: selecting a Daybreak model can switch the
+  control to Approve for me by itself.
+- **The presets' sandbox**, from the permission list Codex is given:
+  read anywhere (`:root`); write in the workspace, a per-chat folder
+  under `~/.codex/visualizations/`, `/tmp` and `$TMPDIR`; `.git`,
+  `.agents`, `.codex` and `.aws` read-only inside each writable root;
+  the network off. So a session can read whatever the user can, and
+  every `git pull`, `git commit`, `git push` and `gh` call needs an
+  escalation.
+- **Escalation.** Under Ask for approval, `curl` and `git push --dry-run`
+  each raised a prompt; the push's said the name lookup of `github.com`
+  had failed in the sandbox and asked to re-run the command outside it —
+  the whole command leaves the sandbox, not its network alone. The
+  buttons: Deny, and Allow once with a menu beside it (not opened).
+  Under Approve for me the same commands, a live web search and the
+  built-in browser passed with no prompt and no verdict shown in the
+  chat; Auto-review is inferred to have approved the escalations, the
+  reviewer itself not seen. What Auto-review refuses, and whether a
+  refusal shows: not seen.
+- **A vault's routine rests on the model asking.** Under the presets the
+  vault's start-of-session `git pull --ff-only` failed in the sandbox
+  (`cannot open '.git/FETCH_HEAD'`) and `gh` could not reach the
+  network. In one chat Codex asked for no escalation — it judged the
+  user's question answerable locally — and reported a limit of its
+  environment; in later chats it asked, and the pull passed. An
+  instruction saying when to ask is one way to make it steadier; whether
+  to have one, and in which file, is the user's (and the vault's, for
+  its own file).
+- **Git hooks run outside the sandbox.** With `.git` read-only every
+  commit escalates, so a vault's pre-commit hook runs outside the
+  sandbox, while the hook's files sit in the workspace, writable from
+  inside; a reviewer sees the command, not the hook's code (found by the
+  vault's own session). See `guide.md` § 2.14.
+- **Permission profiles in the app.** A profile in `config.toml`
+  (`default_permissions`; `:root` deny with `:minimal` read; the clone
+  writable with `.git` and the vault's rule files read-only; git's own
+  config readable and the credential files denied; network off) showed
+  by name in the composer and held: reads and writes outside, the
+  network and writes to the protected paths were refused, the denies
+  marked not escalatable. **Nothing left it.** Requests to run outside
+  the sandbox (`require_escalated`, eight over two chats: a branch, `git
+  pull`, `git push --dry-run`, `gh api`, a write under `~/.codex`) ran
+  inside and met the profile's errors, with no prompt and no verdict;
+  `prompt` rules likewise; an `allow` rule for `git ls-remote origin` ran
+  with no prompt and could not resolve `github.com`. The built-in
+  browser failed (its helper could not read
+  `/System/Library/OpenSSL/openssl.cnf`), and every git command printed
+  warnings (xcrun's cache, a global gitignore). So under that profile the
+  vault's sync, commit and issue listing did not run. The docs are
+  silent on escalation under a profile ("approved escalations use their
+  own controls"); a gihyo.jp article and a forum post say approved
+  escalations are handled outside profiles — not what was seen. As
+  tried, a read fence and a reviewed way out of the sandbox were not had
+  together.
+- **Profiles through the CLI** (`codex sandbox -P … -c …`, on throwaway
+  repositories): `:root` deny with `:minimal` read blocked reads and
+  writes outside; `.git` writable with `.git/config`, `.git/hooks` and
+  the hooks folder read-only let commits through and refused `git
+  config`; a `github.com` allowlist (`features.network_proxy`) let an
+  anonymous `ls-remote` through and refused another host; the macOS
+  Keychain credential helper failed inside the sandbox (a private
+  repository unreachable) and passed outside. A profile with the sync
+  inside it would need these and a credential readable inside; untried
+  in the app. A workspace admin can enforce profiles
+  (`allowed_permission_profiles`), where a member's composer would
+  otherwise override the file.
+- **Command rules** (`~/.codex/rules/*.rules`). A `forbidden` rule
+  rejected the command before its process started, with the rule's
+  reason, under a profile and under a preset (seen: `git push --force …`,
+  `git commit --no-verify`). A `prompt` rule raised a prompt with its
+  justification; allowed once, the command still ran inside the sandbox
+  and failed (`.git/FETCH_HEAD` read-only) — one observation; the docs
+  say only "Prompt before each matching invocation". Matching is by
+  argument prefix: a rule on `git push --force` does not catch `git push
+  origin --force` unless it names that placement too.
+- **The web.** `[sandbox_workspace_write] network_access = false`: under
+  Ask for approval the network was shut in the sandbox (the name lookup
+  failed); whether the presets read that key at all is not known. Live
+  web search (`web_search = "live"`; the docs' default is cached, which
+  "reduces exposure to prompt injection from arbitrary live content")
+  and the built-in browser, its browsing default Always allow, reached a
+  page with no prompt under Approve for me. The built-in browser has
+  its own profile and settings: the browsing default (Always allow or
+  ask), history access, site tools (WebMCP), downloads and uploads, a
+  password manager, contact info, extensions. With browsing on Always
+  allow, a session can put what it has read into a URL and visit it
+  unasked.
+- **Git and GitHub.** A local Codex used the Mac's own `git` and `gh`
+  login; no GitHub connection in ChatGPT was needed (ChatGPT's GitHub
+  connector serves cloud tasks and code review). The commit author came
+  from `~/.gitconfig`.
+- **Other settings that bear on Codex**, from the app's tabs and the
+  docs — what each does: memories (off by default; the docs: "Treat
+  memories as a helpful recall layer, not as the only source for rules
+  that must always apply"); a "Codex" custom-instructions field in
+  Personalize, undocumented, which also reaches Codex Cloud, beside the
+  documented `~/.codex/AGENTS.md` (32 KiB cap); plugins, which "work in
+  Chat, Work and Codex", the host's sandbox and approval policy applying
+  through Codex; computer use (app access asked of the user, use while
+  the Mac is locked, always-allowed apps, and a Chrome extension that
+  acts in the user's signed-in Chrome — "sites may treat ChatGPT's
+  actions as coming from your account"); computer history (text
+  summaries of activity in apps and sites); dots (always-on cloud agents
+  with their own computer, which can be connected to the Mac); saved
+  passwords (a saved login lets the agent sign in as the user; the
+  built-in browser's help: a password typed into its sign-in form is not
+  visible to the model); connections (the Mac controlled from another
+  device); hooks (`PreToolUse`, `PermissionRequest`; "a useful
+  guardrail, not a complete enforcement boundary"); Git (always force
+  push; commit and PR instructions); Import (detects Claude Code and
+  Claude Cowork; maps settings, instruction files, MCP, skills, hooks,
+  subagents, plugins and project memories, and 30 days of chats; what
+  its sync does is not stated); keyboard shortcuts, global ones among
+  them. On the Business workspace the data controls showed training off
+  and fixed (OpenAI's help: Business, Enterprise and Edu content is not
+  used for training by default).
+- **The admin route.** Admin Console > Agent security (workspace owners,
+  admins, members with Codex admin permissions): requirements members
+  cannot override — approval policies, approvals reviewers, sandbox
+  modes, permission profiles, web search modes, managed hooks, the MCP
+  list, plugins — and defaults (a cloud-delivered `config.toml`); it
+  covers the desktop app's Codex. Whether Business is among "supported
+  plans": not confirmed.
+
 ## From a research report made for this guide (2026-11-09)
 
 Citing the Codex docs of 2026; not checked here:
@@ -134,7 +287,13 @@ kept: `guide.md` § 2.12, § 2.13, § 3.8.
 ## Not known here
 
 Whether Codex may write its own `config.toml`, and whether such a write
-is protected; how command rules match PowerShell commands; why a
+is protected (under a profile in the desktop app, refused even when
+escalation was asked; under the presets, not tried); what Auto-review
+refuses, and whether a refusal shows; whether the presets read
+`network_access`; which `permission_mode` a hook sees under Approve for
+me, and whether hooks run inside the sandbox; whether Plugin Management
+lets the agent install or enable plugins; whether the "ChatGPT" custom
+instructions reach Codex chats; how command rules match PowerShell commands; why a
 program may fail to start inside the Windows sandbox; how a repository's `.codex/config.toml` combines with
 the user's, and whether it can loosen it; where its login is stored on
 Windows; which shell a `Bash` hook sees on Windows (the hooks page does

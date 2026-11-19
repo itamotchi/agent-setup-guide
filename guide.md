@@ -2,8 +2,7 @@
 
 For a user and their coding agent — Claude Code, Codex or another — on
 any machine. The agent reads this file and talks with the user in the
-user's own language, one point at a time. Drafted 2026-11-09; its first
-trial is Codex on Windows.
+user's own language, one point at a time. Drafted 2026-11-09.
 
 This guide says what to watch for and what the user decides. It does not
 say what the user's settings must be. The notes on particular tools and
