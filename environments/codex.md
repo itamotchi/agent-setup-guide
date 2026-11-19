@@ -2,9 +2,10 @@
 
 What has been found here about Codex, dated and sourced: the docs as
 read on 2026-11-09, a vault's setup on Windows (2026-11-09), trials in
-the ChatGPT desktop app on macOS (2026-11-19). Observations, not
-settings to copy: which settings and guardrails a user has is theirs to
-decide with their agent (`guide.md`). Where a note and the docs differ,
+the ChatGPT desktop app on macOS (2026-11-19); and a reference
+configuration drawn from those trials, each line with its reason. A
+reference, never a requirement: which settings and guardrails a user has
+is theirs to decide with their agent (`guide.md`). Where a note and the docs differ,
 the docs win; Codex changes with each version.
 
 ## From the Codex docs (read 2026-11-09)
@@ -254,6 +255,97 @@ docs (`learn.chatgpt.com/docs/…` and `learn.chatgpt.com/codex/…`, read
   list, plugins — and defaults (a cloud-delivered `config.toml`); it
   covers the desktop app's Codex. Whether Business is among "supported
   plans": not confirmed.
+
+## A reference configuration: the ChatGPT desktop app on macOS (2026-11-19)
+
+One configuration that worked on the test bed above, for a user who
+works in a shared vault through Codex and wants few prompts; each line
+with its reason. A reference, not a requirement: the user decides each
+point with their agent, and the docs for their version win. Personal
+preferences (keyboard shortcuts, the send key) are left out.
+
+- **Mode: Approve for me**, chosen in the composer for each chat — the
+  composer overrides `config.toml`. A vault's routine needs an
+  escalation at every pull, commit, push and `gh` call; under Ask for
+  approval each is a prompt, and many prompts wear attention down
+  (`guide.md` § 2.10); Auto-review answers them instead. Auto-review is
+  a model, not a boundary: what must never happen goes in `forbidden`
+  rules (below). Full access off: with the General tab's toggle off it
+  is not in the menu.
+- **`~/.codex/config.toml`**, the part that bears on this:
+
+  ```toml
+  sandbox_mode = "workspace-write"
+  web_search = "live"
+
+  [sandbox_workspace_write]
+  network_access = false
+  ```
+
+  No approval keys: the composer's choice supplies them (with
+  `approvals_reviewer` removed, Approve for me still showed
+  `auto_review`). The network off makes a command that connects an
+  escalation, which is reviewed. Live search shows a page as it is now;
+  the docs' default, cached, "reduces exposure to prompt injection from
+  arbitrary live content" — the trade-off. No permission profile: under
+  one, nothing left the sandbox and the vault's sync failed (above).
+  The app adds a `[projects."<path>"] trust_level = "trusted"` entry when
+  the vault's folder is trusted.
+- **`~/.codex/rules/<name>.rules`**, forbidden rules for what no reviewer
+  should pass. For example:
+
+  ```
+  prefix_rule(
+      pattern = ["git", "push", ["--force", "-f", "--force-with-lease", "--mirror", "--delete", "-d"]],
+      decision = "forbidden",
+      justification = "Rewrites or deletes shared history. Ask the user.",
+  )
+  ```
+
+  and the same after `"origin"` and after `"origin", "main"`; and `git
+  commit` with `--no-verify` or `-n`, which skips the vault's
+  pre-commit. A list in one position is a set of alternatives (the
+  docs' rules page). Matching is by exact argument prefix, so each
+  placement is a rule of its own, and a form not named passes (`git
+  push origin +main`, `--force-with-lease=<ref>`; `guide.md` § 2.2).
+  Seen rejecting before the process started, with the justification.
+- **Instructions and memory.** Codex memories off, and memories from
+  tool-assisted chats off: the docs call memories "a helpful recall
+  layer, not ... the only source for rules that must always apply". The
+  "Codex" custom-instructions field in Personalize empty — undocumented,
+  and it reaches Codex Cloud too; the user's own instructions, if any, go
+  in `~/.codex/AGENTS.md`, the documented place. A line there that, when
+  a vault's routine fails in the sandbox, the agent asks to run it
+  outside — the route, not a workaround — makes the routine steadier
+  (above).
+- **Web and the built-in browser.** The built-in browser on, its
+  browsing default Always allow: looking at a page needs no approval
+  (the cost: a session can put what it has read into a URL unasked).
+  Downloads and uploads Requires approval: a file in or out is asked.
+  History access off (the docs: history "can include internal URLs,
+  search terms, and other sensitive information"); site tools (WebMCP)
+  off; no saved passwords, contact info or extensions in the browser.
+- **What acts as the user, off.** Computer use: no app allowed, not
+  while the Mac is locked, no always-allowed apps; no Chrome extension
+  ("sites may treat ChatGPT's actions as coming from your account");
+  computer history off; no passwords saved in the app (a saved login
+  lets the agent sign in as the user); no control of the Mac from
+  another device.
+- **Cloud, off.** No GitHub connection in ChatGPT: a local Codex uses the
+  Mac's own `git` and `gh` login, and the connector would open the
+  repositories to cloud tasks. Codex Cloud, code review and dots not
+  used; plugins the work does not use, off.
+- **Git tab.** Always force push off: it rewrites a shared vault's
+  history. Commit and PR instructions empty: a vault's conventions are in
+  its `AGENTS.md`.
+- **Notifications** for permission requests and questions on: a prompt
+  that does reach the user is seen.
+- **Import** not run, sync off: another tool's settings and instructions
+  are that tool's.
+- **Hooks**: none of the user's own; a vault's `.codex/` hooks, if any,
+  read, then trusted in the Hooks tab.
+- **Before the first chat on the vault**: `git` and `gh` signed in with
+  the user's own account, with access to the vault's repository.
 
 ## From a research report made for this guide (2026-11-09)
 
