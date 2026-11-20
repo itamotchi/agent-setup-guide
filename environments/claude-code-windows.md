@@ -49,7 +49,8 @@ a user of the CLI extends this note. `~/.claude` is
   authentication page; on the Mac it is the Keychain). gh keeps its
   configuration in `%APPDATA%\GitHub CLI` (`gh help environment`). curl
   and git also read `_netrc` beside `.netrc`. The template's deny list is
-  the macOS one with `brew` and `security` out and `winget` in.
+  the macOS one as it stood before 2026-11-20, with `brew` and
+  `security` out and `winget` in.
 - **Paths in rules.** The docs give the POSIX forms only (`~/`, `//`,
   `/`) and say nothing of how `~` expands on Windows, of drive letters,
   backslashes, case, or a space in a path. The template writes them as

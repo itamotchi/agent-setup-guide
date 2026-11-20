@@ -728,7 +728,7 @@ tool names (`Edit`, `Write`, `Bash` …); under Codex an edit arrives as
 would also have to read `apply_patch`'s input and the commands of the
 shell Codex runs on Windows, which a program written for bash may
 misread (not checked here). Whether to adapt, and where an adapter is
-kept: `guide.md` § 2.12, § 2.13, § 3.7.
+kept: `guide.md` § 2.12, § 2.13, § 3.6.
 
 ## Not known here
 

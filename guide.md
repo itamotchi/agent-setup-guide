@@ -2,10 +2,11 @@
 
 For a user and their coding agent — Claude Code, Codex or another — on
 any machine. The agent reads this file and talks with the user in the
-user's own language, one point at a time. Drafted 2026-11-09.
+user's own language, one point at a time. Drafted 2026-11-09; revised
+2026-11-20.
 
-This guide says what to watch for and what the user decides. It does not
-say what the user's settings must be. The notes on particular tools and
+This guide says how to judge a setting, what to watch for and what the
+user decides. It does not say what the user's settings must be. The notes on particular tools and
 platforms (`environments/`) and the templates (`model/`) are references:
 partial, dated, and never a requirement. The tool's own official
 documentation, for the user's version and platform, is the source of
@@ -57,8 +58,34 @@ user.
   with the user's full rights.
 - **Project settings** — a repository may carry settings and hooks;
   cloning it brings them to the user's machine.
+- **The application's own screens** — a desktop app may hold settings no
+  file shows: the approval mode chosen for each chat, a built-in
+  browser, what the app may do as the user. A choice made there can
+  override the file.
 
 ## 2. What to watch for
+
+**The test for a line.** Start from the tool's standard configuration:
+it is built to work, and its makers keep improving it. A setting or an
+instruction of the user's own is added only where one of two things
+holds:
+
+- a problem actually arose in use; or
+- the standard is known to leave a harm that is silent and cannot be
+  undone — a secret read, a file planted that another program runs later
+  with the user's rights, a write outside the folder that no one sees.
+
+Each line carries its reason — what arose, or which harm — so that it
+can be taken out when the reason is gone. A line added "to be safe" with
+neither ground has a cost: it stops wanted work, it hides which lines
+matter, and one that stops a single spelling of an act gives a false
+sense of a stop (§ 2.2). To apply the second ground the agent has to
+know what the standard does with no setting: in the approval mode the
+user will work in, what is read, written and run without asking, and who
+decides each — the tool, a model, or the user. Find that in the docs
+(and in `environments/`), say it to the user, and only then propose
+lines. The points below are where to look; they are not a list of lines
+to add.
 
 1. **Written versus enforced.** An instruction is followed most of the
    time; a rule or a sandbox stops. A never-case belongs in an enforced
@@ -69,7 +96,11 @@ user.
    '…'`), another program that does the same (`python -m pip`), a second
    shell (`powershell`, `cmd`, `bash -c`), a script's own file access, a
    full path to the program. A sandbox, where there is one, catches what
-   rules miss. Where there is none, tell the user plainly.
+   rules miss. Where there is none, tell the user plainly. So a deny on
+   a command name is worth little where a sandbox bounds what any
+   command writes and reaches, and is the only stop — a porous one —
+   where there is none. A deny on a path (a folder of secrets) is not of
+   this kind: it holds whatever program is used, for the tools it binds.
 3. **Secrets on the machine.** SSH keys, cloud credentials, the agent
    tool's own login, the GitHub CLI's token, password managers and the
    OS's credential store. Find where each is on this platform; deny the
@@ -97,7 +128,12 @@ user.
    instruction.
 7. **Agents starting agents.** A session that launches another agent —
    a CLI from the shell, a new session — may give it looser settings than
-   its own.
+   its own. What holds a program started from the shell is the sandbox,
+   where there is one, not a rule on its name (`environments/`). The
+   tool's own subagents are not this point: they inherit the session's
+   sandbox and permission rules (Claude Code and Codex, the docs, read
+   2026-11-20), so whether to use them is a way of working, not a
+   question for the user.
 8. **A cloned repository's settings.** Its allow rules take effect on the
    user's machine (in Claude Code, once the folder is trusted); its hooks
    run as the user; where the tool lets a project value override a user
@@ -161,41 +197,87 @@ user.
     (Codex: `forbidden` rules), the sandbox for what stays inside it, the
     vault's commit and push checks. The user decides, command by command,
     knowing this.
+15. **A repository nested in a vault.** A vault may hold another git
+    repository in a subfolder — a site's code, say — so that the vault's
+    work can read and edit it. Some files there are read and run later
+    by another program, outside any sandbox, with the user's rights:
+    Git's `config` (it can name commands) and `hooks`, and each agent
+    tool's project folder (its settings, hooks, skills). A tool's own
+    protection of such files may reach the top of the opened folder
+    only: on one Mac, Claude Code's and Codex's both fell short below
+    it, each in its own way (`environments/`). So try the protected
+    files at depth; do not assume. Whether the gap closes by a pattern
+    that holds at any depth or needs lines for each repository differs
+    by tool; where it is per repository, the lines come before the
+    clone, and a repository with no lines is open with no sign. A vault
+    that holds such repositories keeps a procedure for adding one;
+    `vault-procedures.md` is the base for writing it.
 
 ## 3. What the user decides
 
-Put each to the user with what it protects, what it costs, and a
-proposed answer; one at a time; record the answers in the conversation
-before anything is written.
+Ask little. A user who does not follow a question tends to say yes to
+it (seen in a setup by this guide, 2026-11-20), and a yes given so
+decides nothing. A point is put to the user only if both hold: the
+answer changes what the agent can do, and it depends on the person.
+Everything else is not asked. The agent proposes the standard set for
+this tool — found by the test of § 2, from the docs, `environments/` and
+`model/` — each line with its reason, and tells the user that any of it
+can be changed (§ 4 step 4).
 
-1. **Where the agent works.** Which folders; whether the file tools and
-   shell commands are kept from reading and writing outside them.
+Each point below carries a proposed answer that this guide stands by,
+since the yes may be given without following. Put each with what it
+protects and what it costs; one at a time; record the answers in the
+conversation before anything is written.
+
+1. **Where the agent works.** Proposed: the folder it was opened on and
+   nothing else — nothing outside is read or written unless the user
+   asks for it in the conversation — held by the tool's own settings
+   where it has them (folder boundaries, a sandbox), not by a model's
+   judgement. It protects everything else on the machine from a mistake
+   or from text addressed to the agent. It costs: a folder needed from
+   outside is added by the user each time; and where the tool then
+   refuses the agent its own settings files, the user applies every
+   settings change by hand (§ 2.9). A user who is content that a model
+   judges an outside read or write says so, and those settings are left
+   out.
 2. **How much it does unasked.** The approval mode. Ask how many prompts
    the user will actually read: a mode that prompts more than that is
    not safer. Who answers them — the user, or a reviewer the tool offers
    in the user's place — and which commands, if any, may pass the sandbox
    without asking (§ 2.14). Proposed: no more prompts than the user will
-   read; a reviewer for the routine where the tool has one; what is never
-   done (§ 3.3) in deny rules, which no reviewer overrides.
-3. **What is never done.** The secrets never read; the commands never
-   run; the acts never taken.
-4. **Acts outside.** Whether sending, installing, signing in, pushing
-   and the like are always said and asked in the conversation first.
-5. **Who applies changes to the settings.** The agent, or the user by
-   hand.
-6. **How the agent deals with the user.** The language; how questions
+   read; a reviewer for the routine where the tool has one; what must
+   never happen in deny rules, which no reviewer overrides.
+3. **Acts outside.** Sending a message, installing software, signing in,
+   a push outside a vault's routine (§ 2.4). Proposed: the agent says in
+   the conversation what it is about to do before such an act, and the
+   settings stop outright only the few that must never happen; a prompt
+   for every one wears attention down (§ 2.10).
+4. **How the agent deals with the user.** The language; how questions
    are asked; what is said before a write; how a disagreement is
-   settled. These go in the user-level instruction file, which holds
-   lines about the person — not about a vault, not about the tool.
-7. **A vault built for another tool** (§ 2.12). Whether to adapt its
-   hooks to the user's tool — an adapter the agent writes, kept out of
-   the vault (§ 2.13), shown to work by step 6 of § 4 for each way of
-   writing (the edit tool and the shell) — or to tell the user what is
-   lost and rely on the vault's commit and push checks. Proposed: rely on
-   those checks, unless the user wants the earlier stop and the agent can
-   show the adapter working; an adapter that lets writes through unseen
-   gives a false assurance.
-8. **How it is checked, and when it is looked at again.**
+   settled. Proposed: start from `model/user-memo.md` and keep, change
+   or drop each line. These go in the user-level instruction file, which
+   holds lines about the person — not about a vault, not about the tool.
+5. **What is the user's own.** Anything on this machine the standard
+   set does not know: a folder of secrets peculiar to it, an account, a
+   tool the user's work needs that the sandbox stops. Proposed: a secret
+   is added to the denied paths now; a tool is opened when the need is
+   met, by the entry that names it, not in advance.
+6. **A vault built for another tool** (§ 2.12) — only if the user works
+   in one. Whether to adapt its hooks to the user's tool — an adapter
+   the agent writes, kept out of the vault (§ 2.13), shown to work by
+   step 6 of § 4 for each way of writing (the edit tool and the shell) —
+   or to tell the user what is lost and rely on the vault's commit and
+   push checks. Proposed: rely on those checks, unless the user wants
+   the earlier stop and the agent can show the adapter working; an
+   adapter that lets writes through unseen gives a false assurance.
+
+Not asked, but proposed as the standard with its reasons: which secrets
+are denied (§ 2.3); the files kept from the agent because another
+program runs them later, at the top of the folder and in a repository
+nested in it (§ 2.15); who applies changes to the settings (it follows
+from the tool: § 2.9); the tool's own subagents (§ 2.7); how the result
+is checked (§ 4 step 6) and when it is looked at again (after an update:
+§ 2.11).
 
 ## 4. How to proceed
 
@@ -211,16 +293,48 @@ settings.
 
 1. **Read.** This guide; the notes for this tool and platform in
    `environments/`, if any; the official docs of the tool for the user's
-   version and platform. Write down which version and platform.
+   version and platform — above all, what the tool does with no setting
+   in the approval mode the user will work in (§ 2, the test). Write
+   down which version and platform.
 2. **Look at what is there.** Say which of the user's settings and
    instruction files will be read, read them, and say what they already
-   set. Before any change, back each file up.
-3. **Explain the layers** this tool has here, and what it lacks (no
-   sandbox, say), in the user's language.
-4. **Ask** the decisions of § 3, one at a time.
+   set. Where the tool is a desktop app, its own settings screens are
+   part of what is there: the agent cannot see them, so it asks the user
+   to open each and say or show what is set. Before any change, back
+   each file up.
+3. **Explain the layers** this tool has here, what it lacks (no
+   sandbox, say), and what the standard does with no setting, in the
+   user's language.
+4. **Offer two ways, then ask.** First offer the choice: *leave it to
+   the agent* — the proposed answers of § 3 and the standard set for
+   this tool, applied as they stand — or go through the points one at a
+   time. A user new to the tool will often nod at every question, and
+   one plain choice to leave it is more honest than six nods. Left to
+   the agent, these still hold:
+   - the agent asks the one thing only the user knows — secrets peculiar
+     to this machine (§ 3.5);
+   - the user still applies by hand what the tool refuses the agent
+     (step 5);
+   - after writing, the agent says in a few lines what was set and what
+     the user will meet in daily use — a folder outside is added each
+     time, a settings change is pasted by hand, and the like;
+   - the check of step 6 is not skipped;
+   - the record (step 7) says the set was taken as proposed, so that a
+     later change starts from a known state.
+
+   The choice is offered only where there is a set this guide can stand
+   by for the tool and platform — one that was tried (`environments/`
+   says which). Where the reference was not tried, say so before the
+   user chooses. If the user goes through the points instead: ask those
+   of § 3, one at a time; then put the standard set — each line with its
+   reason, the problem it answers or the silent harm it closes — and ask
+   what the user wants changed. A line with no reason is not proposed.
 5. **Write.** Draft each file; show it whole; write it on the user's yes,
    or have the user apply it where the tool refuses the agent; read it
-   back and compare.
+   back and compare. A setting that lives in the app's screens is
+   applied by the user by hand, the agent naming the screen and the
+   switch; one that is chosen anew for each chat or session is said to
+   be a step at every start, since nothing keeps it.
 6. **Check, in a new session** opened on another folder — not this one,
    whose `AGENTS.md` would lead it back into the setup — so that the
    settings are tried as they will be used. Try what should be refused —
@@ -229,9 +343,39 @@ settings.
    refused: a permission rule, the sandbox, a hook, the user declining a
    prompt — or the agent declining by itself after reading an instruction,
    which shows nothing about the enforced settings. Record each message as
-   it stands. Anything not refused is
-   said; the user decides whether to fix it or accept it.
-7. **Record** what was decided and why, where the user keeps such notes.
+   it stands. Where a vault the user works in holds a repository nested
+   in it, try the protected files there too (§ 2.15). Anything not
+   refused is said; the user decides whether to fix it or accept it.
+7. **Record** what was decided and why — for each line, the reason it is
+   there — where the user keeps such notes.
+
+**Later: changing the harness.** Most lines of the user's own come after
+the first setup: the test of § 2 adds a line when a problem arises, and
+problems arise in use. So this guide is read again each time, in the
+same kind of session — opened on this folder, in the mode where the
+agent asks before it writes. The occasions: a prompt that keeps coming
+for routine work; a tool the user's work needs, stopped by the sandbox
+or a rule; something that happened and should not have; an update of the
+tool (§ 2.11); a vault that changed what it needs — a repository added
+inside it, say (§ 2.15). A session stopped in the middle of other work
+does not work around the stop and does not change the settings itself:
+it reports what was wanted, where, and why, and the change is made here.
+
+1. **Say what arose**, as it happened: the action or command, the
+   message, and what refused it or let it through (read as in step 6).
+2. **Find the smallest change that answers it** — one entry that names
+   the thing, not a wider opening; the tool's documented remedy where
+   there is one. Say what else it opens besides what is wanted.
+3. **Or change nothing.** Where the cause is the agent's own malformed
+   command, or a single case, no line is the answer; a second case is
+   the occasion.
+4. **Write** as in step 5: back up, draft, show, write or have the user
+   apply, read back.
+5. **Check** that what arose is answered, and that what should be
+   refused still is (step 6).
+6. **Record** the line with its reason and the date.
+
+A line is taken out by the same steps when its reason is gone.
 
 ## 5. A report back
 
@@ -252,5 +396,11 @@ not post it itself.
   platforms; partial, dated, sourced.
 - `model/` — templates for Claude Code (macOS; `model/windows/` for
   native Windows): the user settings fragment, a rules file, a user memo
-  with placeholders (`model/user-memo.md`). One way to set it; not a
-  requirement.
+  with placeholders (`model/user-memo.md`). One user's result of the
+  test of § 2, each line with its reason; one way to set it, not a
+  requirement. For Codex, the reference configurations are in
+  `environments/codex.md`.
+- `vault-procedures.md` — for a vault's agent: the base from which it
+  writes the vault's own procedures for its users — the first setup of
+  a user's harness, a later change, and adding a git repository inside
+  the vault (with what each tool's harness needs there).
