@@ -490,8 +490,17 @@ rights: Git's `config` (it can name commands — `core.fsmonitor`,
   own `~/.codex/config.toml` — outside the folder, and a request to run
   outside the sandbox ran inside (tried, above). The way known to work:
   the agent shows the lines, the user pastes them into the file with the
-  app quit (so the app does not write the file back), restarts, and the
-  agent checks in a new chat. A chat switched in the composer to Ask for
+  app quit, restarts it, and the agent checks in a new chat — by the
+  permission list it is given and by a refused write, since under the
+  profile it cannot read that file either. `~/.codex` is a hidden
+  folder: the agent names the way to open the file (on macOS, Finder's
+  Go to Folder, ⌘⇧G, `~/.codex`, then `config.toml` in a plain-text
+  editor). Quitting the app first is a precaution of the test bed, not a
+  known need: the app writes this file itself (a trust entry for a
+  folder), every edit there was made with the app quit and followed by a
+  restart, and the app was never seen to write an edit back. Whether an
+  edit made while the app runs is kept, and whether it takes effect
+  without a restart: not tried. A chat switched in the composer to Ask for
   approval leaves the profile, and there Codex might write the file with
   the user's approval: not tried.
 

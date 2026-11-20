@@ -162,7 +162,9 @@ repository that exists before its lines is open until they are written.
    - Codex with a profile: the five lines for the repository's path
      (`environments/codex.md`, "A repository nested in the opened
      folder"), in the user's `~/.codex/config.toml`. The agent shows the
-     lines; the user pastes them with the app quit, and restarts it.
+     lines and how to open that file (the folder is hidden); the user
+     pastes them with the app quit, and restarts it — the way that was
+     tried; whether quitting is needed is not known.
    - Claude Code: no line for the repository. The agent checks once that
      the user's settings carry the lines that hold at any depth, and
      says so if they do not.
