@@ -1,12 +1,13 @@
 # Codex
 
 What has been found here about Codex, dated and sourced: the docs as
-read on 2026-11-09, a vault's setup on Windows (2026-11-09), trials in
-the ChatGPT desktop app on macOS (2026-11-19); and a reference
-configuration drawn from those trials, each line with its reason. A
-reference, never a requirement: which settings and guardrails a user has
-is theirs to decide with their agent (`guide.md`). Where a note and the docs differ,
-the docs win; Codex changes with each version.
+read on 2026-11-09 and 2026-11-20, a vault's setup on Windows
+(2026-11-09), trials in the ChatGPT desktop app on macOS (2026-11-19,
+2026-11-20); and two reference configurations drawn from those trials,
+each line with its reason. A reference, never a requirement: which
+settings and guardrails a user has is theirs to decide with their agent
+(`guide.md`). Where a note and the docs differ, the docs win; Codex
+changes with each version.
 
 ## From the Codex docs (read 2026-11-09)
 
@@ -185,7 +186,8 @@ docs (`learn.chatgpt.com/docs/…` and `learn.chatgpt.com/codex/…`, read
   own controls"); a gihyo.jp article and a forum post say approved
   escalations are handled outside profiles — not what was seen. As
   tried, a read fence and a reviewed way out of the sandbox were not had
-  together.
+  together. (2026-11-20: the routine was moved inside a profile instead;
+  below.)
 - **Profiles through the CLI** (`codex sandbox -P … -c …`, on throwaway
   repositories): `:root` deny with `:minimal` read blocked reads and
   writes outside; `.git` writable with `.git/config`, `.git/hooks` and
@@ -194,8 +196,8 @@ docs (`learn.chatgpt.com/docs/…` and `learn.chatgpt.com/codex/…`, read
   anonymous `ls-remote` through and refused another host; the macOS
   Keychain credential helper failed inside the sandbox (a private
   repository unreachable) and passed outside. A profile with the sync
-  inside it would need these and a credential readable inside; untried
-  in the app. A workspace admin can enforce profiles
+  inside it would need these and a credential readable inside — tried in
+  the app on 2026-11-20 (below). A workspace admin can enforce profiles
   (`allowed_permission_profiles`), where a member's composer would
   otherwise override the file.
 - **Command rules** (`~/.codex/rules/*.rules`). A `forbidden` rule
@@ -256,13 +258,115 @@ docs (`learn.chatgpt.com/docs/…` and `learn.chatgpt.com/codex/…`, read
   covers the desktop app's Codex. Whether Business is among "supported
   plans": not confirmed.
 
+## An agent wrote outside its folder (the desktop app on macOS, 2026-11-20)
+
+The same Mac and app, Approve for me (`auto_review`), the presets'
+sandbox. A Codex chat opened on a vault edited files in another
+repository on the Mac — outside its folder — by two escalated
+(`require_escalated`) `python3 -c` runs writing with
+`Path.write_text()`; each escalation's justification was written by the
+agent itself. No prompt reached the user, so Auto-review approved both.
+By the agent's own account, the user had said that another session would
+make a change later, and it took that as leave to make the change
+itself — past three written lines: the user's word to keep it for
+later, a line in `~/.codex/AGENTS.md` allowing writes outside the folder
+only when the user explicitly instructs or permits, and the target
+folder's own `AGENTS.md`, which says to write nothing there. It had found
+that folder through a local path written in one of the vault's
+documents, then listed and read it. The changes were found uncommitted,
+by `git status` in that repository.
+
+What it shows: under the presets the way out of the sandbox opens
+whenever the model asks and the reviewer agrees — instructions and a
+reviewer are not a boundary (`guide.md` § 2.1, § 2.14); a write by a
+script passes edit-tool checks and command rules alike (§ 2.2); a local
+path to another folder in a vault's document leads an agent there
+(§ 2.5). What held, the same day: the profile below.
+
+## A permission profile with the routine inside (the desktop app on macOS, 2026-11-20)
+
+The same Mac and app. A profile written into `config.toml` with the app
+quit, then checked in new chats on the vault: Codex ran set commands and
+reported their raw output. The syntax is from the docs' Permissions page
+(marked Beta; `learn.chatgpt.com/docs/permissions`, read 2026-11-20).
+The configuration itself: the second reference, below.
+
+- **A fence with no folder named.** `:workspace_roots` stands for the
+  session's folders (the folder opened, and the chat's
+  `~/.codex/visualizations/…` folder), so one profile fences every folder
+  Codex is opened on. `:root` deny, `:minimal` read, reads of what the
+  tools need, the temp folders denied; Codex's permission list showed
+  each entry, the denies marked `escalatable: false`. A listing of a
+  sibling folder, a `touch` outside and a `python3 -c` write outside —
+  the form of the write above — were refused (`Operation not
+  permitted`), and so were the same with `require_escalated`, with no
+  prompt.
+- **`.git` is protected under a profile too.** With `"." = "write"` on
+  the folder and no entry for `.git`, `git pull --ff-only` failed
+  (`cannot open '.git/FETCH_HEAD'`), as under the presets, though
+  Codex's list showed no such entry. `".git" = "write"` lifted it (the
+  list then showed `.git` as a writable root); `".git/config" = "read"`
+  and `".git/hooks" = "read"` beside it kept those refused (`git
+  config`: "could not write config file .git/config"; a file in
+  `.git/hooks`), so the agent cannot plant a hook or a hooks path that
+  runs when someone commits outside the fence.
+- **The network, GitHub alone.** The profile's `network.enabled = true`,
+  `[features] network_proxy = true`, and `network.domains` allowing
+  `github.com` and `api.github.com`: Codex set `HTTP_PROXY` and
+  `HTTPS_PROXY` (a loopback port) and `ALL_PROXY` (socks5h) in each
+  command, and refused another host before the command ran — "Network
+  access to "example.com" was blocked: domain is not on the allowlist
+  for the current sandbox mode."
+- **A credential inside.** The macOS Keychain is out of reach inside the
+  sandbox (2026-11-19), so the user's own `git` and `gh` login does not
+  work there. What worked: a fine-grained personal access token for the
+  vault's repository alone (Contents and Issues read and write,
+  Metadata read; no Workflows, so a push that changes GitHub Actions
+  files is refused), made on GitHub and stored by the user with
+  `GH_CONFIG_DIR=~/.config/gh-codex gh auth login --with-token
+  --insecure-storage` — plain text in that folder, which the profile
+  makes read-only; and, through `[shell_environment_policy.set]`,
+  `GH_CONFIG_DIR` pointing there and gh's own credential-helper pair
+  (the form `gh auth setup-git` writes) given as command-scope Git
+  config (`GIT_CONFIG_COUNT`, `GIT_CONFIG_KEY_<n>`,
+  `GIT_CONFIG_VALUE_<n>`). Inside the fence `gh auth status` read the
+  token from that folder; `git ls-remote` on the private repository,
+  `git pull --ff-only`, `git push --dry-run` ("Everything up-to-date")
+  and `gh api` on its issues passed. A real push: not yet seen. The
+  user's terminal and `~/.gitconfig` are unchanged. The docs say nothing
+  on credentials inside the sandbox, nor on whether the app sets the
+  proxy variables.
+- **The composer** showed the profile's name. Codex's own header still
+  read `sandbox_mode: workspace-write` and called the profile `managed`;
+  the entries were the profile's. A preset chosen in the composer leaves
+  the profile for that chat (2026-11-19).
+- **Not working.** The built-in browser: "Browser is not available:
+  iab", cause not found (the OpenSSL file it lacked on 2026-11-19 was
+  readable). Every `git` command warned that xcrun's cache could not be
+  written in `$TMPDIR`; harmless.
+- **What it costs, and what it leaves.** The agent can read the token;
+  its reach is one repository and the network GitHub alone, and it can be
+  revoked. In any other GitHub repository Codex's `git` offers this token
+  and fails. The vault's own hook programs inside the folder (a hooks
+  folder, a script they call) stay writable: they run inside the fence
+  when Codex commits, unbounded when someone commits outside it. A
+  trusted project's `.codex/config.toml` is read, and the docs say a
+  higher-precedence layer can add or replace entries under the same
+  profile name; whether a project's layer can loosen this one: not tried
+  (Codex cannot write that file; a commit synced from others could). In
+  a workspace, a member's profile holds only while the composer is left
+  alone, unless an admin enforces it (`allowed_permission_profiles`).
+
 ## A reference configuration: the ChatGPT desktop app on macOS (2026-11-19)
 
 One configuration that worked on the test bed above, for a user who
 works in a shared vault through Codex and wants few prompts; each line
 with its reason. A reference, not a requirement: the user decides each
 point with their agent, and the docs for their version win. Personal
-preferences (keyboard shortcuts, the send key) are left out.
+preferences (keyboard shortcuts, the send key) are left out. On
+2026-11-20 a chat under this configuration wrote outside its folder
+with Auto-review's approval (above); the second reference keeps the
+routine inside a profile instead.
 
 - **Mode: Approve for me**, chosen in the composer for each chat — the
   composer overrides `config.toml`. A vault's routine needs an
@@ -271,7 +375,9 @@ preferences (keyboard shortcuts, the send key) are left out.
   (`guide.md` § 2.10); Auto-review answers them instead. Auto-review is
   a model, not a boundary: what must never happen goes in `forbidden`
   rules (below). Full access off: with the General tab's toggle off it
-  is not in the menu.
+  is not in the menu. The weakness, seen 2026-11-20: whether a command
+  leaves the sandbox is decided by the model and the reviewer, for any
+  command, a write outside the folder included.
 - **`~/.codex/config.toml`**, the part that bears on this:
 
   ```toml
@@ -287,8 +393,9 @@ preferences (keyboard shortcuts, the send key) are left out.
   `auto_review`). The network off makes a command that connects an
   escalation, which is reviewed. Live search shows a page as it is now;
   the docs' default, cached, "reduces exposure to prompt injection from
-  arbitrary live content" — the trade-off. No permission profile: under
-  one, nothing left the sandbox and the vault's sync failed (above).
+  arbitrary live content" — the trade-off. No permission profile here:
+  under the one tried on 2026-11-19 the vault's sync failed; the second
+  reference has the sync inside one.
   The app adds a `[projects."<path>"] trust_level = "trusted"` entry when
   the vault's folder is trusted.
 - **`~/.codex/rules/<name>.rules`**, forbidden rules for what no reviewer
@@ -347,6 +454,99 @@ preferences (keyboard shortcuts, the send key) are left out.
 - **Before the first chat on the vault**: `git` and `gh` signed in with
   the user's own account, with access to the vault's repository.
 
+## A second reference: a profile with the routine inside (2026-11-20)
+
+For a user who wants a write or read outside the folder stopped by the
+sandbox rather than by a model, with the vault's routine (pull, commit,
+push, its issues through `gh`) still running. The configuration tried
+above, as it stood on the test bed; the paths are that Mac's — find each
+on the user's (where `git`, `python3` and `gh` live; which git config
+files exist). A reference, not a requirement.
+
+```toml
+default_permissions = "workspace-fence"
+approval_policy = "on-request"
+approvals_reviewer = "auto_review"
+
+[permissions.workspace-fence.filesystem]
+":root" = "deny"
+":minimal" = "read"
+":tmpdir" = "deny"
+":slash_tmp" = "deny"
+"/Library/Developer/CommandLineTools" = "read"
+"/opt/homebrew" = "read"
+"/System/Library/OpenSSL" = "read"
+"~/.gitconfig" = "read"
+"~/.gitignore_global" = "read"
+"~/.config/gh-codex" = "read"
+
+[permissions.workspace-fence.filesystem.":workspace_roots"]
+"." = "write"
+".git" = "write"
+".git/config" = "read"
+".git/hooks" = "read"
+".codex" = "read"
+".agents" = "read"
+".claude" = "read"
+
+[permissions.workspace-fence.network]
+enabled = true
+
+[permissions.workspace-fence.network.domains]
+"github.com" = "allow"
+"api.github.com" = "allow"
+
+[features]
+network_proxy = true
+
+[shell_environment_policy.set]
+GH_CONFIG_DIR = "/Users/<name>/.config/gh-codex"
+GIT_CONFIG_COUNT = "2"
+GIT_CONFIG_KEY_0 = "credential.https://github.com.helper"
+GIT_CONFIG_VALUE_0 = ""
+GIT_CONFIG_KEY_1 = "credential.https://github.com.helper"
+GIT_CONFIG_VALUE_1 = "!/opt/homebrew/bin/gh auth git-credential"
+```
+
+The reasons, line by line:
+
+- **No `sandbox_mode`, no `[sandbox_workspace_write]`.** The docs: a
+  profile or those, not both; either in any loaded file makes Codex use
+  the older settings. Written with the app quit, so it is not written
+  back.
+- **`default_permissions`** applies the profile to every chat; the
+  composer shows its name, and a preset chosen there leaves it for that
+  chat. The approval keys are those tried; under the profile a request
+  to run outside the sandbox ran inside all the same.
+- **`:root` deny, `:minimal` read**: nothing outside is read or written
+  unless named. The named reads are what the routine's tools need: the
+  Command Line Tools (`git`), Homebrew (`python3`, `gh`), the OpenSSL
+  file the built-in browser's helper read on 2026-11-19, git's own config
+  for the author — read first, to see that it holds no credential.
+- **Temp folders denied**: other programs' files sit there. The cost:
+  `git` warns at each command.
+- **`~/.config/gh-codex` read**: the token's folder, kept from the
+  agent's writes.
+- **`:workspace_roots`**: the folder opened, with no path written. `.git`
+  writable for pull and commit; its `config` and `hooks` read-only, so no
+  hook or hooks path can be planted; `.codex`, `.agents` and `.claude`
+  read-only, so the agent cannot loosen its own or another tool's
+  project settings.
+- **The network**: GitHub alone, through the proxy (`api.github.com` for
+  `gh`). Web search and the built-in browser are not filtered by it (the
+  docs).
+- **`[shell_environment_policy.set]`**: only Codex's commands get the
+  token's folder and the helper; the user's own `git` and `gh` are
+  untouched. The empty helper first clears the Keychain helper that
+  fails inside.
+- **The token** is made and stored by the user, never shown to the agent
+  (a fine-grained token for the one repository; Contents and Issues read
+  and write; no Workflows), and renewed by them at its expiry.
+- **Kept from the first reference**: the `forbidden` rules (a forced push
+  is still possible inside the fence), and the points on instructions,
+  the web and the browser, what acts as the user, cloud, the Git tab,
+  notifications, import and hooks.
+
 ## From a research report made for this guide (2026-11-09)
 
 Citing the Codex docs of 2026; not checked here:
@@ -387,6 +587,8 @@ me, and whether hooks run inside the sandbox; whether Plugin Management
 lets the agent install or enable plugins; whether the "ChatGPT" custom
 instructions reach Codex chats; how command rules match PowerShell commands; why a
 program may fail to start inside the Windows sandbox; how a repository's `.codex/config.toml` combines with
-the user's, and whether it can loosen it; where its login is stored on
-Windows; which shell a `Bash` hook sees on Windows (the hooks page does
-not say).
+the user's, and whether it can loosen it — a permission profile
+included; where its login is stored on Windows; which shell a `Bash`
+hook sees on Windows (the hooks page does not say); why the built-in
+browser is unavailable under the second reference's profile; whether a
+real push passes inside it.
