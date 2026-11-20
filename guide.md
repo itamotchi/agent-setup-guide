@@ -181,14 +181,13 @@ before anything is written.
    run; the acts never taken.
 4. **Acts outside.** Whether sending, installing, signing in, pushing
    and the like are always said and asked in the conversation first.
-5. **Agents starting agents.** Allowed, asked each time, or never.
-6. **Who applies changes to the settings.** The agent, or the user by
+5. **Who applies changes to the settings.** The agent, or the user by
    hand.
-7. **How the agent deals with the user.** The language; how questions
+6. **How the agent deals with the user.** The language; how questions
    are asked; what is said before a write; how a disagreement is
    settled. These go in the user-level instruction file, which holds
    lines about the person — not about a vault, not about the tool.
-8. **A vault built for another tool** (§ 2.12). Whether to adapt its
+7. **A vault built for another tool** (§ 2.12). Whether to adapt its
    hooks to the user's tool — an adapter the agent writes, kept out of
    the vault (§ 2.13), shown to work by step 6 of § 4 for each way of
    writing (the edit tool and the shell) — or to tell the user what is
@@ -196,7 +195,7 @@ before anything is written.
    those checks, unless the user wants the earlier stop and the agent can
    show the adapter working; an adapter that lets writes through unseen
    gives a false assurance.
-9. **How it is checked, and when it is looked at again.**
+8. **How it is checked, and when it is looked at again.**
 
 ## 4. How to proceed
 
@@ -225,12 +224,12 @@ settings.
 6. **Check, in a new session** opened on another folder — not this one,
    whose `AGENTS.md` would lead it back into the setup — so that the
    settings are tried as they will be used. Try what should be refused —
-   read a secret, run a denied command, write outside the folder, start
-   another agent — and show each refusal. A refusal counts by its
-   message, which says what refused: a permission rule, the sandbox, a
-   hook, the user declining a prompt — or the agent declining by itself
-   after reading an instruction, which shows nothing about the enforced
-   settings. Record each message as it stands. Anything not refused is
+   read a secret, run a denied command or write outside the folder — and
+   show each refusal. A refusal counts by its message, which says what
+   refused: a permission rule, the sandbox, a hook, the user declining a
+   prompt — or the agent declining by itself after reading an instruction,
+   which shows nothing about the enforced settings. Record each message as
+   it stands. Anything not refused is
    said; the user decides whether to fix it or accept it.
 7. **Record** what was decided and why, where the user keeps such notes.
 
