@@ -322,14 +322,16 @@ settings.
    - the record (step 7) says the set was taken as proposed, so that a
      later change starts from a known state.
 
-   The choice is offered only where there is a set this guide can stand
-   by for the tool and platform — one that was tried (`environments/`
-   says which; where a note gives more than one reference for a tool,
-   it names the one proposed). Where the reference was not tried, say
-   so before the user chooses. If the user goes through the points instead: ask those
-   of § 3, one at a time; then put the standard set — each line with its
-   reason, the problem it answers or the silent harm it closes — and ask
-   what the user wants changed. A line with no reason is not proposed.
+   The set that is applied is the one the notes name for the tool and
+   platform (`environments/`; where a note gives more than one
+   reference, it names the one proposed). Say, before the user chooses,
+   how far that set was tried: on a machine, or from the docs alone.
+   Where there is no such set, the choice is not offered.
+
+   If the user goes through the points instead: ask those of § 3, one
+   at a time; then put the standard set — each line with its reason,
+   the problem it answers or the silent harm it closes — and ask what
+   the user wants changed. A line with no reason is not proposed.
 5. **Write.** Draft each file; show it whole; write it on the user's yes,
    or have the user apply it where the tool refuses the agent; read it
    back and compare. A setting that lives in the app's screens is
