@@ -529,7 +529,10 @@ rights: Git's `config` (it can name commands — `core.fsmonitor`,
 
 One configuration that worked on the test bed above, for a user who
 works in a shared vault through Codex and wants few prompts; each line
-with its reason. A reference, not a requirement: the user decides each
+with its reason. **Not the set this guide proposes** when a user leaves
+the setup to the agent — that is the second reference: this one is the
+lighter alternative, named with its weakness (the last sentence of this
+paragraph). A reference, not a requirement: the user decides each
 point with their agent, and the docs for their version win. Personal
 preferences (keyboard shortcuts, the send key) are left out. On
 2026-11-20 a chat under this configuration wrote outside its folder
@@ -623,6 +626,21 @@ routine inside a profile instead.
   the user's own account, with access to the vault's repository.
 
 ## A second reference: a profile with the routine inside (2026-11-20)
+
+**The set this guide proposes for Codex in the ChatGPT desktop app on
+macOS**, and the one applied when a user leaves the setup to the agent
+(`guide.md` § 4 step 4): it matches the guide's proposed answer —
+nothing outside the opened folder read or written, held by a setting
+and not by a model's judgement (`guide.md` § 3.1) — and the first
+reference is the configuration under which a write outside the folder
+happened. It is heavier, and these stay the user's own hands even when
+the rest is left to the agent: making the token on GitHub and storing
+it; pasting the configuration, with the paths found for their Mac; five
+lines for each repository nested in the folder; and leaving the
+composer's permission choice alone — a preset chosen there leaves the
+profile for that chat. Tried on one Mac, in the desktop app; a real
+push was not yet seen; under the CLI or on another platform it was not
+tried, and that is said before the user chooses.
 
 For a user who wants a write or read outside the folder stopped by the
 sandbox rather than by a model, with the vault's routine (pull, commit,

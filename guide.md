@@ -324,8 +324,9 @@ settings.
 
    The choice is offered only where there is a set this guide can stand
    by for the tool and platform — one that was tried (`environments/`
-   says which). Where the reference was not tried, say so before the
-   user chooses. If the user goes through the points instead: ask those
+   says which; where a note gives more than one reference for a tool,
+   it names the one proposed). Where the reference was not tried, say
+   so before the user chooses. If the user goes through the points instead: ask those
    of § 3, one at a time; then put the standard set — each line with its
    reason, the problem it answers or the silent harm it closes — and ask
    what the user wants changed. A line with no reason is not proposed.
