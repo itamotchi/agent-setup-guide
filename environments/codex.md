@@ -491,8 +491,9 @@ rights: Git's `config` (it can name commands — `core.fsmonitor`,
   outside the sandbox ran inside (tried, above). The way known to work:
   the agent shows the lines, the user pastes them into the file with the
   app quit, restarts it, and the agent checks in a new chat — by the
-  permission list it is given and by a refused write, since under the
-  profile it cannot read that file either. `~/.codex` is a hidden
+  permission list it is given and by a refused write, since the
+  profile's entries leave that file outside what it may read (a read
+  was not tried). `~/.codex` is a hidden
   folder: the agent names the way to open the file (on macOS, Finder's
   Go to Folder, ⌘⇧G, `~/.codex`, then `config.toml` in a plain-text
   editor). Quitting the app first is a precaution of the test bed, not a
