@@ -120,21 +120,43 @@ commands whose job is to **print a secret**, and on desktop-app tools by
 which a session widens its own scope. Where there is no sandbox (native
 Windows) the ground for dropping the name denies does not hold.
 
-**Another agent started from the shell** (`guide.md` § 2.7) is the case
-where this is least settled. With the `claude` and `codex` name denies
-gone, what holds such a program is the sandbox, for a command that runs
-inside it: an ordinary program is bound there (tried, above), an agent's
-own CLI started from a sandboxed command was not tried. And a command
-can run outside the sandbox two ways, where no OS bound applies and what
-stands is the classifier in Auto, or a prompt: the retry outside the
-sandbox that Claude Code offers a failed command; and the excluded
-commands, some forms of which start another program (a `gh` alias that
-begins `!`, a git option that names a command such as
-`--upload-pack=`). Neither was tried with an agent's CLI. A user for
-whom this matters tries it, or keeps the two name denies knowing they
-stop one spelling. The desktop app's own way of starting a session is
-the ask rule below; Claude Code's own subagents inherit the session's
-permission rules (read 2026-11-20) and are not this case.
+**Another agent started from the shell** (`guide.md` § 2.7) was the
+case the dropped `claude` and `codex` name denies had covered. Tried
+2026-11-20 on that Mac, in Auto, with the sandbox and both blocks on
+(the `codex` CLI was not installed there: that half was not tried):
+
+- **Inside the sandbox, `claude -p …` did not start**: the OS refused
+  the exec ("operation not permitted"). The binary sat under the home
+  folder, which the read block closes to sandboxed commands — a fact of
+  where it was installed, not a general property: a CLI installed
+  elsewhere may start.
+- **A started process stays inside.** `python3` starting `sh` starting
+  `touch` on a path outside the folder: "Operation not permitted". The
+  sandbox is inherited by a child and its child, so an agent that did
+  start inside would write and reach only what the sandbox allows.
+- **The retry outside the sandbox** that Claude Code offers a failed
+  command, for `claude --version` and for `claude -p --permission-mode
+  bypassPermissions …`: each raised the user's permission prompt, in
+  Auto — under the read block the retry was not left to the classifier.
+  `sandbox.allowUnsandboxedCommands: false` removes the retry altogether
+  and leaves the excluded commands unsandboxed (read).
+- **Not observed: an excluded command starting a program.** The excluded
+  commands run outside the sandbox, and some forms of them start another
+  program (a `gh` alias that begins `!`, a git option that names a
+  command such as `--upload-pack=`). The trial of the `gh` form was
+  stopped before the alias was set up, by a model's safety judgement
+  that had seen the user ask for the test; the git form was not reached.
+  A deny on a command name cannot close this route — the rule matches
+  the call's text, not what a subprocess starts — and the exclusions are
+  what lets `git push` reach its credential. What stands on it is a
+  judgement, not a rule.
+
+So with the sandbox and both blocks on, a deny line per agent name adds
+little: it would close again a spelling the sandbox and the prompt
+already close, and would not reach the one route left. Without the
+sandbox none of this holds. The desktop app's own way of starting a
+session is the ask rule below; Claude Code's own subagents inherit the
+session's permission rules (read 2026-11-20) and are not this case.
 
 ## A repository nested in the opened folder
 
@@ -275,9 +297,10 @@ Read 2026-11-20 unless marked.
 
 ## Not known here
 
-Whether an agent's CLI started from a sandboxed command runs at all,
-and what meets it when it is retried outside the sandbox or started
-through an excluded command; how the desktop app shows a sandbox that
+Whether a program started through an excluded command (a `gh` alias, a
+git option that names a command) runs unprompted; an agent CLI installed
+outside the home folder, started from a sandboxed command; the `codex`
+CLI started from Claude Code's shell; how the desktop app shows a sandbox that
 cannot start; what a sandboxed
 command meets in Manual or Accept edits since `autoAllowBashIfSandboxed`
 defaults to `false`; a submodule's or a worktree's Git folder under the
