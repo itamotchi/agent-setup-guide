@@ -340,13 +340,23 @@ The configuration itself: the second reference, below.
   read `sandbox_mode: workspace-write` and called the profile `managed`;
   the entries were the profile's. A preset chosen in the composer leaves
   the profile for that chat (2026-11-19).
-- **Not working.** The built-in browser: "Browser is not available:
-  iab", cause not found (the OpenSSL file it lacked on 2026-11-19 was
-  readable). Every `git` command warned that xcrun's cache could not be
-  written in `$TMPDIR`; harmless.
+- **The built-in browser** at first: "Browser is not available: iab".
+  Its helper runs inside the sandbox (hence the OpenSSL read of
+  2026-11-19) and finds the browser through Unix sockets in
+  `/tmp/codex-browser-use` (read in the browser plugin's code), which the
+  denied `/tmp` hid. A read on `/private/tmp/codex-browser-use` and a
+  `unix_sockets` allow on the same folder brought it back: a page
+  opened, and web search worked. In Codex's source a `unix_sockets`
+  allow becomes a Seatbelt `subpath` rule, so a folder covers the sockets
+  made in it later; under the proxy, sockets not listed are refused; a
+  filesystem read alone does not allow a connection. The rest of `/tmp`
+  stayed refused. Every `git` command warned that xcrun's cache could
+  not be written in `$TMPDIR`; harmless.
 - **What it costs, and what it leaves.** The agent can read the token;
   its reach is one repository and the network GitHub alone, and it can be
-  revoked. In any other GitHub repository Codex's `git` offers this token
+  revoked. Web search and the built-in browser are not filtered by the
+  proxy (the docs): they are a way out beside GitHub, and with browsing
+  on Always allow a session can put what it has read into a URL. In any other GitHub repository Codex's `git` offers this token
   and fails. The vault's own hook programs inside the folder (a hooks
   folder, a script they call) stay writable: they run inside the fence
   when Codex commits, unbounded when someone commits outside it. A
@@ -479,6 +489,7 @@ approvals_reviewer = "auto_review"
 "~/.gitconfig" = "read"
 "~/.gitignore_global" = "read"
 "~/.config/gh-codex" = "read"
+"/private/tmp/codex-browser-use" = "read"
 
 [permissions.workspace-fence.filesystem.":workspace_roots"]
 "." = "write"
@@ -495,6 +506,9 @@ enabled = true
 [permissions.workspace-fence.network.domains]
 "github.com" = "allow"
 "api.github.com" = "allow"
+
+[permissions.workspace-fence.network.unix_sockets]
+"/private/tmp/codex-browser-use" = "allow"
 
 [features]
 network_proxy = true
@@ -524,7 +538,10 @@ The reasons, line by line:
   file the built-in browser's helper read on 2026-11-19, git's own config
   for the author — read first, to see that it holds no credential.
 - **Temp folders denied**: other programs' files sit there. The cost:
-  `git` warns at each command.
+  `git` warns at each command. The one folder opened,
+  `/private/tmp/codex-browser-use`, read and its sockets allowed, is
+  where the built-in browser's helper finds the browser; without it the
+  browser is unavailable.
 - **`~/.config/gh-codex` read**: the token's folder, kept from the
   agent's writes.
 - **`:workspace_roots`**: the folder opened, with no path written. `.git`
@@ -589,6 +606,5 @@ instructions reach Codex chats; how command rules match PowerShell commands; why
 program may fail to start inside the Windows sandbox; how a repository's `.codex/config.toml` combines with
 the user's, and whether it can loosen it — a permission profile
 included; where its login is stored on Windows; which shell a `Bash`
-hook sees on Windows (the hooks page does not say); why the built-in
-browser is unavailable under the second reference's profile; whether a
-real push passes inside it.
+hook sees on Windows (the hooks page does not say); whether a real push
+passes inside the second reference's profile.
