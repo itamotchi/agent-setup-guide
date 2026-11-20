@@ -120,6 +120,22 @@ commands whose job is to **print a secret**, and on desktop-app tools by
 which a session widens its own scope. Where there is no sandbox (native
 Windows) the ground for dropping the name denies does not hold.
 
+**Another agent started from the shell** (`guide.md` § 2.7) is the case
+where this is least settled. With the `claude` and `codex` name denies
+gone, what holds such a program is the sandbox, for a command that runs
+inside it: an ordinary program is bound there (tried, above), an agent's
+own CLI started from a sandboxed command was not tried. And a command
+can run outside the sandbox two ways, where no OS bound applies and what
+stands is the classifier in Auto, or a prompt: the retry outside the
+sandbox that Claude Code offers a failed command; and the excluded
+commands, some forms of which start another program (a `gh` alias that
+begins `!`, a git option that names a command such as
+`--upload-pack=`). Neither was tried with an agent's CLI. A user for
+whom this matters tries it, or keeps the two name denies knowing they
+stop one spelling. The desktop app's own way of starting a session is
+the ask rule below; Claude Code's own subagents inherit the session's
+permission rules (read 2026-11-20) and are not this case.
+
 ## A repository nested in the opened folder
 
 A vault may hold another git repository in a subfolder — its own `.git`,
@@ -259,7 +275,10 @@ Read 2026-11-20 unless marked.
 
 ## Not known here
 
-How the desktop app shows a sandbox that cannot start; what a sandboxed
+Whether an agent's CLI started from a sandboxed command runs at all,
+and what meets it when it is retried outside the sandbox or started
+through an excluded command; how the desktop app shows a sandbox that
+cannot start; what a sandboxed
 command meets in Manual or Accept edits since `autoAllowBashIfSandboxed`
 defaults to `false`; a submodule's or a worktree's Git folder under the
 two deny lines; a `cd` followed by a bare `git push` in a nested

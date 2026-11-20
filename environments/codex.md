@@ -4,7 +4,12 @@ What has been found here about Codex, dated and sourced: the docs as
 read on 2026-11-09 and 2026-11-20, a vault's setup on Windows
 (2026-11-09), trials in the ChatGPT desktop app on macOS (2026-11-19,
 2026-11-20); and two reference configurations drawn from those trials,
-each line with its reason. A reference, never a requirement: which
+each line with its reason. What was tried and what was only read — in
+the docs or in Codex's source — is marked. **Codex's own protection of
+Git's files and of its project settings, and the profile of the second
+reference, hold at the top of the opened folder only**; a repository
+nested below it needs lines of its own ("A repository nested in the
+opened folder"). A reference, never a requirement: which
 settings and guardrails a user has is theirs to decide with their agent
 (`guide.md`). Where a note and the docs differ, the docs win; Codex
 changes with each version.
@@ -45,7 +50,19 @@ Codex CLI 0.162.0.
   trusted (an onboarding prompt or `/permissions`). Network access is off
   by default. Inside `workspace-write`, `<writable_root>/.git` is
   read-only, and `.codex`, `.agents` and `.aws` when they exist,
-  recursively: a `git add` or `git commit` needs an escalation.
+  recursively: a `git add` or `git commit` needs an escalation. The
+  path is anchored at the writable root: a `.git` or `.codex` in a
+  subfolder is not covered (Codex's source, read 2026-11-20; seen the
+  same day, below).
+- **Subagents** (read 2026-11-20). A subagent inherits the parent
+  turn's sandbox and approval settings, and a custom agent file does not
+  override them (a summary of the docs, not their words). A local Codex
+  delegates only when asked, or when an `AGENTS.md` or a skill names the
+  situation; the cost is tokens. So whether subagents are used is a way
+  of working, not a matter of permission — and a user who wants Codex to
+  use them as needed says so in `~/.codex/AGENTS.md`. Another agent
+  started as a program from the shell is a different case (`guide.md`
+  § 2.7): not tried here.
 - **Who answers approvals** (the same page). By default the user
   (`approvals_reviewer = "user"`); with `approvals_reviewer =
   "auto_review"`, "eligible approval requests are reviewed by Auto-review
@@ -138,8 +155,8 @@ docs (`learn.chatgpt.com/docs/…` and `learn.chatgpt.com/codex/…`, read
 - **The presets' sandbox**, from the permission list Codex is given:
   read anywhere (`:root`); write in the workspace, a per-chat folder
   under `~/.codex/visualizations/`, `/tmp` and `$TMPDIR`; `.git`,
-  `.agents`, `.codex` and `.aws` read-only inside each writable root;
-  the network off. So a session can read whatever the user can, and
+  `.agents`, `.codex` and `.aws` read-only at the top of each writable
+  root (not in a subfolder: below, 2026-11-20); the network off. So a session can read whatever the user can, and
   every `git pull`, `git commit`, `git push` and `gh` call needs an
   escalation.
 - **Escalation.** Under Ask for approval, `curl` and `git push --dry-run`
@@ -309,7 +326,10 @@ The configuration itself: the second reference, below.
   and `".git/hooks" = "read"` beside it kept those refused (`git
   config`: "could not write config file .git/config"; a file in
   `.git/hooks`), so the agent cannot plant a hook or a hooks path that
-  runs when someone commits outside the fence.
+  runs when someone commits outside the fence — **in the opened folder's
+  own repository**. These entries are paths relative to the folder
+  opened; in a repository nested below it the same writes passed (next
+  section).
 - **The network, GitHub alone.** The profile's `network.enabled = true`,
   `[features] network_proxy = true`, and `network.domains` allowing
   `github.com` and `api.github.com`: Codex set `HTTP_PROXY` and
@@ -357,8 +377,10 @@ The configuration itself: the second reference, below.
   revoked. Web search and the built-in browser are not filtered by the
   proxy (the docs): they are a way out beside GitHub, and with browsing
   on Always allow a session can put what it has read into a URL. In any other GitHub repository Codex's `git` offers this token
-  and fails. The vault's own hook programs inside the folder (a hooks
-  folder, a script they call) stay writable: they run inside the fence
+  and fails. A repository nested in the folder is not protected by the
+  `:workspace_roots` entries (next section). The vault's own hook
+  programs inside the folder (a hooks folder, a script they call) stay
+  writable: they run inside the fence
   when Codex commits, unbounded when someone commits outside it. A
   trusted project's `.codex/config.toml` is read, and the docs say a
   higher-precedence layer can add or replace entries under the same
@@ -366,6 +388,112 @@ The configuration itself: the second reference, below.
   (Codex cannot write that file; a commit synced from others could). In
   a workspace, a member's profile holds only while the composer is left
   alone, unless an admin enforces it (`allowed_permission_profiles`).
+
+## A repository nested in the opened folder (the desktop app on macOS, 2026-11-20)
+
+The same Mac and app, under the profile of the second reference. A vault
+may hold another git repository in a subfolder — its own `.git`, ignored
+by the vault's Git. The files that matter there are the ones another
+program reads and runs later, outside any sandbox, with the user's
+rights: Git's `config` (it can name commands — `core.fsmonitor`,
+`core.hooksPath`, a credential helper, an alias that begins `!`) and
+`hooks`, and each tool's project folder (`.codex`, `.agents`,
+`.claude`).
+
+- **The gap (tried).** In a throwaway repository made with `git init`
+  in a subfolder of the opened folder, and then at the top:
+
+  | target | nested repository | the opened folder's top |
+  |---|---|---|
+  | `git config <key> <value>` | written | refused ("could not write config file .git/config: Operation not permitted") |
+  | a file in `.git/hooks` | written | refused |
+  | a file in `.codex/` | written | refused |
+  | a file in `.agents/` | written | refused |
+  | a file in `.claude/` | written | refused |
+
+  No approval was asked. The profile's entries under `:workspace_roots`
+  are "workspace-root relative subpaths" (the docs): the top alone.
+  Codex's own protection under the presets is anchored the same way, at
+  the writable root (the source, `seatbelt.rs`, read; not tried under a
+  preset). Neither the docs nor the source say anything of a nested
+  repository.
+- **A pattern cannot close it.** A key that holds `*`, `?`, `[` or `]`
+  is a glob, and a glob takes `deny` alone: with `read` or `write` the
+  profile fails to compile — "filesystem glob path … only supports
+  `deny` access" (the source, read; not tried). So "`.git/config`
+  read-only at any depth" cannot be written. A `deny` glob under
+  `:workspace_roots` is supported (the docs' example: `"**/*.env" =
+  "deny"`), but `deny` "denies both reads and writes": it hides as well
+  as locks, and a hidden `.git/config` would stop Git in that repository
+  (inferred; not tried).
+- **A `deny` glob with `**` stops the agent from removing or moving any
+  folder (tried).** Four deny globs were written for the other families
+  at depth (`"*/**/.git/hooks/**"`, `"*/**/.codex/**"`,
+  `"*/**/.agents/**"`, `"*/**/.claude/**"` — one path component first,
+  so the top's literal entries stand). The profile compiled and the
+  writes at depth were refused. But `rm -rf` on a test folder then
+  removed every file and was refused at every directory, unrelated ones
+  included; before the globs the same command had removed all. The cause
+  is in the source (`seatbelt.rs`, read): for each deny glob, every
+  prefix of the pattern gets a rule that denies unlinking directories
+  that match it — "Also deny renaming directories that could contain
+  matches so the protected files cannot be moved beyond the path where
+  the glob applies" — and with `**` the prefixes match every directory
+  under the root. By the same reading the docs' own `**/*.env` would do
+  the same (not tried); the docs do not mention it. A rename was not
+  tried (the same rule). A plain `git init` beside the test repository
+  also failed, at copying the template hooks into the denied
+  `.git/hooks`. The globs were taken out.
+- **What was kept: five literal `read` lines for each nested
+  repository**, under
+  `[permissions.<profile>.filesystem.":workspace_roots"]`, with `<R>`
+  the repository's path relative to the opened folder:
+
+  ```toml
+  "<R>/.git/config" = "read"
+  "<R>/.git/hooks" = "read"
+  "<R>/.codex" = "read"
+  "<R>/.agents" = "read"
+  "<R>/.claude" = "read"
+  ```
+
+  Tried in two of the listed repositories (the others have the same
+  form, not tried one by one): `git status` and `git log` ran; `git
+  config` refused; a file in `.git/hooks` refused; `mkdir` of `.codex`,
+  `.claude` and `.agents` refused; `mv .git .git-moved` refused;
+  ordinary files and folders made, renamed and removed; at the top the
+  five refused as before; the vault's routine (`git ls-remote`, its lint
+  script) passed; no approval asked.
+- **What the lines leave.** A repository with no lines is open — all
+  five families (tried: `git config` and a file in `.git/hooks`
+  written). So is one cloned before its lines, moved or renamed, with no
+  sign. The folders leading to a listed repository cannot be removed or
+  moved by Codex (the source: a literal entry protects its own
+  ancestors; the listed `.git` seen). The tools' folders anywhere else
+  in the vault — a `.codex` that is not at a listed repository's top —
+  stay writable, as under the presets. Not tried: a submodule or a
+  worktree (a `.git` file with a pointer); a swap of the top's `.git`.
+- **Adding a repository: the lines first, then the clone.** A
+  repository cloned first is open until its lines are written. With the
+  lines in, Codex cannot write that `.git/config` or `.git/hooks`, so it
+  cannot `git init` or clone there (inferred from the refusals above and
+  from the failed `git init` under the globs): the clone is the user's,
+  in their own terminal. The order itself was not tried — on the test
+  bed the lines were written for repositories already there — nor
+  whether a line may name a path that does not exist yet. If Codex is to pull or push the nested
+  repository, the credential inside the fence must cover it (the second
+  reference's token is scoped to one repository). A check, run in a
+  Codex chat and compared with the lines:
+  `find . -mindepth 2 -name .git -not -path './.git/*' -prune`.
+  The paths are relative to whichever folder Codex is opened on.
+- **Who writes the lines.** Under the profile Codex could not write its
+  own `~/.codex/config.toml` — outside the folder, and a request to run
+  outside the sandbox ran inside (tried, above). The way known to work:
+  the agent shows the lines, the user pastes them into the file with the
+  app quit (so the app does not write the file back), restarts, and the
+  agent checks in a new chat. A chat switched in the composer to Ask for
+  approval leaves the profile, and there Codex might write the file with
+  the user's approval: not tried.
 
 ## A reference configuration: the ChatGPT desktop app on macOS (2026-11-19)
 
@@ -499,6 +627,13 @@ approvals_reviewer = "auto_review"
 ".codex" = "read"
 ".agents" = "read"
 ".claude" = "read"
+# For each git repository nested in the folder, five more lines, written
+# before it is cloned ("A repository nested in the opened folder"):
+# "<R>/.git/config" = "read"
+# "<R>/.git/hooks" = "read"
+# "<R>/.codex" = "read"
+# "<R>/.agents" = "read"
+# "<R>/.claude" = "read"
 
 [permissions.workspace-fence.network]
 enabled = true
@@ -548,7 +683,9 @@ The reasons, line by line:
   writable for pull and commit; its `config` and `hooks` read-only, so no
   hook or hooks path can be planted; `.codex`, `.agents` and `.claude`
   read-only, so the agent cannot loosen its own or another tool's
-  project settings.
+  project settings. All of this at the folder's top only: a repository
+  nested in the folder has none of it until its own five lines are
+  written, and a pattern cannot stand in for them (the section above).
 - **The network**: GitHub alone, through the proxy (`api.github.com` for
   `gh`). Web search and the built-in browser are not filtered by it (the
   docs).
@@ -607,4 +744,8 @@ program may fail to start inside the Windows sandbox; how a repository's `.codex
 the user's, and whether it can loosen it — a permission profile
 included; where its login is stored on Windows; which shell a `Bash`
 hook sees on Windows (the hooks page does not say); whether a real push
-passes inside the second reference's profile.
+passes inside the second reference's profile; a submodule or a worktree
+nested in the folder; whether a `read` glob is in fact rejected, and
+what the app does with a profile that fails to compile; whether Codex
+can write its own `config.toml` in a chat on Ask for approval; what
+happens when Codex starts another agent's program from the shell.
