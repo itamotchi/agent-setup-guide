@@ -334,7 +334,9 @@ settings.
    back and compare. A setting that lives in the app's screens is
    applied by the user by hand, the agent naming the screen and the
    switch; one that is chosen anew for each chat or session is said to
-   be a step at every start, since nothing keeps it.
+   be a step at every start, since nothing keeps it. Whether a session
+   already open takes a change up differs by tool (`environments/`):
+   after a change, the work goes on in a new one.
 6. **Check, in a new session** opened on another folder — not this one,
    whose `AGENTS.md` would lead it back into the setup — so that the
    settings are tried as they will be used. Try what should be refused —

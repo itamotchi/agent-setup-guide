@@ -163,13 +163,15 @@ repository that exists before its lines is open until they are written.
      (`environments/codex.md`, "A repository nested in the opened
      folder"), in the user's `~/.codex/config.toml`. The agent shows the
      lines and how to open that file (the folder is hidden); the user
-     pastes them with the app quit, and restarts it — the way that was
-     tried; whether quitting is needed is not known.
+     takes a backup copy, pastes the lines and saves, with the app
+     running — no quit, no restart (tried on one version, macOS). The
+     lines hold from the next new chat; a chat already open keeps its
+     earlier permissions, so the work goes on in a new one.
    - Claude Code: no line for the repository. The agent checks once that
      the user's settings carry the lines that hold at any depth, and
      says so if they do not.
 4. **The clone is the user's**, in their own terminal. With its lines
-   in, Codex cannot create that repository's Git files; under Claude
+   in, Codex cannot create that repository's Git files (tried); under Claude
    Code's sandbox a clone needs a host and a credential the sandbox
    hides (inferred from what a push met; not tried).
 5. **Who pulls and pushes it.** This depends on the repository, not on

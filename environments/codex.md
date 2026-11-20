@@ -474,36 +474,56 @@ rights: Git's `config` (it can name commands — `core.fsmonitor`,
   stay writable, as under the presets. Not tried: a submodule or a
   worktree (a `.git` file with a pointer); a swap of the top's `.git`.
 - **Adding a repository: the lines first, then the clone.** A
-  repository cloned first is open until its lines are written. With the
-  lines in, Codex cannot write that `.git/config` or `.git/hooks`, so it
-  cannot `git init` or clone there (inferred from the refusals above and
-  from the failed `git init` under the globs): the clone is the user's,
-  in their own terminal. The order itself was not tried — on the test
-  bed the lines were written for repositories already there — nor
-  whether a line may name a path that does not exist yet. If Codex is to pull or push the nested
-  repository, the credential inside the fence must cover it (the second
-  reference's token is scoped to one repository). A check, run in a
-  Codex chat and compared with the lines:
+  repository cloned first is open until its lines are written. A line
+  may name a path that does not exist yet, and with the lines in, Codex
+  cannot make a repository there: `git init` at a listed path was
+  refused at `.git/hooks/` ("Operation not permitted"), while an
+  ordinary file beside it was made (tried, the paste trial below). So
+  the clone is the user's, in their own terminal. If Codex is to pull or
+  push the nested repository, the credential inside the fence must cover
+  it (the second reference's token is scoped to one repository). A
+  check, run in a Codex chat and compared with the lines:
   `find . -mindepth 2 -name .git -not -path './.git/*' -prune`.
   The paths are relative to whichever folder Codex is opened on.
-- **Who writes the lines.** Under the profile Codex could not write its
-  own `~/.codex/config.toml` — outside the folder, and a request to run
-  outside the sandbox ran inside (tried, above). The way known to work:
-  the agent shows the lines, the user pastes them into the file with the
-  app quit, restarts it, and the agent checks in a new chat — by the
-  permission list it is given and by a refused write, since the
-  profile's entries leave that file outside what it may read (a read
-  was not tried). `~/.codex` is a hidden
-  folder: the agent names the way to open the file (on macOS, Finder's
-  Go to Folder, ⌘⇧G, `~/.codex`, then `config.toml` in a plain-text
-  editor). Quitting the app first is a precaution of the test bed, not a
-  known need: the app writes this file itself (a trust entry for a
-  folder), every edit there was made with the app quit and followed by a
-  restart, and the app was never seen to write an edit back. Whether an
-  edit made while the app runs is kept, and whether it takes effect
-  without a restart: not tried. A chat switched in the composer to Ask for
-  approval leaves the profile, and there Codex might write the file with
-  the user's approval: not tried.
+- **Who writes the lines: the user, by a paste, with the app running.**
+  Under the profile Codex could not write its own `~/.codex/config.toml`
+  — outside the folder, and a request to run outside the sandbox ran
+  inside (tried, above); the profile's entries also leave that file
+  outside what it may read (a read was not tried). So the agent shows
+  the lines and the user pastes them. Tried 2026-11-20 on the ChatGPT
+  desktop app 26.1111.71704 on macOS, the user doing each step by hand
+  with the app running throughout:
+  - a backup copy of `config.toml` first — the way back;
+  - the file opened in a plain-text editor (`~/.codex` is a hidden
+    folder: `open -e ~/.codex/config.toml` in a terminal opens it in
+    TextEdit; Finder's Go to Folder, ⌘⇧G, is another way), the last line
+    of the `:workspace_roots` table found, five lines pasted under it,
+    saved. The file then differed from the backup by those five lines
+    alone, plain quotes kept;
+  - **no quit and no restart were needed**: a chat opened after the save
+    had the lines in force — the writes refused, and the five entries in
+    the permission list Codex is given;
+  - **a chat already open keeps the permissions it started with**: the
+    chat open since before the paste still wrote into the path the new
+    lines protect. After an edit the work goes on in a new chat, not in
+    an old one;
+  - lines taken out took effect the same way, in the next new chat; the
+    file was then byte for byte the backup — the app had not written to
+    it through three chats.
+
+  One Mac, one version, some twenty-five minutes. Not seen: the app
+  writing `config.toml` on its own — a setting changed in its screens, a
+  folder trusted — while an editor holds the file open, where the later
+  save would win; other versions; Windows. (Until this trial every edit
+  on the test bed was made with the app quit, a precaution that proved
+  unneeded here.) The check is the agent's, in the new chat: the
+  permission list it is given and one refused write. Each chat has a
+  second workspace root, a folder of Codex's own under
+  `~/.codex/visualizations/`, and a `:workspace_roots` entry applies to
+  it too — no harm seen. A chat switched in the composer to Ask for
+  approval leaves the profile, and there Codex might write the file
+  with the user's approval: not tried, and not the way proposed — it
+  would have the agent rewrite its own bounds.
 
 ## A reference configuration: the ChatGPT desktop app on macOS (2026-11-19)
 
@@ -671,8 +691,8 @@ The reasons, line by line:
 
 - **No `sandbox_mode`, no `[sandbox_workspace_write]`.** The docs: a
   profile or those, not both; either in any loaded file makes Codex use
-  the older settings. Written with the app quit, so it is not written
-  back.
+  the older settings. It was written with the app quit; the paste trial
+  later showed that is not needed (above).
 - **`default_permissions`** applies the profile to every chat; the
   composer shows its name, and a preset chosen there leaves it for that
   chat. The approval keys are those tried; under the profile a request
@@ -757,5 +777,7 @@ hook sees on Windows (the hooks page does not say); whether a real push
 passes inside the second reference's profile; a submodule or a worktree
 nested in the folder; whether a `read` glob is in fact rejected, and
 what the app does with a profile that fails to compile; whether Codex
-can write its own `config.toml` in a chat on Ask for approval; what
+can write its own `config.toml` in a chat on Ask for approval; whether
+the app ever writes `config.toml` over an edit left open in an editor;
+what
 happens when Codex starts another agent's program from the shell.
