@@ -21,6 +21,18 @@ a user of the CLI extends this note. `~/.claude` is
   macOS line on the sandbox's excluded commands is dropped. The docs' way
   to the sandbox on Windows is Claude Code inside WSL2 — heavier; for a
   user who wants the OS to bound commands.
+- **Why this template is not the macOS one.** On 2026-11-20 the macOS
+  template lost its deny lines on command names and its rules-file lines
+  on simple commands, on one ground: the sandbox bounds what any command
+  writes and reaches, and takes away the read block's prompt on a
+  command it cannot trace (`claude-code-macos.md`). With no sandbox
+  neither holds, so the Windows template keeps those lines — a stop on
+  the usual spelling of a command and no more, and that is to be said to
+  the user. Two lines were taken over: `Edit(**/.git/hooks/**)` and
+  `Edit(**/.git/config)`, which keep the file tools off Git's hooks and
+  config at any depth; a Bash command can still write there on Windows.
+  Not tried on Windows, like the rest of the template. Nothing here
+  carries the macOS sandbox's protection of a nested `.claude`.
 - **The PowerShell tool.** With Git Bash it is on by default for
   claude.ai and Console accounts, and a Bash rule does not restrict it; a
   Bash deny rule turns it off for the session without a warning (the

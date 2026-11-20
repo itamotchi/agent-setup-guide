@@ -1,6 +1,5 @@
 {
-  "_comment": "Template, Windows variant (native Windows with Git for Windows; environments/claude-code-windows.md), drafted 2026-11-09, not yet run on a machine: the fragment to MERGE into %USERPROFILE%\\.claude\\settings.json (~/.claude/settings.json). It is model/settings.json less the sandbox, which does not run on native Windows: Claude Code runs commands unsandboxed there, with no warning, and failIfUnavailable would stop it at startup (the sandboxing page). Changed for Windows: brew and security (macOS) out; winget in; powershell, pwsh and cmd denied from Bash; _netrc beside .netrc; gh's folder is %APPDATA%\\GitHub CLI on Windows (gh help environment), in place of ~/.config/gh; Claude Code's own login is the file ~/.claude/.credentials.json on Windows (the authentication page), not the Keychain. The PowerShell tool is turned off by env: with Git Bash it is on by default for claude.ai and Console accounts, and a Bash rule does not restrict it (the tools reference). Paths are written ~/… as in the Mac model; the docs do not say how ~ expands on Windows or how a space in a rule's path is matched, so the checks try a deny line on the machine (environments/claude-code-windows.md). Everything else as model/settings.json's comment says.",
-  "autoMemoryEnabled": false,
+  "_comment": "Template, Windows variant (native Windows with Git for Windows; environments/claude-code-windows.md), drafted 2026-11-09, not yet run on a machine: the fragment to MERGE into %USERPROFILE%\\.claude\\settings.json (~/.claude/settings.json). It is model/settings.json less the sandbox, which does not run on native Windows: Claude Code runs commands unsandboxed there, with no warning, and failIfUnavailable would stop it at startup (the sandboxing page). Changed for Windows: brew and security (macOS) out; winget in; powershell, pwsh and cmd denied from Bash; _netrc beside .netrc; gh's folder is %APPDATA%\\GitHub CLI on Windows (gh help environment), in place of ~/.config/gh; Claude Code's own login is the file ~/.claude/.credentials.json on Windows (the authentication page), not the Keychain. The PowerShell tool is turned off by env: with Git Bash it is on by default for claude.ai and Console accounts, and a Bash rule does not restrict it (the tools reference). Paths are written ~/… as in the Mac model; the docs do not say how ~ expands on Windows or how a space in a rule's path is matched, so the checks try a deny line on the machine (environments/claude-code-windows.md). Not brought up to the macOS template's review of 2026-11-20, on purpose: that review dropped the deny lines on command names because the sandbox bounds what any command writes and reaches; with no sandbox here they stay, as a stop on the usual spelling of a command and no more (environments/claude-code-windows.md). Two lines are taken from it: Edit(**/.git/hooks/**) and Edit(**/.git/config) keep the file tools off Git's hooks and config at any depth, in the opened folder's repository and in one nested in it — what is planted there runs later with the user's rights; a Bash command can still write there on Windows. The ask lines, the read block and the write block as model/settings.json's comment says.",
   "env": {
     "CLAUDE_CODE_USE_POWERSHELL_TOOL": "0"
   },
@@ -20,6 +19,8 @@
       "Edit(~/AppData/Roaming/GitHub CLI/**)",
       "Read(~/.claude/.credentials.json)",
       "Edit(~/.claude/.credentials.json)",
+      "Edit(**/.git/hooks/**)",
+      "Edit(**/.git/config)",
       "Bash(sudo:*)",
       "Bash(pip:*)",
       "Bash(pip3:*)",
@@ -39,7 +40,6 @@
       "Bash(codex:*)",
       "mcp__ccd_directory__request_directory",
       "mcp__ccd_directory__change_directory",
-      "Cd",
       "mcp__ccd_session_mgmt__set_session_permission_mode",
       "mcp__ccd_session__hand_off_to_session",
       "mcp__ccd_session__move_to_cloud",
