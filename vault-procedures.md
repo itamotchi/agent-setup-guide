@@ -9,9 +9,14 @@ names, and carried out on each user's machine by that user's own agent.
 A vault cannot assume that a user has anything but their agent tool and
 this guide.
 
-What is here is the base for writing them: what each procedure holds,
-and why. The facts per tool are in `environments/`, each marked tried or
-read; the way to judge a setting is in `guide.md` § 2. Dated 2026-11-20.
+A vault's procedure is not composed anew. It is `guide.md` § 4 and the
+file in `setup/` for the tool its users run, with the vault's values
+put in: the same steps in the same order, each value with its reason.
+This file says what is put in and what is not, how a user reaches the
+procedure (§ 1), how it serves a later change (§ 2), and what adding a
+repository inside the vault needs (§ 3). The facts per tool are in
+`environments/`, each marked tried or read; the way to judge a setting
+is in `guide.md` § 2. Dated 2026-11-21.
 
 ## What a vault may and may not do
 
@@ -35,49 +40,131 @@ read; the way to judge a setting is in `guide.md` § 2. Dated 2026-11-20.
 ## 1. The first setup
 
 When: before the user's agent is first opened on the vault (`guide.md`
-§ 4, "When"). The procedure either sends the user to this guide (its
-README) or leads the user's agent through the same steps; in both cases
-it holds:
+§ 4, "When").
 
-1. **The choice to leave it to the agent, first.** A user new to the
-   tool will nod at each question; one plain choice — "apply the
-   standard as it stands" — is more honest than a row of nods
-   (`guide.md` § 4 step 4). Offered only for a set that was tried on
-   that tool and platform; where it was not, the procedure says so.
-2. **What is still done when it is left to the agent**: the one question
-   only the user can answer (secrets peculiar to that machine); the
-   user's own hands where the tool refuses the agent — a settings file
-   pasted, a switch in the app's own screens, a choice made anew in each
-   chat; a few lines afterwards on what was set and what the user will
-   meet in daily use; the check; the record.
-3. **The points for a user who wants to decide** (`guide.md` § 3), each
-   with the proposed answer and its reason.
-4. **What the vault's routine needs** (above), so that the routine runs
-   under the harness that results, and the user knows which commands
-   leave its bounds.
-5. **The check, in a new session** (`guide.md` § 4 step 6): what should
-   be refused is refused, each by its message, and the vault's routine
-   still runs. Where the vault holds nested repositories, the protected
-   files there are tried too (§ 3 below).
-6. **The record**: what was set, each line with its reason, kept where
-   the user keeps such notes — outside the vault.
+### What the procedure is
+
+`guide.md` § 4 and the tool's file in `setup/`, adjusted to the vault.
+One document for each tool the vault's users run, or one with a part
+for each. It is both the setup and what is read again at a later change
+(§ 2), so it keeps each value's reason: a user and their agent can then
+tell which line to change.
+
+**What is adjusted** — the vault's values, put where the tool's file
+names them ("The values a vault puts in"):
+
+- the tool its users run, and so which file in `setup/` is followed;
+- what the vault's routine runs and reaches: the commands of a session
+  (a pull at the start, a commit, a push, the vault's scripts, issues
+  through a CLI), the programs they need, the hosts they reach;
+- the repository a token is made for, and the permissions the routine
+  needs on it, where the tool's file uses a token;
+- the git repositories nested in the vault, each by its path from the
+  vault's top (§ 3);
+- where the vault's standard differs from the tool's file, and why —
+  each difference with its ground, by the test of `guide.md` § 2;
+- the name of the setup folder, and where the record is kept — outside
+  the vault.
+
+**What is not adjusted**:
+
+- the test for a line (`guide.md` § 2), and the user's right to change
+  any line: the standard is offered;
+- the order — the application's own settings, the files, the lines for
+  each nested repository, the check — and the vault cloned only after
+  the harness;
+- what stays the user's own hands, as the tool's file lists it;
+- the marks of what was tried. Where the tool's file says a step was not
+  tried, the vault's procedure says so too, until the vault has tried it
+  — and then it says where and when;
+- the choice offered first, to leave it to the agent or to go point by
+  point, and what still holds when it is left (`guide.md` § 4 step 4);
+- the split between what is needed for the set to hold and what is
+  advice, and the tone: a vault's procedure turns no advice into an
+  order. A setup that is long or reads as a list of orders is put off
+  or resented (`guide.md` § 4).
+
+### How a user reaches it
+
+A new user has the invitation to the vault's repository and an agent
+tool, perhaps not yet a coding agent, and no harness. The procedure
+cannot begin inside the vault: the vault is opened last.
+
+1. **The invitation is accepted, and the user is given a link to the
+   vault's introductory document.** A README at the top of the vault's
+   repository leads to it. An invited person reads it in the browser, so
+   it may live inside the vault.
+2. **The document holds a text to copy and paste to the agent.** The
+   text carries the vault's values, so the agent that sets up needs no
+   read of the vault. Pasted into a chat that is not a coding agent, it
+   has that agent say that Claude Code or Codex is needed and how to go
+   on: the same text, pasted there.
+3. **The first session is opened on a setup folder of its own.** The
+   vault's folder will not do: a clone wants its target empty or
+   missing, and a vault should not be open to an agent before there is
+   a harness. Nor will the folder that holds the user's vaults: an
+   agent opened there may write into every vault under it, those still
+   to come among them. The setup folder is also where a later change is
+   made when it is made outside the vault. The agent says what will
+   happen and offers the two ways.
+4. **The tools and the GitHub login first** — `git`, `gh`, `gh auth
+   login` — one command at a time, run by the user in their terminal.
+5. **The agent brings this guide to hand, as a local copy, and follows
+   the tool's file with the vault's values.** The application's screens,
+   a token, the paste of a settings file are the user's hands.
+6. **The check**, in a new session.
+7. **The vault is cloned after the harness, by the user's own command.**
+   Before the harness, the agent that cloned it would be one with no
+   bounds, using the user's credential, with the vault in its hands.
+   After it, some harnesses keep the agent from creating a repository's
+   Git files at all.
+8. **The agent is opened on the vault's folder**: the vault's own first
+   steps follow.
+
+This entry was settled on 2026-11-21 and has not yet been run from its
+first step by a user; the tool's file marks what is untried in it.
+
+### The text to paste
+
+It is the vault's word, handed to the user, who gives it to their own
+agent. It holds:
+
+- what it is: the setup of the user's own harness, before a named vault
+  is opened, by this guide — with the public repository's address — and
+  which file in `setup/` is followed;
+- where the session is opened: the setup folder's name, and that it is
+  not the vault's folder;
+- the vault's values (above), as plain facts;
+- that the agent offers first to leave it to the agent or to go point
+  by point, and that any value may be changed by the user;
+- what the agent does not do: clone the vault, write a file the tool's
+  file gives to the user's hands, post anything;
+- nothing secret: no token, no password. A token is made by the user and
+  never shown to the agent.
 
 ## 2. A later change
 
 Most lines of a user's own come after the first setup: a line is added
 when a problem arises, and problems arise in use (`guide.md` § 2, the
-test; § 4, "Later"). The vault's procedure is therefore read again, and
-says so. It holds:
+test; § 4, "Later"). The vault's procedure is the document read then,
+and says so at its top. For that it holds:
 
 1. **The occasions that are the vault's doing**: the routine changed (a
    new script, a new host, a new command), a repository was added inside
    the vault (§ 3), a rule of the vault moved to another layer. Each is
-   announced to the users with what their harness needs for it.
+   announced to the users with what their harness needs for it — the
+   entry, as the tool's file lists it ("Later: the entry for each
+   occasion"), with the vault's value in it.
 2. **What a session does when the harness stops the routine**: it does
    not work around the stop and does not change settings itself; it
-   reports what was wanted, where and why. The change is made in a
-   session opened for it, outside the vault.
-3. **The steps** (`guide.md` § 4, "Later"): say what arose; the smallest
+   reports what was wanted, where and why.
+3. **Where the change is made** — by tool (`guide.md` § 4, "Later"; the
+   tool's file): in a session on the setup folder where the agent can
+   write some of its own settings or instructions; where the tool
+   refuses the agent all of them, the change may be prepared in a
+   session on the vault, which can read this procedure, and the user
+   applies it by hand.
+4. **The steps** (`guide.md` § 4, "Later"): say what arose; the smallest
    change that answers it, or none; back up, write or have the user
    apply, read back; check; record the line with its reason and date.
    A line is taken out the same way.
@@ -160,8 +247,8 @@ repository that exists before its lines is open until they are written.
 3. **The user's harness lines, for the tool that user runs** — before
    the clone:
    - Codex with a profile: the five lines for the repository's path
-     (`environments/codex.md`, "A repository nested in the opened
-     folder"), in the user's `~/.codex/config.toml`. The agent shows the
+     (`setup/codex-macos.md`, step 4), in the user's
+     `~/.codex/config.toml`. The agent shows the
      lines and how to open that file (the folder is hidden); the user
      takes a backup copy, pastes the lines and saves, with the app
      running — no quit, no restart (tried on one version, macOS). The

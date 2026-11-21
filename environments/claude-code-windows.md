@@ -74,7 +74,7 @@ a user of the CLI extends this note. `~/.claude` is
 
 ## Checks on Windows
 
-The check of `guide.md` § 4 step 6, for this platform. A Bash write
+The check of `guide.md` § 4 step 7, for this platform. A Bash write
 outside the session's folders (`touch`) would succeed here and prove
 nothing; these instead:
 
