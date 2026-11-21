@@ -401,7 +401,17 @@ The configuration itself, each line with its reason:
   trusted project's `.codex/config.toml` is read, and the docs say a
   higher-precedence layer can add or replace entries under the same
   profile name; whether a project's layer can loosen this one: not tried
-  (Codex cannot write that file; a commit synced from others could). In
+  (Codex cannot write that file; a commit synced from others could).
+  Read in the source since (2026-11-21, `codex-rs/config/src/merge.rs`,
+  `loader/mod.rs` in part): layers are merged table by table, the
+  higher layer's value winning on the same key, a trusted project's
+  file above the user's; the list of keys a project file may not set
+  (`PROJECT_LOCAL_CONFIG_DENYLIST` — the provider and base-URL keys,
+  `notify`, `profile`, `profiles`, `otel` …) does not hold
+  `permissions` or `default_permissions`; an untrusted or unknown
+  project's file is loaded disabled. By that reading a trusted
+  project's file could add to a user's profile or loosen it; the docs
+  say neither, and the function that applies the list was not read. In
   a workspace, a member's profile holds only while the composer is left
   alone, unless an admin enforces it (`allowed_permission_profiles`).
 
@@ -479,7 +489,9 @@ rights: Git's `config` (it can name commands — `core.fsmonitor`,
   `.claude` and `.agents` refused; `mv .git .git-moved` refused;
   ordinary files and folders made, renamed and removed; at the top the
   five refused as before; the vault's routine (`git ls-remote`, its lint
-  script) passed; no approval asked.
+  script) passed; no approval asked. (Since 2026-11-21 the set in
+  `setup/codex-macos.md` has four of these; the `.claude` line is
+  optional — *A tracked file under a read-only folder*, below.)
 - **What the lines leave.** A repository with no lines is open — all
   five families (tried: `git config` and a file in `.git/hooks`
   written). So is one cloned before its lines, moved or renamed, with no
@@ -540,6 +552,73 @@ rights: Git's `config` (it can name commands — `core.fsmonitor`,
   approval leaves the profile, and there Codex might write the file
   with the user's approval: not tried, and not the way proposed — it
   would have the agent rewrite its own bounds.
+
+## A tracked file under a read-only folder (2026-11-21)
+
+Raised by a vault's agent writing its procedure: the vault tracks files
+under `.claude/` (a settings file, skills), the profile kept `.claude`
+read-only, and a session's routine pulls at its start. What to do about
+it: `setup/codex-macos.md`, step 3.
+
+- **The pull does not fail cleanly (tried, not under Codex).** Git
+  2.54.0 (Apple), a throwaway origin and clone; tracked files in two
+  folders made read-only by file permissions (`chmod -R a-w`) and in an
+  ordinary folder; an incoming commit that changes one file in each and
+  adds one in a read-only folder and one in the ordinary folder.
+  `git pull --ff-only` fetched, then failed, exit 1: "error: unable to
+  unlink old '.claude/settings.json': Permission denied", "error:
+  unable to create file .claude/skills/new.md: Permission denied".
+  After it: HEAD not moved, the index unchanged, the branch one commit
+  behind; the files in the read-only folders the old ones, with no
+  change shown; the changed file in the ordinary folder already
+  rewritten and shown as modified, the added one there as untracked. A
+  second pull refused — "Your local changes to the following files
+  would be overwritten by merge", "The following untracked working tree
+  files would be overwritten by merge" — and so did one after the
+  folders were made writable again. A `git add -A` there would take the
+  two leftovers as local work on the old HEAD: a commit of them
+  diverges from the remote, and the change under the read-only folder
+  enters no commit, so nothing is silently reverted. Under Codex's
+  profile the refusal would come from the sandbox ("Operation not
+  permitted"); the same course is expected, not tried.
+- **The way back (tried, the same clone).** With the folders writable
+  — the user's own terminal — and no other uncommitted work: `git stash
+  --include-untracked`, `git merge --ff-only @{u}`, `git stash drop`
+  left the clone at the remote's commit, clean.
+- **Looking before the merge (tried, the same way).** In a fresh clone
+  one commit behind, the same folders read-only: `git fetch`, then
+  `git diff --name-only HEAD @{u} -- <the read-only folders>` listed
+  the three files of the incoming commit that lie there, and changed
+  nothing in the clone. `git merge --ff-only @{u}` needs no network, so
+  a user can run it in a terminal that holds no credential for the
+  remote.
+- **No line tells Git's write from the agent's.** A profile's entry
+  binds every process in the sandbox; the access values are `read`,
+  `write` and `deny` alone (the source, read).
+- **What Codex loads from these folders by itself (the docs, read
+  2026-11-21; not tried).** `.agents/skills/`: scanned in every folder
+  from the working directory up to the repository's root; "Codex
+  detects skill changes automatically"; a skill is "a directory with a
+  `SKILL.md` file plus optional scripts and references", and Codex
+  starts each chat with every skill's name and description, loading the
+  body when it chooses the skill. No confirmation and no trust
+  condition for a project's skills was found. `.codex/`: `config.toml`
+  and `hooks.json` from a trusted project, hooks only once reviewed
+  (above). `.claude/`: nothing — no page read names it; `CLAUDE.md` is
+  read only if listed in `project_doc_fallback_filenames`, empty by
+  default; the import from Claude Code is started by the user (the
+  desktop app has a switch for automatic updates, off on the test bed).
+- **The `.claude` line was this guide's own.** Codex's presets protect
+  `.git`, `.agents`, `.codex` and `.aws` at the top, not `.claude`. On
+  the test bed the profile kept `.claude` read-only too, on the ground
+  that a file there is read by another tool; no problem had arisen from
+  it. Since 2026-11-21 it is optional in `setup/codex-macos.md`: it
+  guards a machine where Claude Code opens the same folder, and it
+  costs the pull above in any vault that tracks files under `.claude/`
+  — which a vault built for Claude Code usually does. Without it, a
+  file Codex writes under `.claude/` and does not commit, or one Git
+  ignores (`.claude/settings.local.json`), is seen by no check that
+  compares commits; on a machine with Codex alone nothing reads it.
 
 ## From a research report made for this guide (2026-11-09)
 

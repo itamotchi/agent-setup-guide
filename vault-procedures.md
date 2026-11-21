@@ -66,6 +66,13 @@ names them ("The values a vault puts in"):
   collaborators says which way it offers them instead;
 - the git repositories nested in the vault, each by its path from the
   vault's top (§ 3);
+- whether the vault's repository tracks files under a folder the
+  tool's file keeps read-only — under Codex's profile `.codex/` and
+  `.agents/`, and `.claude/` for a user who keeps that line. If it
+  does, a plain pull that brings a change there fails half-way, so the
+  procedure gives the routine's pull in the three steps of
+  `setup/codex-macos.md`, step 3, and says which users need the
+  `.claude` line;
 - where the vault's standard differs from the tool's file, and why —
   each difference with its ground, by the test of `guide.md` § 2. A
   line the vault adds to a user's settings holds wherever those
@@ -217,8 +224,9 @@ each in its own way, with no prompt (`environments/claude-code-macos.md`,
   the file tools, and a command can still write these files (read, not
   tried).
 - **Codex with a permission profile** (the ChatGPT desktop app on
-  macOS). Five literal `read` lines for each nested repository, written
-  before it is cloned. No pattern can stand in for them: a `read` glob
+  macOS). Four literal `read` lines for each nested repository — five
+  where the user keeps `.claude` read-only (`setup/codex-macos.md`,
+  steps 3 and 4) — written before it is cloned. No pattern can stand in for them: a `read` glob
   is rejected (read), and a `deny` glob with `**` stops the agent from
   removing or moving any folder in the vault (tried). A repository with
   no lines is open, with no sign.
@@ -255,7 +263,7 @@ repository that exists before its lines is open until they are written.
    the vault's checks may read its files as the vault's.
 3. **The user's harness lines, for the tool that user runs** — before
    the clone:
-   - Codex with a profile: the five lines for the repository's path
+   - Codex with a profile: the lines for the repository's path
      (`setup/codex-macos.md`, step 4), in the user's
      `~/.codex/config.toml`. The agent shows the
      lines and how to open that file (the folder is hidden); the user

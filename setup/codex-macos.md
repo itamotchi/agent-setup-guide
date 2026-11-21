@@ -21,16 +21,20 @@ is read or written — held by the sandbox, not by a model's judgement
 other host; looking at the web — web search and the built-in browser —
 still works, and is not bound by that list. A vault's routine — a
 pull, a commit, a push, its issues through `gh` — runs inside those
-bounds, with no approval asked. Git's `config` and `hooks` and the agent
-tools' project folders are kept from the agent, at the top of the opened
-folder and in each nested repository that has its lines.
+bounds, with no approval asked. Git's `config` and `hooks` and Codex's
+own project folders (`.codex`, `.agents`) are kept from the agent, at
+the top of the opened folder and in each nested repository that has its
+lines.
 
 **Tried**: on one Mac, in the ChatGPT desktop app (versions 26.1118.11504
 and 26.1111.71704, as the app showed them), on 2026-11-19 and
 2026-11-20, in a Business workspace, with Codex opened on one vault.
 On that Mac web search was set to live and the built-in browser to open
 pages without asking (step 9); with the app's defaults for those two the
-set was not tried.
+set was not tried. On that Mac the profile also kept `.claude`
+read-only, at the top and in each nested repository; that line is
+optional here since 2026-11-21 (step 3), so the set below is the one
+tried, less that line.
 
 **Not tried**:
 
@@ -173,7 +177,8 @@ Codex".
 
 ## 3. `~/.codex/config.toml`: the profile
 
-The set proposed, as it stood on the test bed. The paths are that Mac's:
+The set proposed: the test bed's, less one line (`.claude` read-only,
+now optional — below). The paths are that Mac's:
 the agent finds each on the user's — where `git`, `gh` and the routine's
 other programs are, which Git configuration files exist — and puts in
 the user's home folder for `<name>`.
@@ -203,8 +208,7 @@ approvals_reviewer = "auto_review"
 ".git/hooks" = "read"
 ".codex" = "read"
 ".agents" = "read"
-".claude" = "read"
-# step 4: five lines for each git repository nested in the folder
+# step 4: four lines for each git repository nested in the folder
 
 [permissions.workspace-fence.network]
 enabled = true
@@ -264,15 +268,61 @@ The reasons:
 - **`:workspace_roots`**: the folder opened, with no path written.
   `.git` writable, for a pull and a commit; its `config` and `hooks`
   read-only, so that no hook or hooks path can be planted to run later
-  outside the bounds; `.codex`, `.agents` and `.claude` read-only, so
-  that the agent cannot loosen its own or another tool's project
-  settings. **At the folder's top only** (step 4). A key in this table
+  outside the bounds; `.codex` and `.agents` read-only, so that the
+  agent cannot change its own project settings or leave itself a skill
+  — Codex reads a trusted project's `.codex/` and picks up a skill put
+  under `.agents/skills/` by itself (the docs, read). These two are
+  also the names Codex's own presets protect.
+  **At the folder's top only** (step 4). A key in this table
   is read against whatever folder a chat is opened on, so a line added
   here — a vault's own among them — holds in every folder the user
   opens with Codex: a folder of the same name in another project is
   read-only there too (by how the keys are read, and seen for a chat's
   second root; another project not tried). → "`.git` is protected
   under a profile too".
+- **`.claude` is not in the set: an optional line.** `".claude" =
+  "read"` in this table — and `"<R>/.claude" = "read"` for a nested
+  repository (step 4) — is for a user who opens the same folder with
+  Claude Code as well. There, what Codex writes under `.claude/` (a
+  settings file, a hook, a skill) is read by Claude Code, and a hook
+  runs with the user's rights, outside any sandbox. Where Codex alone
+  opens the folder, nothing reads `.claude/` (the docs name no such
+  read). Codex's presets do not protect it; the line was this guide's
+  own, on the test bed, and rested on no problem that arose. Its cost
+  is the next point: most vaults built for Claude Code track files
+  there. → *A tracked file under a read-only folder*.
+- **A vault that tracks files under a read-only folder.** A path kept
+  read-only is read-only to every program in the sandbox, Git among
+  them: no line lets Git's write through and stops the agent's. So
+  where the vault's repository tracks a file under `.codex/` or
+  `.agents/` — or under `.claude/`, with the optional line — a pull
+  that brings a change to it cannot write it, and does not fail
+  cleanly: `git pull --ff-only` stops with an error, HEAD unmoved, the
+  files under the read-only folder the old ones, **the other files of
+  the same commits already rewritten** and shown as local changes; and
+  every later pull refuses, in the user's own terminal too, until they
+  are discarded. Nothing is silently reverted; the clone is stuck. A
+  vault that tracks nothing under these folders never meets it. One
+  that does has its routine pull in three steps (the vault's procedure
+  says so, `vault-procedures.md` § 1):
+
+  1. `git fetch` — inside the bounds, `.git` being writable;
+  2. `git diff --name-only HEAD @{u} -- .codex .agents` (with the
+     optional line, `.claude` too; for a nested repository, its own);
+  3. nothing listed: `git merge --ff-only @{u}`. Something listed: the
+     agent stops and says so, and the user runs `git merge --ff-only
+     @{u}` in their own terminal, in the vault's folder — the commits
+     are already fetched, so it needs no login there. A change to a
+     tool's project files then enters the clone by the user's hand.
+
+  If the half-written state is already there, the user, in their own
+  terminal, with no work of their own uncommitted: `git stash
+  --include-untracked`, `git merge --ff-only @{u}`, `git stash drop` —
+  what the failed pull wrote is the incoming commits' own content.
+  Tried with Git 2.54 on folders made read-only by file permissions —
+  the failed pull, the three steps, the way back; **not under the
+  profile**, where the refusal comes from the sandbox.
+  → *A tracked file under a read-only folder*.
 - **The network**: the hosts the routine reaches and no other, through
   Codex's proxy — here GitHub (`api.github.com` is for `gh`). A host
   not listed is refused before the command runs. Web search and the
@@ -315,7 +365,7 @@ the lines".
 
 The profile's protection of Git's files and the tools' folders reaches
 the top of the opened folder only. For each git repository nested in the
-vault, five lines under
+vault, four lines under
 `[permissions.workspace-fence.filesystem.":workspace_roots"]`, with
 `<R>` its path from the vault's top:
 
@@ -324,13 +374,15 @@ vault, five lines under
 "<R>/.git/hooks" = "read"
 "<R>/.codex" = "read"
 "<R>/.agents" = "read"
-"<R>/.claude" = "read"
 ```
+
+A fifth, `"<R>/.claude" = "read"`, for the user who keeps `.claude`
+read-only (step 3, the optional line).
 
 - **Why**: these are the files another program reads and runs later,
   outside any sandbox, with the user's rights (`guide.md` § 2.15). In a
-  nested repository with no lines all five were written, with no
-  approval asked (tried).
+  nested repository with no lines all of them, and `.claude`, were
+  written, with no approval asked (tried).
 - **Why a line per repository, and no pattern**: a `read` pattern is
   rejected by Codex (read in its source); a `deny` pattern with `**`
   stopped the agent from removing or moving any folder (tried).
@@ -338,14 +390,16 @@ vault, five lines under
   A repository that exists before its lines is open until they are
   written, with no sign; so is one moved or renamed.
 - At the first setup they are part of the file of step 3. Later, for a
-  repository added to the vault, the user pastes the five under the
+  repository added to the vault, the user pastes them under the
   table's last line (tried).
 - **What they cost**: the agent cannot create a repository at a listed
   path — the clone is the user's — and cannot remove or move the folders
-  that lead to it.
+  that lead to it. If the agent pulls a nested repository that tracks
+  files under its `.codex/` or `.agents/`, the pull meets what step 3
+  describes.
 
-Tried in two repositories of several. Not tried: a submodule or a
-worktree. → *A repository nested in the opened folder*.
+Tried in two repositories of several, with all five lines. Not tried: a
+submodule or a worktree. → *A repository nested in the opened folder*.
 
 ## 5. The token
 
@@ -469,7 +523,7 @@ After step 8, in a new chat on the vault:
 | `git config <key> <value>`; a new file in `.git/hooks`; `mkdir .codex` | each refused |
 | the vault's routine: its pull, its script, its issues through `gh`, `git push --dry-run` | each passes, with no approval asked |
 | in a nested repository: `git status`; then `git config <key> <value>` and a new file in `.git/hooks` | runs; both refused |
-| `find . -mindepth 2 -name .git -not -path './.git/*' -prune` | every repository it lists has its five lines |
+| `find . -mindepth 2 -name .git -not -path './.git/*' -prune` | every repository it lists has its lines |
 
 Anything not refused is said to the user, who decides. As tried, all of
 these were run in chats on the vault; `git ls-remote` by the
@@ -502,7 +556,10 @@ a backup, the paste, a new chat, the check.
 
 | what arose | the entry | what else it opens |
 |---|---|---|
-| a repository is added inside the vault, moved or renamed | its five lines (step 4), before the clone or the move | nothing |
+| a repository is added inside the vault, moved or renamed | its lines (step 4), before the clone or the move | nothing |
+| the vault begins to track a file under `.codex/` or `.agents/`, or a pull fails at one | no entry: the pull in three steps (step 3, "A vault that tracks files under a read-only folder") | — |
+| the user begins to open the same folder with Claude Code | the optional `.claude` lines (steps 3 and 4) | nothing; a pull that changes a tracked file under `.claude/` then goes by the three steps |
+| a pull fails at a file under `.claude/`, and Codex alone opens the folder | the optional `.claude` lines taken out | what Codex writes there is read by Claude Code, should it open the folder later |
 | a program the routine needs cannot be read | a `read` line for its folder in `[permissions.workspace-fence.filesystem]` | that folder becomes readable to every chat |
 | a host the routine needs is refused | a line in `network.domains` | what the agent has read can be sent there |
 | the agent is to pull or push another repository | that repository added to the token on GitHub — no line | the token reaches it |
