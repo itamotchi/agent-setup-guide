@@ -367,6 +367,8 @@ The configuration itself, each line with its reason:
   token from that folder; `git ls-remote` on the private repository,
   `git pull --ff-only`, `git push --dry-run` ("Everything up-to-date")
   and `gh api` on its issues passed. A real push: not yet seen. The
+  token here was made by the repository's owner; who else can make one,
+  and what is left for a user who cannot: `github.md`. The
   user's terminal and `~/.gitconfig` are unchanged. The docs say nothing
   on credentials inside the sandbox, nor on whether the app sets the
   proxy variables.

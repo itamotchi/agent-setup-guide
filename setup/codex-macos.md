@@ -40,6 +40,10 @@ set was not tried.
   session of another tool; the user's own paste was tried for five
   lines, not for the whole file;
 - a real push (a dry run passed);
+- the token of step 5 made by anyone but the repository's owner, used
+  inside the profile. Outside it, a member of an organization made one
+  for a single repository and read and wrote with it through `gh`
+  (2026-11-21);
 - the CLI, another platform, another version of the app.
 
 Each further untried point is marked where it stands. Say this to the
@@ -69,7 +73,7 @@ with no vault's procedure settles them with their agent.
 | the programs the vault's routine runs (`git`, `gh`, a script's interpreter) | step 3, the named reads |
 | the hosts the routine reaches | step 3, the network |
 | the git repositories nested in the vault, each by its path from the vault's top | step 4 |
-| the repository the agent's token covers, and the permissions the routine needs on it | step 5 |
+| the repository the agent's token covers, who owns it (the user, an organization whose members the users are, or another personal account), and the permissions the routine needs on it | step 5 |
 | the vault's repository, for the clone | step 8 |
 | where the record is kept | step 8 |
 
@@ -348,20 +352,57 @@ Inside the sandbox the macOS Keychain is out of reach, so the user's own
   Metadata read; no Workflows, so a push that changes GitHub Actions
   files is refused. The permissions are what the vault's routine needs:
   a vault that keeps no issues needs no Issues.
-- **Stored by the user**, in their own terminal, never shown to the
-  agent:
+- **Who can make it**: the repository's owner, or a member of the
+  organization that owns it. At the token's creation the user selects
+  that owner under "Resource owner", then the repository. A
+  collaborator on a repository that another personal account owns is
+  not offered the repository, and neither is an outside collaborator of
+  an organization (GitHub's docs name this as a gap; seen with two
+  accounts on 2026-11-21). The vault's procedure says who owns the
+  repository. → `environments/github.md`, "Who can make a fine-grained
+  token for a repository".
+- **In an organization, the token may wait for the owner.** By default
+  an organization's owner approves each member's fine-grained token
+  before it works, and a token made again waits again; an owner may
+  turn that off (→ `environments/github.md`, "An organization").
+- **Stored by the user, at once**, in their own terminal, never shown
+  to the agent. GitHub shows the token's string once, on the page that
+  follows its creation — also while it waits for approval — so it is
+  stored before that page is left:
 
   ```
   GH_CONFIG_DIR=~/.config/gh-codex gh auth login --with-token --insecure-storage
   ```
 
-  It is then plain text in that folder, which the profile makes
-  read-only to the agent.
+  `gh` reads the token from its standard input. It is then plain text
+  in that folder, which the profile makes read-only to the agent;
+  `GH_CONFIG_DIR=~/.config/gh-codex gh auth status` shows whether it
+  went in, the token masked. A paste that shows nothing invites a
+  second paste, and the string is then wrong with no sign: let the user
+  see that it went in, or check it (→ `environments/github.md`,
+  "Handing the token to the command that stores it"). Not tried:
+  whether this command accepts a token that still waits for approval.
+  `gh`'s own help advises `GH_TOKEN` rather than `--with-token` for a
+  fine-grained token, whose narrow reach "may cause confusing
+  behaviour" with other resources (read, gh 2.102.0); stored this way
+  it worked for the routine on the test bed.
 - **What it costs**: the agent can read the token. Its reach is that one
   repository and the network is GitHub alone; it can be revoked, and the
   user renews it at its expiry. In any other GitHub repository Codex's
   `git` offers this token and fails; if the agent is to pull or push a
-  nested repository, the user adds that repository to the token.
+  nested repository, the user adds that repository to the token — one
+  token takes several repositories of the same owner, not of two.
+
+**Where the user is neither the owner nor a member** — a collaborator
+on a repository of another personal account — no such token can be
+made. The ways then, each with what it opens; the user decides, and the
+vault's procedure says which the vault offers:
+
+| the way | what it opens, or costs |
+|---|---|
+| the vault's owner moves the repository to an organization and invites the users as its members | nothing more: each user then makes the token above. The work is the owner's, once (→ `environments/github.md`, "An organization", "A transfer of a repository to an organization") |
+| a personal access token (classic), stored the same way | GitHub: "can access every repository that you can access". The profile still bounds the Mac's files; on GitHub the agent's reach is the user's whole account. Small for an account that reaches nothing else, large for one that holds other work |
+| no credential inside | the agent commits; the pull, the push and the issues are the user's hand in their own terminal, at every session |
 
 → *A permission profile with the routine inside*, "A credential inside".
 

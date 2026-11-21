@@ -57,8 +57,13 @@ names them ("The values a vault puts in"):
 - what the vault's routine runs and reaches: the commands of a session
   (a pull at the start, a commit, a push, the vault's scripts, issues
   through a CLI), the programs they need, the hosts they reach;
-- the repository a token is made for, and the permissions the routine
-  needs on it, where the tool's file uses a token;
+- the repository a token is made for, who owns it, and the permissions
+  the routine needs on it, where the tool's file uses a token. Who owns
+  it decides whether a user can make the token at all: a token limited
+  to one repository can be made by its owner or by a member of the
+  organization that owns it, not by a collaborator on another person's
+  repository (`environments/github.md`). A vault whose users are
+  collaborators says which way it offers them instead;
 - the git repositories nested in the vault, each by its path from the
   vault's top (§ 3);
 - where the vault's standard differs from the tool's file, and why —
