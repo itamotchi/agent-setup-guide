@@ -3,16 +3,16 @@
 What has been found here about Codex, dated and sourced: the docs as
 read on 2026-11-09 and 2026-11-20, a vault's setup on Windows
 (2026-11-09), trials in the ChatGPT desktop app on macOS (2026-11-19,
-2026-11-20); and two reference configurations drawn from those trials,
-each line with its reason. What was tried and what was only read — in
-the docs or in Codex's source — is marked. **Codex's own protection of
-Git's files and of its project settings, and the profile of the second
-reference, hold at the top of the opened folder only**; a repository
+2026-11-20). What was tried and what was only read — in the docs or in
+Codex's source — is marked. This note is the evidence: the set proposed
+for the desktop app on macOS, in order and each value with its reason,
+is `setup/codex-macos.md`, which points here by section. **Codex's own
+protection of Git's files and of its project settings, and the profile
+tried here, hold at the top of the opened folder only**; a repository
 nested below it needs lines of its own ("A repository nested in the
-opened folder"). A reference, never a requirement: which
-settings and guardrails a user has is theirs to decide with their agent
-(`guide.md`). Where a note and the docs differ, the docs win; Codex
-changes with each version.
+opened folder"). Which settings and guardrails a user has is theirs to
+decide with their agent (`guide.md`). Where a note and the docs differ,
+the docs win; Codex changes with each version.
 
 ## From the Codex docs (read 2026-11-09)
 
@@ -79,11 +79,16 @@ Codex CLI 0.162.0.
   A command added to the allow list in the TUI is written to the user's
   `default.rules`, and with Smart approvals (the default) Codex may
   propose a rule during an escalation. `codex execpolicy check --rules
-  <file> -- <command>` shows the decision.
+  <file> -- <command>` shows the decision. A list in one position of a
+  pattern is a set of alternatives.
 - **Settings.** The user's `config.toml` is in `CODEX_HOME` (`~/.codex`;
   on Windows, for example, `C:\Users\<name>\.codex`); a repository may
   carry `.codex/config.toml`; `trust_level = "untrusted"` for a project
-  disables its project-local configuration.
+  disables its project-local configuration. A permission profile and
+  the older sandbox settings (`sandbox_mode`, `[sandbox_workspace_write]`)
+  are not used together: either of the older keys in any loaded file
+  makes Codex use the older settings (the Permissions page, read
+  2026-11-20).
 - **Instructions.** A global `AGENTS.md` in Codex's home, then each
   `AGENTS.md` from the project root down to the folder opened; later ones
   come later in the prompt and override.
@@ -140,7 +145,11 @@ docs (`learn.chatgpt.com/docs/…` and `learn.chatgpt.com/codex/…`, read
   "ChatGPT desktop app", its installer `Codex.dmg`. Its data folder is
   `~/.codex` (`config.toml`, `AGENTS.md`, `rules/`); the app's settings
   hold more than the file, and its AGENTS.md editor edits
-  `~/.codex/AGENTS.md`.
+  `~/.codex/AGENTS.md`. The Configuration screen shows values of
+  `config.toml` — the approval policy, the sandbox, network access, web
+  search — and opens the file. When a folder is trusted the app adds a
+  `[projects."<path>"] trust_level = "trusted"` entry to the file by
+  itself.
 - **The permission control** under the composer, per chat: Ask for
   approval; Approve for me (the docs: `workspace-write`, `on-request`,
   `approvals_reviewer = "auto_review"`); Full access (absent from the
@@ -264,7 +273,11 @@ docs (`learn.chatgpt.com/docs/…` and `learn.chatgpt.com/codex/…`, read
   Claude Cowork; maps settings, instruction files, MCP, skills, hooks,
   subagents, plugins and project memories, and 30 days of chats; what
   its sync does is not stated); keyboard shortcuts, global ones among
-  them. On the Business workspace the data controls showed training off
+  them; bundled Node.js and Python ("Codex dependencies"), Plugin
+  Management and worktrees (none of the three judged here); the app's
+  own MCP servers `node_repl` and `codex_apps` (the built-in browser
+  and computer use run on the first, by GitHub issues, not the docs).
+  On the Business workspace the data controls showed training off
   and fixed (OpenAI's help: Business, Enterprise and Edu content is not
   used for training by default).
 - **The admin route.** Admin Console > Agent security (workspace owners,
@@ -298,7 +311,7 @@ whenever the model asks and the reviewer agrees — instructions and a
 reviewer are not a boundary (`guide.md` § 2.1, § 2.14); a write by a
 script passes edit-tool checks and command rules alike (§ 2.2); a local
 path to another folder in a vault's document leads an agent there
-(§ 2.5). What held, the same day: the profile below.
+(§ 2.5). What held, the same day: the profile of the next section.
 
 ## A permission profile with the routine inside (the desktop app on macOS, 2026-11-20)
 
@@ -306,7 +319,8 @@ The same Mac and app. A profile written into `config.toml` with the app
 quit, then checked in new chats on the vault: Codex ran set commands and
 reported their raw output. The syntax is from the docs' Permissions page
 (marked Beta; `learn.chatgpt.com/docs/permissions`, read 2026-11-20).
-The configuration itself: the second reference, below.
+The configuration itself, each line with its reason:
+`setup/codex-macos.md`, step 3.
 
 - **A fence with no folder named.** `:workspace_roots` stands for the
   session's folders (the folder opened, and the chat's
@@ -391,7 +405,7 @@ The configuration itself: the second reference, below.
 
 ## A repository nested in the opened folder (the desktop app on macOS, 2026-11-20)
 
-The same Mac and app, under the profile of the second reference. A vault
+The same Mac and app, under the profile of the section above. A vault
 may hold another git repository in a subfolder — its own `.git`, ignored
 by the vault's Git. The files that matter there are the ones another
 program reads and runs later, outside any sandbox, with the user's
@@ -481,7 +495,7 @@ rights: Git's `config` (it can name commands — `core.fsmonitor`,
   ordinary file beside it was made (tried, the paste trial below). So
   the clone is the user's, in their own terminal. If Codex is to pull or
   push the nested repository, the credential inside the fence must cover
-  it (the second reference's token is scoped to one repository). A
+  it (the token tried was scoped to one repository). A
   check, run in a Codex chat and compared with the lines:
   `find . -mindepth 2 -name .git -not -path './.git/*' -prune`.
   The paths are relative to whichever folder Codex is opened on.
@@ -524,230 +538,6 @@ rights: Git's `config` (it can name commands — `core.fsmonitor`,
   approval leaves the profile, and there Codex might write the file
   with the user's approval: not tried, and not the way proposed — it
   would have the agent rewrite its own bounds.
-
-## A reference configuration: the ChatGPT desktop app on macOS (2026-11-19)
-
-One configuration that worked on the test bed above, for a user who
-works in a shared vault through Codex and wants few prompts; each line
-with its reason. **Not the set this guide proposes** when a user leaves
-the setup to the agent — that is the second reference: this one is the
-lighter alternative, named with its weakness (the last sentence of this
-paragraph). A reference, not a requirement: the user decides each
-point with their agent, and the docs for their version win. Personal
-preferences (keyboard shortcuts, the send key) are left out. On
-2026-11-20 a chat under this configuration wrote outside its folder
-with Auto-review's approval (above); the second reference keeps the
-routine inside a profile instead.
-
-- **Mode: Approve for me**, chosen in the composer for each chat — the
-  composer overrides `config.toml`. A vault's routine needs an
-  escalation at every pull, commit, push and `gh` call; under Ask for
-  approval each is a prompt, and many prompts wear attention down
-  (`guide.md` § 2.10); Auto-review answers them instead. Auto-review is
-  a model, not a boundary: what must never happen goes in `forbidden`
-  rules (below). Full access off: with the General tab's toggle off it
-  is not in the menu. The weakness, seen 2026-11-20: whether a command
-  leaves the sandbox is decided by the model and the reviewer, for any
-  command, a write outside the folder included.
-- **`~/.codex/config.toml`**, the part that bears on this:
-
-  ```toml
-  sandbox_mode = "workspace-write"
-  web_search = "live"
-
-  [sandbox_workspace_write]
-  network_access = false
-  ```
-
-  No approval keys: the composer's choice supplies them (with
-  `approvals_reviewer` removed, Approve for me still showed
-  `auto_review`). The network off makes a command that connects an
-  escalation, which is reviewed. Live search shows a page as it is now;
-  the docs' default, cached, "reduces exposure to prompt injection from
-  arbitrary live content" — the trade-off. No permission profile here:
-  under the one tried on 2026-11-19 the vault's sync failed; the second
-  reference has the sync inside one.
-  The app adds a `[projects."<path>"] trust_level = "trusted"` entry when
-  the vault's folder is trusted.
-- **`~/.codex/rules/<name>.rules`**, forbidden rules for what no reviewer
-  should pass. For example:
-
-  ```
-  prefix_rule(
-      pattern = ["git", "push", ["--force", "-f", "--force-with-lease", "--mirror", "--delete", "-d"]],
-      decision = "forbidden",
-      justification = "Rewrites or deletes shared history. Ask the user.",
-  )
-  ```
-
-  and the same after `"origin"` and after `"origin", "main"`; and `git
-  commit` with `--no-verify` or `-n`, which skips the vault's
-  pre-commit. A list in one position is a set of alternatives (the
-  docs' rules page). Matching is by exact argument prefix, so each
-  placement is a rule of its own, and a form not named passes (`git
-  push origin +main`, `--force-with-lease=<ref>`; `guide.md` § 2.2).
-  Seen rejecting before the process started, with the justification.
-- **Instructions and memory.** Codex memories off, and memories from
-  tool-assisted chats off: the docs call memories "a helpful recall
-  layer, not ... the only source for rules that must always apply". The
-  "Codex" custom-instructions field in Personalize empty — undocumented,
-  and it reaches Codex Cloud too; the user's own instructions, if any, go
-  in `~/.codex/AGENTS.md`, the documented place. A line there that, when
-  a vault's routine fails in the sandbox, the agent asks to run it
-  outside — the route, not a workaround — makes the routine steadier
-  (above).
-- **Web and the built-in browser.** The built-in browser on, its
-  browsing default Always allow: looking at a page needs no approval
-  (the cost: a session can put what it has read into a URL unasked).
-  Downloads and uploads Requires approval: a file in or out is asked.
-  History access off (the docs: history "can include internal URLs,
-  search terms, and other sensitive information"); site tools (WebMCP)
-  off; no saved passwords, contact info or extensions in the browser.
-- **What acts as the user, off.** Computer use: no app allowed, not
-  while the Mac is locked, no always-allowed apps; no Chrome extension
-  ("sites may treat ChatGPT's actions as coming from your account");
-  computer history off; no passwords saved in the app (a saved login
-  lets the agent sign in as the user); no control of the Mac from
-  another device.
-- **Cloud, off.** No GitHub connection in ChatGPT: a local Codex uses the
-  Mac's own `git` and `gh` login, and the connector would open the
-  repositories to cloud tasks. Codex Cloud, code review and dots not
-  used; plugins the work does not use, off.
-- **Git tab.** Always force push off: it rewrites a shared vault's
-  history. Commit and PR instructions empty: a vault's conventions are in
-  its `AGENTS.md`.
-- **Notifications** for permission requests and questions on: a prompt
-  that does reach the user is seen.
-- **Import** not run, sync off: another tool's settings and instructions
-  are that tool's.
-- **Hooks**: none of the user's own; a vault's `.codex/` hooks, if any,
-  read, then trusted in the Hooks tab.
-- **Before the first chat on the vault**: `git` and `gh` signed in with
-  the user's own account, with access to the vault's repository.
-
-## A second reference: a profile with the routine inside (2026-11-20)
-
-**The set this guide proposes for Codex in the ChatGPT desktop app on
-macOS**, and the one applied when a user leaves the setup to the agent
-(`guide.md` § 4 step 4): it matches the guide's proposed answer —
-nothing outside the opened folder read or written, held by a setting
-and not by a model's judgement (`guide.md` § 3.1) — and the first
-reference is the configuration under which a write outside the folder
-happened. It is heavier, and these stay the user's own hands even when
-the rest is left to the agent: making the token on GitHub and storing
-it; pasting the configuration, with the paths found for their Mac; five
-lines for each repository nested in the folder; and leaving the
-composer's permission choice alone — a preset chosen there leaves the
-profile for that chat. Tried on one Mac, in the desktop app; a real
-push was not yet seen; under the CLI or on another platform it was not
-tried, and that is said before the user chooses.
-
-For a user who wants a write or read outside the folder stopped by the
-sandbox rather than by a model, with the vault's routine (pull, commit,
-push, its issues through `gh`) still running. The configuration tried
-above, as it stood on the test bed; the paths are that Mac's — find each
-on the user's (where `git`, `python3` and `gh` live; which git config
-files exist). A reference, not a requirement.
-
-```toml
-default_permissions = "workspace-fence"
-approval_policy = "on-request"
-approvals_reviewer = "auto_review"
-
-[permissions.workspace-fence.filesystem]
-":root" = "deny"
-":minimal" = "read"
-":tmpdir" = "deny"
-":slash_tmp" = "deny"
-"/Library/Developer/CommandLineTools" = "read"
-"/opt/homebrew" = "read"
-"/System/Library/OpenSSL" = "read"
-"~/.gitconfig" = "read"
-"~/.gitignore_global" = "read"
-"~/.config/gh-codex" = "read"
-"/private/tmp/codex-browser-use" = "read"
-
-[permissions.workspace-fence.filesystem.":workspace_roots"]
-"." = "write"
-".git" = "write"
-".git/config" = "read"
-".git/hooks" = "read"
-".codex" = "read"
-".agents" = "read"
-".claude" = "read"
-# For each git repository nested in the folder, five more lines, written
-# before it is cloned ("A repository nested in the opened folder"):
-# "<R>/.git/config" = "read"
-# "<R>/.git/hooks" = "read"
-# "<R>/.codex" = "read"
-# "<R>/.agents" = "read"
-# "<R>/.claude" = "read"
-
-[permissions.workspace-fence.network]
-enabled = true
-
-[permissions.workspace-fence.network.domains]
-"github.com" = "allow"
-"api.github.com" = "allow"
-
-[permissions.workspace-fence.network.unix_sockets]
-"/private/tmp/codex-browser-use" = "allow"
-
-[features]
-network_proxy = true
-
-[shell_environment_policy.set]
-GH_CONFIG_DIR = "/Users/<name>/.config/gh-codex"
-GIT_CONFIG_COUNT = "2"
-GIT_CONFIG_KEY_0 = "credential.https://github.com.helper"
-GIT_CONFIG_VALUE_0 = ""
-GIT_CONFIG_KEY_1 = "credential.https://github.com.helper"
-GIT_CONFIG_VALUE_1 = "!/opt/homebrew/bin/gh auth git-credential"
-```
-
-The reasons, line by line:
-
-- **No `sandbox_mode`, no `[sandbox_workspace_write]`.** The docs: a
-  profile or those, not both; either in any loaded file makes Codex use
-  the older settings. It was written with the app quit; the paste trial
-  later showed that is not needed (above).
-- **`default_permissions`** applies the profile to every chat; the
-  composer shows its name, and a preset chosen there leaves it for that
-  chat. The approval keys are those tried; under the profile a request
-  to run outside the sandbox ran inside all the same.
-- **`:root` deny, `:minimal` read**: nothing outside is read or written
-  unless named. The named reads are what the routine's tools need: the
-  Command Line Tools (`git`), Homebrew (`python3`, `gh`), the OpenSSL
-  file the built-in browser's helper read on 2026-11-19, git's own config
-  for the author — read first, to see that it holds no credential.
-- **Temp folders denied**: other programs' files sit there. The cost:
-  `git` warns at each command. The one folder opened,
-  `/private/tmp/codex-browser-use`, read and its sockets allowed, is
-  where the built-in browser's helper finds the browser; without it the
-  browser is unavailable.
-- **`~/.config/gh-codex` read**: the token's folder, kept from the
-  agent's writes.
-- **`:workspace_roots`**: the folder opened, with no path written. `.git`
-  writable for pull and commit; its `config` and `hooks` read-only, so no
-  hook or hooks path can be planted; `.codex`, `.agents` and `.claude`
-  read-only, so the agent cannot loosen its own or another tool's
-  project settings. All of this at the folder's top only: a repository
-  nested in the folder has none of it until its own five lines are
-  written, and a pattern cannot stand in for them (the section above).
-- **The network**: GitHub alone, through the proxy (`api.github.com` for
-  `gh`). Web search and the built-in browser are not filtered by it (the
-  docs).
-- **`[shell_environment_policy.set]`**: only Codex's commands get the
-  token's folder and the helper; the user's own `git` and `gh` are
-  untouched. The empty helper first clears the Keychain helper that
-  fails inside.
-- **The token** is made and stored by the user, never shown to the agent
-  (a fine-grained token for the one repository; Contents and Issues read
-  and write; no Workflows), and renewed by them at its expiry.
-- **Kept from the first reference**: the `forbidden` rules (a forced push
-  is still possible inside the fence), and the points on instructions,
-  the web and the browser, what acts as the user, cloud, the Git tab,
-  notifications, import and hooks.
 
 ## From a research report made for this guide (2026-11-09)
 
@@ -792,10 +582,15 @@ program may fail to start inside the Windows sandbox; how a repository's `.codex
 the user's, and whether it can loosen it — a permission profile
 included; where its login is stored on Windows; which shell a `Bash`
 hook sees on Windows (the hooks page does not say); whether a real push
-passes inside the second reference's profile; a submodule or a worktree
+passes inside the profile; a submodule or a worktree
 nested in the folder; whether a `read` glob is in fact rejected, and
 what the app does with a profile that fails to compile; whether Codex
 can write its own `config.toml` in a chat on Ask for approval; whether
 the app ever writes `config.toml` over an edit left open in an editor;
 what
-happens when Codex starts another agent's program from the shell.
+happens when Codex starts another agent's program from the shell; what
+the Configuration screen shows once a profile is in the file, and
+whether a switch touched there writes the older sandbox keys back; how
+many approvals a setup takes in a folder that is not under version
+control, before any profile exists; whether a user's paste of a whole
+`config.toml` goes as the five-line paste did.
