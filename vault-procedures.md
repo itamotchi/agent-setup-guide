@@ -67,7 +67,11 @@ names them ("The values a vault puts in"):
 - the git repositories nested in the vault, each by its path from the
   vault's top (§ 3);
 - where the vault's standard differs from the tool's file, and why —
-  each difference with its ground, by the test of `guide.md` § 2;
+  each difference with its ground, by the test of `guide.md` § 2. A
+  line the vault adds to a user's settings holds wherever those
+  settings do: under Codex's profile it is read against every folder
+  the user opens with Codex, not the vault alone
+  (`setup/codex-macos.md`, step 3) — the procedure says so to the user;
 - the name of the setup folder, and where the record is kept — outside
   the vault.
 

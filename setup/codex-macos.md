@@ -266,8 +266,13 @@ The reasons:
   read-only, so that no hook or hooks path can be planted to run later
   outside the bounds; `.codex`, `.agents` and `.claude` read-only, so
   that the agent cannot loosen its own or another tool's project
-  settings. **At the folder's top only** (step 4). → "`.git` is
-  protected under a profile too".
+  settings. **At the folder's top only** (step 4). A key in this table
+  is read against whatever folder a chat is opened on, so a line added
+  here — a vault's own among them — holds in every folder the user
+  opens with Codex: a folder of the same name in another project is
+  read-only there too (by how the keys are read, and seen for a chat's
+  second root; another project not tried). → "`.git` is protected
+  under a profile too".
 - **The network**: the hosts the routine reaches and no other, through
   Codex's proxy — here GitHub (`api.github.com` is for `gh`). A host
   not listed is refused before the command runs. Web search and the
