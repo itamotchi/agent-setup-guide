@@ -6,9 +6,11 @@ Code v2.1.2xx to v2.1.3xx). Each point says whether it was **tried** on
 that Mac or only **read** in the Claude Code docs (settings,
 permissions, permission modes, sandboxing), with the date. One machine:
 observations, not guarantees; where this note and the docs for the
-user's version differ, the docs win. Templates: `model/`
-(`settings.json`, `rules/harness.md`, `user-memo.md`, `optional/`) — a
-reference, never a requirement (`guide.md`).
+user's version differ, the docs win. This note is the evidence: the set
+proposed, in order and each value with its reason, is
+`setup/claude-code-macos.md`, which points here by section; the text
+that is applied is in `model/` (`settings.json`, `rules/harness.md`,
+`user-memo.md`, `optional/`).
 
 ## What the standard does with no setting
 
@@ -285,6 +287,9 @@ Read 2026-11-20 unless marked.
   listening); a program that writes a lock file in `/tmp` (the sandbox
   writes `$TMPDIR`). Each is opened when the need is met, by the entry
   that names it, not in advance.
+- **Accept edits and an added folder.** With `~/.claude` added to a
+  session, Accept edits passed a write there with no prompt (seen
+  2026-11-01, before any ask rule on that folder).
 - **Backups of settings files** under `~/.claude/` cannot be made by a
   sandboxed `cp` (most of `~/.claude` is write-denied to commands): made
   with the Read and Write tools, in a session to which the user has
