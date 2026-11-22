@@ -224,7 +224,11 @@ same files were writable, on one Mac, under Claude Code and under Codex,
 each in its own way, with no prompt (`environments/claude-code-macos.md`,
 `environments/codex.md`).
 
-### What each tool's harness needs
+### What is known, tool by tool
+
+As found on the dates given in `environments/` and `setup/`: a
+reference for the user's agent, checked against the tool as it is. For
+any other tool, the test below.
 
 - **Claude Code on macOS.** Nothing for each repository. Five lines in
   the user settings hold at any depth — two deny rules on the file tools
@@ -266,32 +270,30 @@ that passes at depth and is refused at the top is the gap.
 
 ### What the procedure holds, in order
 
-The order matters where a tool needs lines for each repository: a
+Like the rest of a vault's procedure (§ 1) it is written in no tool's
+terms and carries no tool's lines: it says what the vault does and
+announces, and what each user's agent sees to for its own tool. The
+order matters where a tool needs lines for each repository: a
 repository that exists before its lines is open until they are written.
 
 1. **The place.** Where in the vault the repository goes is the vault's
-   to say; it has no meaning to the harness.
+   to say; it has no meaning to the harness. The procedure announces
+   the repository's path from the vault's top.
 2. **The vault's own Git ignores it.** An entry in the vault's
    `.gitignore`, committed with the vault, before the clone. Unignored,
    `git add` in the vault records the nested repository as a link, and
    the vault's checks may read its files as the vault's.
-3. **The user's harness lines, for the tool that user runs** — before
-   the clone:
-   - Codex with a profile: the lines for the repository's path
-     (`setup/codex-macos.md`, step 4), in the user's
-     `~/.codex/config.toml`. The agent shows the
-     lines and how to open that file (the folder is hidden); the user
-     takes a backup copy, pastes the lines and saves, with the app
-     running — no quit, no restart (tried on one version, macOS). The
-     lines hold from the next new chat; a chat already open keeps its
-     earlier permissions, so the work goes on in a new one.
-   - Claude Code: no line for the repository. The agent checks once that
-     the user's settings carry the lines that hold at any depth, and
-     says so if they do not.
-4. **The clone is the user's**, in their own terminal. With its lines
-   in, Codex cannot create that repository's Git files (tried); under Claude
-   Code's sandbox a clone needs a host and a credential the sandbox
-   hides (inferred from what a push met; not tried).
+3. **The user's harness, before the clone.** Where the user's tool
+   needs lines for each nested repository, they go in before the clone,
+   and the work goes on in a new session. Where it needs none, the
+   agent checks once that the settings that hold at any depth are in,
+   and says so if they are not. Which of the two is the case, and what
+   the lines are, the user's agent finds for its own tool — from "What
+   is known, tool by tool" where the tool is there, by the test at
+   depth where it is not.
+4. **The clone is the user's**, in their own terminal: a harness may
+   keep the agent from creating a repository's Git files, or from the
+   host and the credential a clone needs.
 5. **Who pulls and pushes it.** This depends on the repository, not on
    the harness: the procedure says, for each, whether the agent or the
    user does. If the agent is to, the credential it uses inside its
@@ -299,27 +301,24 @@ repository that exists before its lines is open until they are written.
    push is protected at its remote.
 6. **The check**, in a new session on the vault: the list of nested
    repositories (`find . -mindepth 2 -name .git -not -path './.git/*'
-   -prune`) against the lines, where the tool has lines for each; and
-   one refused write in the new repository — `git config <key> <value>`
-   under Codex, an edit of `.git/config` with the file tool under Claude
-   Code — with its message.
-7. **Moving, renaming, removing.** The lines name a path: when a
-   repository moves or is renamed, the new lines come first. Under Codex
-   the folders that lead to a listed repository cannot be moved or
-   removed by the agent; the user does it.
+   -prune`) against what the user's harness protects, where the tool
+   protects each by its path; and one write to Git's `config` in the
+   new repository refused, with its message.
+7. **Moving, renaming, removing.** Where a tool protects a repository
+   by its path, the new lines come first when it moves or is renamed. A
+   harness may also keep the agent from moving or removing the folders
+   that lead to a protected repository; the user does it then.
 8. **What stays open**, said in the procedure itself so that no user
-   assumes more: a repository with no lines; the vault's own hook
-   programs in ordinary folders; skills; whatever the test at depth
-   showed for the tools its users run.
+   assumes more: a repository with no lines, under a tool that needs
+   them; the vault's own hook programs in ordinary folders; skills;
+   whatever the test at depth showed for the tools its users run.
 
 ### Who writes what
 
-- **The vault** writes the procedure and its ignore entry. The lines for
-  each tool are given in the procedure as text.
-- **Each user's agent** carries the procedure out on that user's
-  machine, saying each step before it is done.
-- **The user** applies what the tool refuses the agent — a settings file
-  the agent cannot write, the clone. Under a Codex profile the agent
-  could not write its own `config.toml` (tried); whether a chat switched
-  to ask the user for each approval can, with the user's approval, was
-  not tried.
+- **The vault** writes the procedure and its ignore entry, and announces
+  the new repository's path. It gives no tool's lines.
+- **Each user's agent** finds what its own tool needs for the
+  repository, and carries the procedure out on that user's machine,
+  saying each step before it is done.
+- **The user** applies what the tool leaves to them — a settings file
+  the agent may not write, the clone.
