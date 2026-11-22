@@ -40,18 +40,33 @@ read-only, at the top and in each nested repository; that line is
 optional here since 2026-11-21 (step 3), so the set below is the one
 tried, less that line.
 
+**Followed from its first step, 2026-11-22** (the app 26.1117.41037,
+the user's `~/.codex` set aside first; the user a member of the
+organization that owns the vault's repository; two runs, from a vault's
+procedure made of an earlier form of this file, neither as far as the
+clone). Seen: the profile went in by the user's hand, the whole file at
+once, and showed after one restart of the app (step 3); a member's
+token, approved by the organization's owner, read the repository inside
+the profile; a write inside the folder passed, a read outside and
+`example.com` were refused, and `git ls-remote` by the repository's
+address passed (step 7). What the runs showed of the route itself — a
+setup folder the user did not follow, the leading lost as the work
+moved from chat to chat — changed the entry: a setup is now two
+procedures (`guide.md` § 4, "The agent leads" and "The harness, then
+the vault"; `vault-procedures.md` § 1). Of the steps below, 1 to 4, 6
+and the first table of step 7 are the harness; steps 5 and 8 and the
+second table are a vault's installation. A step a run corrected says
+so.
+
 **Not tried**:
 
-- this file followed from its first step by a user who starts with
-  nothing. On the test bed the settings were reached over two days, in
-  another order, and the configuration of step 3 was written by a
-  session of another tool; the user's own paste was tried for five
-  lines, not for the whole file;
-- a real push (a dry run passed);
-- the token of step 5 made by anyone but the repository's owner, used
-  inside the profile. Outside it, a member of an organization made one
-  for a single repository and read and wrote with it through `gh`
-  (2026-11-21);
+- this file followed to its end by a user who starts with nothing, in
+  the present form: the chat with no folder chosen (step 1), the
+  clone, a nested repository, the check on the vault. On the test bed
+  the settings were reached over two days, in another order, and the
+  configuration of step 3 was written by a session of another tool;
+- a real push (a dry run passed); a pull or a push with a member's
+  token;
 - the CLI, another platform, another version of the app.
 
 Each further untried point is marked where it stands. Say this to the
@@ -78,7 +93,6 @@ settles them with their agent.
 
 | value | where it is used |
 |---|---|
-| the folder the setup session is opened on | step 1 |
 | the programs the vault's routine runs (`git`, `gh`, a script's interpreter) | step 3, the named reads |
 | the hosts the routine reaches | step 3, the network |
 | the git repositories nested in the vault, each by its path from the vault's top | step 4 |
@@ -88,11 +102,15 @@ settles them with their agent.
 
 ## 1. Before the harness
 
-1. **A setup folder.** The session is opened on a folder of its own,
-   kept for setting up. Not the vault's folder: a clone wants its target
-   empty or missing, and a vault is opened only when there is a harness.
-   Not the folder that holds the user's vaults: an agent opened there
-   may write into every vault under it.
+1. **A chat with no folder chosen.** Started so, a chat is given a
+   working folder by the app itself, under `~/Documents/Codex/` (seen
+   2026-11-22; the place is a setting, under General). The user makes
+   no folder for setting up: in the runs of 2026-11-22 a setup folder
+   made for the purpose was a notion the user did not follow. Not the
+   vault's folder: a vault is opened only when there is a harness. Not
+   the folder that holds the user's vaults: an agent opened there may
+   write into every vault under it. Not tried: these steps led from
+   such a chat.
 2. **The first chat.** A folder that is not under version control opens
    read-only (the docs; → *From the Codex docs*). Not tried: how many
    approvals this step then takes, and which permission choice under the
@@ -110,11 +128,12 @@ settles them with their agent.
    terminal and the clone of step 8, and `gh` is also what stores the
    token of step 5. Codex does not use this login inside the bounds set
    below.
-5. **This guide, as a local copy** in the setup folder — a clone of the
-   public repository, or its ZIP downloaded in the browser and unzipped.
-   A local copy, not pages read through the web: the configuration's
-   text matters to the letter. Which of the two is smoother before the
-   harness exists: not tried.
+5. **This guide, as a local copy** in the chat's working folder — a
+   clone of the public repository, or its ZIP downloaded in the browser
+   and unzipped. A local copy, not pages read through the web: the
+   configuration's text matters to the letter. In the runs of
+   2026-11-22 the agent offered both and proposed the clone, which
+   passed; how many approvals it took was not recorded.
 
 ## 2. The app's own settings
 
@@ -130,7 +149,8 @@ sentence what that leaves open.
 
 The app changes. Names, defaults and what a switch does move between
 versions; this list was read on one version, on a Mac whose settings
-were no longer the defaults, so the defaults are not known here. The
+were no longer the defaults, so most defaults are not known here — the
+few seen in a fresh state on 2026-11-22 are marked. The
 user's agent is better placed than this file: it reads the docs for the
 user's version, asks what the screen shows, and where that differs from
 what is written here it goes by what it finds.
@@ -139,7 +159,9 @@ what is written here it goes by what it finds.
 
 - **General, Full access: off.** That choice has no sandbox and no
   approvals; with the switch off it is absent from the menu under the
-  composer (seen). If it is already off, there is nothing to do.
+  composer (seen). In a fresh state the switch was **on** (seen
+  2026-11-22, 26.1117.41037): the user turns it off. If it is already
+  off, there is nothing to do.
 - **The permission choice under the composer is left alone**, in every
   chat once step 3 is done. It shows the profile's name. A preset chosen
   there (Ask for approval, Approve for me) leaves the profile for that
@@ -148,6 +170,9 @@ what is written here it goes by what it finds.
   chat starts. Nothing keeps this choice but the user.
 - **The Configuration screen's approval, sandbox and network switches
   are left alone**: under the profile these come from the file (step 3).
+  The screen opens on the scope Work; Codex's switches are under the
+  scope Codex (seen 2026-11-22, in a fresh state: approval on request,
+  sandbox read-only, web search cached).
 
 **Outside the profile — one sentence to the user.** The profile bounds
 the commands the agent runs. It does not bound what acts as the user
@@ -348,22 +373,32 @@ it is not meant to: the file is its own bounds. So the user applies it.
    merged file — the user's other keys kept, top-level keys before any
    table, no table twice.
 2. The user makes a backup copy of the file: the way back.
-3. The agent shows the whole file in one block. The user opens
+3. The agent gives the whole file — in one block, or as a file in its
+   working folder that the user opens and copies. The user opens
    `~/.codex/config.toml` in a plain-text editor — the folder is hidden:
    `open -e ~/.codex/config.toml` in a terminal opens it in TextEdit —
-   selects all, pastes, saves. The app stays running: no quit and no
-   restart is needed.
-4. The lines hold from **the next new chat**. A chat already open keeps
-   the permissions it started with: so the setup chat, opened before
-   the paste, can still read the file back and compare it with what it
-   showed; and the work goes on in a new chat.
+   selects all, pastes, saves: **the whole file, in one save**. An edit
+   in two stages leaves a half-way file on the disk, and the running
+   app reads it: with the two top lines in and the profile's tables not
+   yet, the app showed `failed to load workspace requirements: invalid
+   input parameter` (seen once, 2026-11-22; the cause not established).
+   The setup chat, opened before the paste, reads the file back and
+   compares it with what it gave.
+4. **A profile put into a file that had none shows after the app is
+   quit and started again**: its name appeared under the composer only
+   after one restart (seen 2026-11-22, 26.1117.41037). Lines added to a
+   profile already in force held from the next new chat, with no
+   restart (2026-11-20, 26.1111.71704). Either way a chat already open
+   keeps the permissions it started with, and work inside the bounds
+   goes on in a new chat.
 
 Tried: an edit of five lines pasted and saved by the user's hand with
 the app running, in force in the next new chat, an open chat unchanged
-(one version, some twenty-five minutes). Not tried: the whole file
-pasted by the user; the read-back from the open chat; the app writing
-the file on its own while an editor holds it open, where the later save
-would win. → *A repository nested in the opened folder*, "Who writes
+(one version, some twenty-five minutes); the whole file applied by a
+user's hand, in force after one restart (2026-11-22; how it was handed
+over in that run was not recorded). Not tried: the read-back from the
+open chat as a step of its own; the app writing the file on its own
+while an editor holds it open, where the later save would win. → *A repository nested in the opened folder*, "Who writes
 the lines".
 
 ## 4. The lines for each nested repository
@@ -425,6 +460,14 @@ Inside the sandbox the macOS Keychain is out of reach, so the user's own
   accounts on 2026-11-21). The vault's procedure says who owns the
   repository. → `environments/github.md`, "Who can make a fine-grained
   token for a repository".
+- **A link that fills the page in** (GitHub's docs, read 2026-11-22;
+  not tried here):
+  `https://github.com/settings/personal-access-tokens/new?name=<name>&target_name=<owner>&expires_in=<days>&contents=write&issues=write&metadata=read`
+  opens the token's page with the name, the resource owner, the expiry
+  and the permissions set. The repository cannot be set by a link: the
+  user still chooses "Only select repositories" and the repository,
+  then generates (→ `environments/github.md`, "A link that fills in
+  the token's page").
 - **In an organization, the token may wait for the owner.** By default
   an organization's owner approves each member's fine-grained token
   before it works, and a token made again waits again; an owner may
@@ -444,8 +487,10 @@ Inside the sandbox the macOS Keychain is out of reach, so the user's own
   went in, the token masked. A paste that shows nothing invites a
   second paste, and the string is then wrong with no sign: let the user
   see that it went in, or check it (→ `environments/github.md`,
-  "Handing the token to the command that stores it"). Not tried:
-  whether this command accepts a token that still waits for approval.
+  "Handing the token to the command that stores it"). Seen 2026-11-22:
+  a member's token, stored this way and approved by the owner, listed
+  and read the repository inside the profile. Not recorded: whether
+  the command took the token while it still waited for approval.
   `gh`'s own help advises `GH_TOKEN` rather than `--with-token` for a
   fine-grained token, whose narrow reach "may cause confusing
   behaviour" with other resources (read, gh 2.102.0); stored this way
@@ -507,7 +552,8 @@ commit` with `--no-verify` or `-n`, which skips a vault's pre-commit.
 In a new chat, opened after steps 3 to 6. The agent runs each and shows
 the message; a refusal counts by its message (`guide.md` § 4 step 7).
 
-On the setup folder:
+In a chat that is not on the vault — the token's two lines once the
+token is stored, in a vault's installation:
 
 | what | the pass |
 |---|---|
@@ -532,8 +578,9 @@ After step 8, in a new chat on the vault:
 
 Anything not refused is said to the user, who decides. As tried, all of
 these were run in chats on the vault; `git ls-remote` by the
-repository's address from another folder, before the clone, was not
-tried in that form.
+repository's address from another folder, before the clone, passed on
+2026-11-22 (Git printed a refusal to write a cache; the refs came all
+the same).
 
 ## 8. The clone, and the record
 

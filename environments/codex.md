@@ -620,6 +620,98 @@ it: `setup/codex-macos.md`, step 3.
   ignores (`.claude/settings.local.json`), is seen by no check that
   compares commits; on a machine with Codex alone nothing reads it.
 
+## A setup followed from its first step (the desktop app on macOS, 2026-11-22)
+
+One user, one Mac, the ChatGPT desktop app 26.1117.41037 (its bundled
+Codex CLI reported itself as 0.171.0-alpha.13), a Business workspace.
+The user's `~/.codex` was set aside by a rename first, and the setup
+was led by Codex itself from a vault's procedure made of this guide's
+form of 2026-11-21 (one text to paste, a setup folder, the check in
+further chats). Two runs, neither as far as the vault's clone. What
+was seen, by the user's reports and screens:
+
+- **With `~/.codex` set aside the app asked for a sign-in again** and
+  listed no Codex chats; the ordinary ChatGPT chats were still there.
+  A `config.toml` was there again soon after the first start, written
+  by the app, with no profile in it.
+- **The fresh state's settings.** General: Full access **on**. The
+  Configuration screen opens on a scope selector set to Work; under
+  the scope Codex: approval policy on request, sandbox read-only, web
+  search cached; no network switch shown; the button that opens
+  `config.toml` is under that scope.
+- **A chat started with no folder chosen** is given a working folder
+  by the app, under `~/Documents/Codex/<date>/` (the agent's own
+  account of its working folder; the place is a setting under
+  General).
+- **An edit of `config.toml` in two stages failed between them.** With
+  `default_permissions` and `approval_policy` pasted at the top and the
+  `[permissions.…]` tables not yet in the file, the app showed `failed
+  to load workspace requirements: invalid input parameter`. The lines
+  were taken out and the file was again identical to its backup. The
+  cause was not established: the file on disk at that moment was not
+  captured, and that string is in neither the docs nor the source as
+  read the same day — the nearest is the load of the workspace's
+  cloud-managed policies, on whose failure config loading stops.
+- **A profile put into a file that had none showed only after the app
+  was restarted once.** (On 2026-11-20, lines added to a profile
+  already in force held from the next new chat with no restart: "A
+  repository nested in the opened folder", "Who writes the lines".)
+- **Inside the profile, in chats not on the vault**: a file made and
+  removed in the working folder; a backup outside it refused
+  (`Operation not permitted`); `curl` to `example.com` refused (first
+  `CONNECT tunnel failed, response 403`, then "domain is not on the
+  allowlist"); `git ls-remote` on a private repository by its address
+  passed with a member's fine-grained token, approved by the
+  organization's owner — Git printed a refusal to write a cache, and
+  the refs came all the same. In one chat an append to a file in
+  another folder named as the working folder stopped with exit code
+  134; from a chat opened on that folder the append passed.
+- **The leading was lost.** The first chat led the user. The work then
+  moved — to a new chat for the profile, to another for the check, to
+  another on the setup folder — and each of those was handed a single
+  request, took its part to be that request, and led nothing; the user
+  carried texts from chat to chat, and a chat that took over through a
+  record file did not know the repository's address and asked the user
+  for it. Asked afterwards, the agent's own account was that it had
+  said where the next check was to run and never who judged the result
+  and went on. A user who does not question the agent stops there.
+  Hence `guide.md` § 4, "The agent leads".
+- **The model.** With the app's default model the agent left a written
+  step (the file in one block) and changed a tried value unsaid; with
+  a higher model the steps were kept, and the plan's five-hour
+  allowance was used up in about half an hour. One run each: no more
+  is known.
+
+From the docs and the source, read the same day through a research
+agent and not tried:
+
+- **Configuration from the workspace.** Requirements bind the user
+  (lowest to highest: `/etc/codex/requirements.toml`, the cloud bundle
+  set under Agent security in the Admin Console, the legacy
+  `managed_config.toml`, macOS managed preferences); they can carry
+  `allowed_approval_policies`, `allowed_sandbox_modes`,
+  `allowed_permission_profiles`, `default_permissions`, a profile's
+  body, forbidden or prompting rules, hooks, features and the network
+  proxy. "When present, the table is the complete list of allowed
+  profiles." Cloud-managed defaults sit below the user's own
+  `config.toml`. `shell_environment_policy` is not a requirement field
+  — a default only — and its `set` values are taken literally, with no
+  `~`. The pricing page marks cloud-managed policies for Business and
+  Enterprise; "workspace owners, workspace admins, and members with
+  Codex admin permissions can manage policies." Whether a profile so
+  required leaves the composer's presets unavailable: the docs say
+  only that a mode "can be disabled or omitted when it isn't
+  available".
+- **A command under the sandbox, with no chat**: `codex sandbox macos
+  [--permissions-profile <name>] [--log-denials] COMMAND…` — "run a
+  command under the same policies Codex uses internally"; with
+  `default_permissions` set it uses that profile, and the network
+  proxy is started for it (the source). The docs' troubleshooting page
+  gives the binary's place as
+  `/Applications/Codex.app/Contents/Resources/codex`.
+- No command sets a key of `config.toml` in general (`codex features`
+  and `codex mcp` write their own).
+
 ## From a research report made for this guide (2026-11-09)
 
 Citing the Codex docs of 2026; not checked here:

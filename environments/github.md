@@ -123,7 +123,10 @@ So, for a vault's repository:
   settings (Personal access tokens, Pending requests); a token that was
   regenerated was pending again and needed a second approval. The
   setting can be turned off ("Tokens requested for this organization
-  will work immediately…": the screen's own words; not tried). What
+  will work immediately…": the screen's own words; not tried). While a
+  token waits, "GitHub will notify organization owners with a daily
+  email" of the tokens awaiting approval, and the token's maker is
+  mailed when it is approved or denied (read 2026-11-22). What
   the approval gives is the owner's look at each token before it works;
   it is not what bounds the token — a token reaches no more than the
   member can reach, so the bound is the access each member is given.
@@ -176,6 +179,24 @@ So, for a vault's repository:
   user or organization account, the repository will lose access to
   features like protected branches and GitHub Pages" (read).
 
+## A link that fills in the token's page
+
+Read 2026-11-22 (GitHub's docs, "Managing your personal access
+tokens"); not tried here. "You can share templates for a fine-grained
+personal access token via links." The parameters, all optional: `name`
+(up to 40 characters), `description`, `target_name` ("User or
+organization slug"; the signed-in user if absent), `expires_in` (1 to
+366, or `none`), and a permission by its name with `read`, `write` or
+`admin` — `contents`, `issues`, `metadata` among them; "`write` always
+includes `read`". So, for a vault's repository in an organization:
+
+```
+https://github.com/settings/personal-access-tokens/new?name=<name>&target_name=<organization>&expires_in=<days>&contents=write&issues=write&metadata=read
+```
+
+No parameter sets the repositories: the user still chooses "Only select
+repositories" and the repository, then generates and copies.
+
 ## Handing the token to the command that stores it
 
 - **The token's string is shown once**, on the page that follows its
@@ -196,9 +217,13 @@ So, for a vault's repository:
 
 ## Not tried
 
-- Git over HTTPS — a pull, a push — with a member's fine-grained token
-  (on another day the owner's own fine-grained token passed `git
-  ls-remote`, a pull and a push dry run: `environments/codex.md`).
+- Git over HTTPS — a pull, a push — with a member's fine-grained token.
+  Seen 2026-11-22: `git ls-remote` on the private repository passed
+  with a member's token, approved by the owner, inside an agent's
+  sandbox (`environments/codex.md`, "A setup followed from its first
+  step"); on another day the owner's own fine-grained token passed
+  `git ls-remote`, a pull and a push dry run.
+- The link that fills in the token's page (above).
 - That a member's token is refused at a repository of the same
   organization that was not selected.
 - Whether `gh auth login --with-token` accepts a token still pending

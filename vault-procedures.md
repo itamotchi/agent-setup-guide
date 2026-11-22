@@ -16,9 +16,10 @@ knows — what its routine needs — in no tool's terms. The settings of a
 tool are not in it: the user's agent finds them for the tool it is,
 and where something is already known for that environment (`setup/`,
 `environments/`) it consults that as a dated reference. This file says
-what a vault states and what it leaves to the user's agent (§ 1), how
-the procedure serves a later change (§ 2), and what adding a repository
-inside the vault needs (§ 3). Dated 2026-11-22.
+what a vault states and what it leaves to the user's agent, and the two
+sheets a user is handed (§ 1), how the procedure serves a later change
+(§ 2), and what adding a repository inside the vault needs (§ 3). Dated
+2026-11-23.
 
 ## What a vault may and may not do
 
@@ -46,11 +47,17 @@ When: before the user's agent is first opened on the vault (`guide.md`
 
 ### What the procedure is
 
-A document from which a user's agent can set up the user's harness,
-whatever its tool and platform. Its steps and their order are those of
-`guide.md` § 4, which hold for any tool; what it adds is what only the
-vault knows. It is written in no tool's terms and carries no tool's
-settings. It is also what is read again at a later change (§ 2).
+Two short sheets from which a user's agent can lead the user from
+nothing to work in the vault, whatever its tool and platform: first the
+agent tool's own settings and the harness, once for a machine; then the
+vault's installation, in a session already inside the bounds ("How a
+user reaches it", below). The steps of the first and their order are
+those of `guide.md` § 4, which hold for any tool; what the sheets add
+is what only the vault knows. They are written in no tool's terms and
+carry no tool's settings. What is handed to the user's agent is small;
+the detail — each value's reason, what a later change needs — stays in
+this guide as material the vault points to. The procedure is also what
+is read again at a later change (§ 2).
 
 **What the vault states** — its needs, as plain facts, once:
 
@@ -74,8 +81,8 @@ settings. It is also what is read again at a later change (§ 2).
   and a pull that brings a change there can then fail half-way: the
   vault says how its routine pulls in that case (seen under one tool:
   `setup/codex-macos.md`, step 3);
-- the vault's repository and the folder it is cloned into; the name of
-  the setup folder; where the record is kept — outside the vault;
+- the vault's repository and the folder it is cloned into; where the
+  record is kept — outside the vault;
 - anything it asks a user to add to their settings beyond what the
   routine needs, with its ground by the test of `guide.md` § 2 — and
   that such a line holds wherever the user's settings do, which may be
@@ -97,6 +104,8 @@ user to it.
 
 - the test for a line (`guide.md` § 2), and the user's right to change
   any line: what the vault advises is offered;
+- that the agent leads the user, and that a session which leads is
+  never missing (`guide.md` § 4, "The agent leads");
 - the order — the application's own settings, the files, the lines for
   each nested repository where the tool needs them, the check — and the
   vault cloned only after the harness;
@@ -113,61 +122,100 @@ user to it.
 ### How a user reaches it
 
 A new user has the invitation to the vault's repository and an agent
-tool, perhaps not yet a coding agent, and no harness. The procedure
-cannot begin inside the vault: the vault is opened last.
+tool, perhaps not yet a coding agent, and no harness. Their aim is to
+begin working in the vault; a harness is not a thing they asked for,
+and its words are not theirs. The procedure cannot begin inside the
+vault: the vault is opened last.
 
-1. **The invitation is accepted, and the user is given a link to the
-   vault's introductory document.** A README at the top of the vault's
-   repository leads to it. An invited person reads it in the browser, so
-   it may live inside the vault.
-2. **The document holds a text to copy and paste to the agent.** The
-   text carries the vault's values, so the agent that sets up needs no
-   read of the vault. Pasted into a chat that cannot work on the
-   user's machine, it has that agent say that one which works in a
-   folder there is needed — Claude Code, Codex or another — and how to
-   go on: the same text, pasted there.
-3. **The first session is opened on a setup folder of its own.** The
-   vault's folder will not do: a clone wants its target empty or
-   missing, and a vault should not be open to an agent before there is
-   a harness. Nor will the folder that holds the user's vaults: an
-   agent opened there may write into every vault under it, those still
-   to come among them. The setup folder is also where a later change is
-   made when it is made outside the vault. The agent says what will
-   happen and offers the two ways.
-4. **The tools and the GitHub login first** — `git`, `gh`, `gh auth
-   login` — one command at a time, run by the user in their terminal.
-5. **The agent brings this guide to hand, as a local copy, and builds
-   the harness by it for the tool it is**, with the vault's needs —
-   reading, where there is one, the file in `setup/` for its
-   environment. What the tool leaves to the user — its application's
-   screens, a credential, a settings file the agent may not write — is
-   the user's hands.
-6. **The check**, in a new session.
-7. **The vault is cloned after the harness, by the user's own command.**
-   Before the harness, the agent that cloned it would be one with no
-   bounds, using the user's credential, with the vault in its hands.
-   After it, some harnesses keep the agent from creating a repository's
-   Git files at all.
-8. **The agent is opened on the vault's folder**: the vault's own first
-   steps follow.
+It is in two sheets. A sheet is a short document the user reads in the
+browser — the invitation accepted, the owner gives a link to it, and a
+README at the top of the vault's repository leads to it; an invited
+person reads it there, so it may live inside the vault. It holds a few
+acts of the user's own, said at its top, then a text to copy and paste
+to their agent. From there the agent leads (`guide.md` § 4, "The agent
+leads").
 
-This entry was settled on 2026-11-21 and has not yet been run from its
-first step by a user; the files in `setup/` mark what is untried on
-their routes.
+**Sheet 1 — the agent tool's own settings and the harness.** Once for a
+machine.
+
+1. **The user starts a session that is not on the vault's folder** —
+   where the tool starts one with no folder chosen and gives it a
+   working folder by itself, that: the user has no setup folder to make
+   or to understand. Not the folder that holds the user's vaults: an
+   agent opened there may write into every vault under it.
+2. **The user pastes the sheet's text.** Pasted into a chat that cannot
+   work on the user's machine, it has that agent say that one which
+   can is needed — Claude Code, Codex or another — and how to go on:
+   the same text, pasted there.
+3. **The agent leads**, one act at a time: the tools the routine needs;
+   this guide brought to hand as a local copy; the harness built by
+   `guide.md` § 4 for the tool it is — the application's own settings,
+   the files, the check — reading, where there is one, the file in
+   `setup/` for its environment. What of the vault's needs goes into
+   the harness's own files — the routine's programs and hosts, the
+   lines for each repository nested in the vault — is in this sheet's
+   text, so that a settings file is written once, by a session that
+   can still read it back; a session inside the bounds may not be able
+   to read its own settings.
+4. **It ends when the bounds are in force**, as the tool shows it, and
+   the agent says so in the user's words. The vault is not yet on the
+   machine.
+
+**Sheet 2 — the vault's installation.** Once for each vault, in a
+session already inside the bounds.
+
+1. **The user makes the vault's folder and opens the agent on it** —
+   the sheet names the folder at its top. An act of the user's own: a
+   command handed over for so small a thing is more trouble to a user
+   than the act.
+2. **The user pastes the sheet's text, and the agent leads**: a look
+   that the bounds hold; the credential the agent uses inside the
+   bounds for the vault's repository — the user's hands, never shown to
+   the agent; the vault cloned into that folder by the user's own
+   command (some harnesses keep the agent from creating a repository's
+   Git files at all); the check on the vault; then the vault's own
+   first steps, by the vault's documents, which are at hand from the
+   clone on.
+
+Why two, and why in this order. Before the harness, an agent that
+cloned the vault would be one with no bounds, using the user's
+credential, with the vault in its hands: so the harness first. Kept
+apart, each sheet has one aim the user can follow and one session that
+leads it from its first act to its last; and each agent has less to
+read and do — the more a session reads and does, the more it fails and
+the less it attends to the user. The cut falls where the session
+changes anyway: bounds hold only in a session begun after they are set.
+
+An earlier form of this entry (2026-11-21) — one text, a setup folder
+of its own, the check in further sessions, the vault cloned at the end
+of the same procedure — was run once by a user, on Codex in the ChatGPT
+desktop app on macOS (2026-11-22), and not to its end: the first
+session led; the sessions the work then moved to were handed single
+requests and led nothing, and the user carried messages between them.
+The form above answers that. It was settled on 2026-11-23 and has not
+yet been run; the files in `setup/` mark what is untried on their
+routes.
 
 ### The text to paste
 
-It is the vault's word, handed to the user, who gives it to their own
-agent. It holds:
+Each sheet's text is the vault's word, handed to the user, who gives it
+to their own agent. It is short. It holds:
 
-- what it is: the setup of the user's own harness, before a named vault
-  is opened, by this guide — with the public repository's address. It
-  names no tool: the agent that receives it sets up for the tool it is;
-- where the session is opened: the setup folder's name, and that it is
-  not the vault's folder;
-- the vault's needs (above), as plain facts, in no tool's terms;
-- that the agent offers first to leave it to the agent or to go point
-  by point, and that any value may be changed by the user;
+- the aim, in the user's terms: to begin working in a named vault —
+  and, for sheet 1, that this part readies the agent tool itself,
+  before the vault;
+- the agent's part: it leads to the end of this sheet, in the user's
+  words, one act at a time; if the work moves to another session, the
+  lead is handed over as the lead (`guide.md` § 4);
+- where the detail is: this guide's public address. The text names no
+  tool: the agent that receives it works for the tool it is;
+- sheet 1: the vault's needs that go into the harness (above), as plain
+  facts, in no tool's terms; that the set the agent proposes may be
+  taken as it stands or gone through point by point, and that any
+  value may be changed by the user;
+- sheet 2: the vault's repository and who owns it, what the routine
+  needs of it, the folder, and which of the vault's documents the
+  agent goes by once the clone is there;
 - what the agent does not do: clone the vault, write what its tool
   leaves to the user's hands, post anything;
 - nothing secret: no token, no password. A token is made by the user and
@@ -189,7 +237,7 @@ and says so at its top. For that it holds:
 2. **What a session does when the harness stops the routine**: it does
    not work around the stop and does not change settings itself; it
    reports what was wanted, where and why.
-3. **Where the change is made** — by tool (`guide.md` § 4, "Later"): in a session on the setup folder where the agent can
+3. **Where the change is made** — by tool (`guide.md` § 4, "Later"): in a session of its own, outside the vault, where the agent can
    write some of its own settings or instructions; where the tool
    refuses the agent all of them, the change may be prepared in a
    session on the vault, which can read this procedure, and the user

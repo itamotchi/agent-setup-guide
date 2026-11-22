@@ -305,12 +305,41 @@ is, the vault's own rules and hooks run, and text from others (issues,
 comments) may reach the session. If the user has already worked in
 vaults, proceed all the same; step 2 starts from what is there.
 
-**The session.** Opened on a folder of its own, kept for setting up:
-this guide's folder, or a folder into which this guide is brought as a
-local copy. Not a vault's folder (§ 2.5), and not the folder that holds
-the user's vaults — the agent could then write under all of it. In the
-mode where the agent asks before it writes — not a mode that skips
-approvals: this session deals with the user's own settings.
+**The session.** One of its own, for setting up. Not opened on a
+vault's folder (§ 2.5), and not on the folder that holds the user's
+vaults — the agent could then write under all of it. Where the tool
+starts a session with no folder chosen and gives it a working folder by
+itself, that will do, and the user has no folder to make or to
+understand; otherwise a folder of its own. This guide is brought there
+as a local copy. In the mode where the agent asks before it writes —
+not a mode that skips approvals: this session deals with the user's own
+settings.
+
+**The agent leads.** The user's aim is to begin working with their
+agent — in a vault, say — not to set up a harness, and the words of
+this guide ("step 7", "vault", "profile") are not theirs. The agent
+holds the procedure. It says, in the user's words, where things stand
+and what comes next; it asks for the user's hand one act at a time,
+with what the user will see; it does not wait to be asked. There is
+always one session that leads. Where the work has to go on in another
+session — a setting that holds only from a new one, the check — either
+the leading session stays the lead: it says exactly what to do there
+and what to look for, and judges the result itself. Or it hands the
+lead over as the lead: the aim, what is done, what is left, and that
+the new session carries it to the end — and tells the user, once, that
+the lead has moved. A session handed a single request takes its part to
+be that request; the user is then left carrying messages between
+sessions none of which leads, and a user who does not ask stops there
+(seen in a setup run from this guide).
+
+**The harness, then the vault.** Two procedures, kept apart. The
+harness is the user's and is set up once for a machine: this section.
+Installing a vault — the credential for its repository, its clone, its
+own first steps — comes after, in a session already inside the bounds,
+and is the vault's (`vault-procedures.md` § 1). Each then has one aim
+the user can follow, and less for its agent to read and do: the more a
+session reads and does, the more it fails and the less it attends to
+the user.
 
 **Who builds it, and from what.** The user's agent, for the tool it is.
 The steps below hold for any tool; at each, the agent finds what this
@@ -410,9 +439,9 @@ leave any of it. The harness is the user's (§ 0).
    there too (§ 2.15). Anything not refused is said; the user decides
    whether to fix it or accept it.
 8. **Record** what was decided and why — for each line, the reason it is
-   there — where the user keeps such notes: the setup folder is one
-   place, beside this guide's copy and not inside it. A vault is cloned
-   and first opened only now.
+   there — where the user keeps such notes: the setup session's folder
+   is one place, beside this guide's copy and not inside it. A vault is
+   cloned and first opened only now: the second procedure, the vault's.
 
 **Later: changing the harness.** Most lines of the user's own come after
 the first setup: the test of § 2 adds a line when a problem arises, and
@@ -429,7 +458,7 @@ A session stopped in the middle of other work does not work around the
 stop and does not change the settings itself: it reports what was
 wanted, where, and why. Where the change is then made depends on the
 tool. Where the agent can write some of its own settings or
-instructions, it is made in a session on the setup folder, as the first
+instructions, it is made in a session of its own, as the first
 setup was — outside any vault. Where the tool refuses the agent all of
 its settings, the user applies every change by hand anyway, and the
 change may be prepared in a session on the vault, which can read the
