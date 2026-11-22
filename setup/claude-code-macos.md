@@ -1,14 +1,18 @@
 # Claude Code on macOS: the setup
 
-The procedure for the harness of Claude Code on macOS, in the desktop
-app's Code tab, in the order it is carried out, each value with its
-reason. For a user's agent, and for a vault's agent that adjusts it into
-the vault's own procedure (`vault-procedures.md`).
+A worked route: how the harness of Claude Code on macOS, in the desktop
+app's Code tab, was set up on a test bed in November 2026, in order,
+each value with its reason. A reference for the user's agent, which
+builds the harness itself by `guide.md` § 4: read this first, check
+each value against Claude Code as it is and its present docs — it
+changes within weeks — take what still holds, and say what does not. It
+is not a procedure to apply unread, and a vault's procedure is not made
+of it (`vault-procedures.md`).
 
-Three files work together. `guide.md` holds what is true of any tool:
-how a line is judged, what the user decides, the steps in general. This
-file holds what is applied for this tool, and why; the text that is
-applied is in `model/` (`settings.json`, `rules/harness.md`,
+Three files work together. `guide.md` holds the procedure, for any
+tool: how a line is judged, what the user decides, the steps. This file
+records what was set for this tool on that route, and why; the text
+that was applied is in `model/` (`settings.json`, `rules/harness.md`,
 `user-memo.md`). The dated findings and trials each value rests on are
 in `environments/claude-code-macos.md`, named here by section as
 "→ *section*". A reference, never a requirement: the user may change
@@ -55,10 +59,11 @@ permission mode and the bypass switch in the app (step 2); every change
 to a settings file once the write block is on (step 3); adding a folder
 to a session; the clone of the vault (step 7).
 
-## The values a vault puts in
+## Where a vault's needs go on this route
 
-A vault's procedure fills these in (`vault-procedures.md` § 1). A user
-with no vault's procedure settles them with their agent.
+A vault states its needs in no tool's terms (`vault-procedures.md`
+§ 1); on this route they went here. A user with no vault's procedure
+settles them with their agent.
 
 | value | where it is used |
 |---|---|

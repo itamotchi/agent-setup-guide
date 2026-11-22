@@ -3,24 +3,31 @@
 For a user and their coding agent — Claude Code, Codex or another — on
 any machine. The agent reads this file and talks with the user in the
 user's own language, one point at a time. Drafted 2026-11-09; revised
-2026-11-21.
+2026-11-22.
 
 This guide says how to judge a setting, what to watch for, what the
 user decides and in which order a harness is set up. It does not say
-what the user's settings must be. It is the part that is true of any
-tool. Beside it:
+what the user's settings must be. It holds for any tool and platform,
+and it is the whole of the procedure: with it, the tool's own official
+documentation and what the user's screen shows, the user's agent builds
+the harness for the tool it is, as that tool is today. No file for the
+user's environment is needed.
 
-- `setup/` — for a tool and platform, the procedure: what is applied,
-  in order, each value with its reason. This guide and one such file
-  together are the steps of a setup.
+What has already been worked out for an environment is kept beside it,
+to be consulted:
+
+- `setup/` — a worked route for one tool and platform: what was set on
+  a test bed, in order, each value with its reason, with its date and
+  how far it was tried.
 - `environments/` — what has been found about a tool and platform,
-  dated: the trials and the docs each value rests on.
-- `model/` — the text of the templates a procedure applies.
+  dated: the trials and the docs those values rest on.
+- `model/` — the text of the templates a worked route uses.
 
-All of it is a reference: partial, dated, and never a requirement. The
-tool's own official documentation, for the user's version and platform,
-is the source of truth; where a file here and the docs differ, the docs
-win.
+These are references: partial, dated, never a requirement — and they
+age. A tool changes within weeks; a route that worked last month is
+where to start looking, not what to apply unread. The agent checks each
+value it takes from them against the present docs and the user's
+screen, and where they differ it goes by what it finds and says so.
 
 ## 0. What a harness is
 
@@ -94,8 +101,8 @@ know what the standard does with no setting: in the approval mode the
 user will work in, what is read, written and run without asking, and who
 decides each — the tool, a model, or the user. Find that in the docs
 (and in `environments/`), say it to the user, and only then propose
-lines. Where `setup/` has a file for the tool, this work is done there:
-each of its values carries the ground it was added on. The points below are where to look; they are not a list of lines
+lines. Where `setup/` has a file for the tool, this work was done there
+as of its date: each of its values carries the ground it was added on. The points below are where to look; they are not a list of lines
 to add.
 
 1. **Written versus enforced.** An instruction is followed most of the
@@ -231,9 +238,9 @@ it (seen in a setup by this guide, 2026-11-20), and a yes given so
 decides nothing. A point is put to the user only if both hold: the
 answer changes what the agent can do, and it depends on the person.
 Everything else is not asked. The agent proposes the standard set for
-this tool — the one its file in `setup/` gives; where there is none,
-found by the test of § 2 from the docs and `environments/` — each line
-with its reason, and tells the user that any of it can be changed (§ 4
+this tool — found by the test of § 2 from the tool's present docs,
+starting, where `setup/` has a file for it, from the set that file
+records — each line with its reason, and tells the user that any of it can be changed (§ 4
 step 4).
 
 Each point below carries a proposed answer that this guide stands by,
@@ -305,13 +312,24 @@ the user's vaults — the agent could then write under all of it. In the
 mode where the agent asks before it writes — not a mode that skips
 approvals: this session deals with the user's own settings.
 
-**What is applied.** Where `setup/` has a file for the user's tool and
-platform, that file is the procedure: the steps below say what each
-step is for and what holds whatever the tool, and the file says what is
-set at each, with its reason and how far it was tried. Where there is
-none — another tool, another platform — the agent builds the same steps
-from the docs and `environments/`, by the test of § 2, and says to the
-user that the result was not tried.
+**Who builds it, and from what.** The user's agent, for the tool it is.
+The steps below hold for any tool; at each, the agent finds what this
+tool has — in its present docs, and by asking what the user's screen
+shows — judges it by the test of § 2, and proposes it with its reason.
+That is the base, and nothing more is required for it.
+
+**What is already known.** Where `setup/` has a file for the user's
+tool and platform, the agent reads it first: a route that worked, what
+was set at each step and why, the traps met on the way — some of them
+found only by trial, which no doc states — and how far it was tried. It
+is used as a reference, and checked: it carries a date, and the tool
+has moved since. What still holds is taken, which saves the user time;
+what no longer matches is said, and the agent goes by the present tool.
+Where there is no such file — another tool, another platform — nothing
+is missing from the procedure: the agent builds the same steps, says to
+the user that the result was not tried on a machine before theirs, and
+puts what it found into the report (§ 5), so that the next user of that
+environment has something to consult.
 
 **The order.** The application's own settings; then the files; then the
 lines for each repository nested in a vault, where the tool needs them;
@@ -319,16 +337,18 @@ then the check.
 
 **Short, and nothing forced.** A setup that takes long, or that reads as
 a list of orders, is put off or resented, and then nothing is set. So
-the tool's file tells apart what is needed for the set to hold — little
-— from what is recommended, and the agent does the same in what it
-says: the needed first, the advice in a sentence each, the user free to
+the agent tells apart what is needed for the set to hold — little —
+from what is recommended, as the files in `setup/` do for their routes,
+and keeps to that in what it says: the needed first, the advice in a sentence each, the user free to
 leave any of it. The harness is the user's (§ 0).
 
-1. **Read.** This guide; the file for this tool and platform in
-   `setup/`, and the note in `environments/` it points to; the official
-   docs of the tool for the user's version and platform — above all,
-   what the tool does with no setting in the approval mode the user
-   will work in (§ 2, the test). Write down which version and platform.
+1. **Read.** This guide; the official docs of the tool for the user's
+   version and platform — above all, what the tool does with no setting
+   in the approval mode the user will work in (§ 2, the test); and,
+   where there is one, the file for this tool and platform in `setup/`
+   with the note in `environments/` it points to. Write down which
+   version and platform, and where the present tool differs from what
+   those files record.
 2. **Look at what is there.** Say which of the user's settings and
    instruction files will be read, read them, and say what they already
    set. Where the tool is a desktop app, its own settings screens are
@@ -340,12 +360,14 @@ leave any of it. The harness is the user's (§ 0).
    user's language. Say how far the set that will be proposed was tried:
    on a machine, or from the docs alone.
 4. **Offer two ways, then ask.** First offer the choice: *leave it to
-   the agent* — the proposed answers of § 3 and the set of the tool's
-   file in `setup/`, the application's own settings included, applied
-   as they stand — or go through the points one at a time. A user new
+   the agent* — the proposed answers of § 3 and the set the agent has
+   found for this tool (step 1), the application's own settings
+   included, applied as they stand — or go through the points one at a
+   time. A user new
    to the tool will often nod at every question, and one plain choice
-   to leave it is more honest than six nods. It is offered only for a
-   set that was tried on that tool and platform. Left to the agent,
+   to leave it is more honest than six nods. It is offered only where
+   that set rests on a route that was tried on this tool and platform
+   and still matches the tool as it is. Left to the agent,
    these still hold:
    - the agent asks what only the user knows — secrets peculiar to this
      machine (§ 3.5), and what is true of the person (§ 3.4);
@@ -362,9 +384,8 @@ leave any of it. The harness is the user's (§ 0).
    at a time; then put the set — each value with its reason, the
    problem it answers or the silent harm it closes — and ask what the
    user wants changed. A line with no reason is not proposed.
-5. **The application's own settings**, first — and briefly. The tool's
-   file says which few are needed for the set to hold and which are
-   advice. The agent names a switch and what it is for; the user sets
+5. **The application's own settings**, first — and briefly: few are
+   needed for the set to hold, and the rest is advice. The agent names a switch and what it is for; the user sets
    it if they agree, and what is only advice may wait. Settings and
    their defaults move with each version: the agent checks what a
    switch does now, in the docs and by what the user's screen shows,
@@ -395,13 +416,14 @@ leave any of it. The harness is the user's (§ 0).
 
 **Later: changing the harness.** Most lines of the user's own come after
 the first setup: the test of § 2 adds a line when a problem arises, and
-problems arise in use. So this guide and the tool's file are read again
-each time. The occasions: a prompt that keeps coming for routine work; a
+problems arise in use. So this guide is read again each time, with the
+tool's present docs. The occasions: a prompt that keeps coming for routine work; a
 tool the user's work needs, stopped by the sandbox or a rule; something
 that happened and should not have; an update of the tool (§ 2.11); a
 vault that changed what it needs — a repository added inside it, say
-(§ 2.15). The tool's file lists the entry that answers each of the
-usual ones, and what else that entry opens.
+(§ 2.15). Where `setup/` has a file for the tool, it lists the entry
+that answered each of the usual ones on its route, and what else that
+entry opens.
 
 A session stopped in the middle of other work does not work around the
 stop and does not change the settings itself: it reports what was
@@ -445,14 +467,17 @@ not post it itself.
 
 ## 6. The other files in this folder
 
-- `setup/` — the procedure for a tool and platform: `codex-macos.md`
-  (Codex in the ChatGPT desktop app on macOS), `claude-code-macos.md`
-  (Claude Code on macOS). Each says what it sets and how far it was
-  tried, then the steps in order — the application's own settings, the
-  files, the lines for a nested repository, the check — each value with
-  its reason, and the entries for a later change. There is no file for
-  Claude Code on native Windows: that set was never run on a machine,
-  and its note and template stay as what was read in the docs.
+- `setup/` — a worked route for a tool and platform, dated:
+  `codex-macos.md` (Codex in the ChatGPT desktop app on macOS),
+  `claude-code-macos.md` (Claude Code on macOS). Each says what it sets
+  and how far it was tried, then the steps as they went — the
+  application's own settings, the files, the lines for a nested
+  repository, the check — each value with its reason, and the entries
+  that answered a later change. To be consulted and checked against the
+  present tool, not applied unread (§ 4). There is none for Claude Code
+  on native Windows — never run on a machine; its note and template
+  stay as what was read in the docs — nor for any other environment:
+  there the agent builds by § 4 alone.
 - `environments/` — what has been found about particular tools and
   platforms; partial, dated, sourced; tried and read told apart. The
   evidence the files in `setup/` point to.
@@ -462,7 +487,8 @@ not post it itself.
   user's result of the test of § 2; one way to set it, not a
   requirement. For Codex the configuration's text is in
   `setup/codex-macos.md` itself.
-- `vault-procedures.md` — for a vault's agent: how a vault's own
-  procedure for its users is made from this guide and a file in
-  `setup/` — the first setup of a user's harness and how a user reaches
-  it, a later change, and adding a git repository inside the vault.
+- `vault-procedures.md` — for a vault's agent: how a vault writes its
+  own procedure for its users so that it holds for any environment —
+  what the vault states of its needs, in no tool's terms, how a user
+  reaches the procedure, a later change, and adding a git repository
+  inside the vault.

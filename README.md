@@ -12,13 +12,16 @@ judges: start from the tool's standard configuration, and add a line of
 your own only where a problem actually arose, or where the standard is
 known to leave a harm that is silent and cannot be undone.
 
-For two environments it also holds a procedure — what is set, in order,
-each value with its reason, and how far it was tried: Codex in the
-ChatGPT desktop app on macOS, and Claude Code on macOS (`setup/`). For
-any other, the agent builds the same steps from the tool's docs. The
-procedures, the environment notes and the templates are references:
-partial, dated, never a requirement. The tool's own official
-documentation is the source of truth. It is a draft (November 2026).
+It works for any environment: your agent builds the harness for the
+tool it is, from this guide and the tool's own documentation. For two
+environments there is also a record of a setup that worked — what was
+set, in order, why, and how far it was tried: Codex in the ChatGPT
+desktop app on macOS, and Claude Code on macOS (`setup/`). Your agent
+consults it and checks it against the tool as it is today; tools change
+within weeks. These records, the environment notes and the templates
+are references: partial, dated, never a requirement. The tool's own
+official documentation is the source of truth. It is a draft (November
+2026).
 
 **This folder holds text and templates only** — no settings file, no
 hook, nothing that runs. Opening it in your agent runs nothing.
@@ -79,11 +82,11 @@ what that vault needs. Otherwise:
 
 | path | what it is |
 |---|---|
-| `guide.md` | the guide, for any tool: what a harness is, the layers, what to watch for, what the user decides, the steps of a setup and of a later change, the report back |
-| `setup/` | the procedure for a tool and platform — what is set, in order, each value with its reason, how far it was tried: Codex in the ChatGPT desktop app on macOS, Claude Code on macOS |
-| `environments/` | the dated findings the procedures rest on: Claude Code on macOS, Claude Code on native Windows (from the docs alone), Codex, GitHub (an agent's credential, and who owns the repository) |
+| `guide.md` | the guide, and the procedure, for any tool: what a harness is, the layers, what to watch for, what the user decides, the steps of a setup and of a later change, the report back |
+| `setup/` | a worked route for one tool and platform, dated — what was set, in order, each value with its reason, how far it was tried: Codex in the ChatGPT desktop app on macOS, Claude Code on macOS. A reference to consult and check, not a procedure to apply unread |
+| `environments/` | the dated findings those routes rest on: Claude Code on macOS, Claude Code on native Windows (from the docs alone), Codex, GitHub |
 | `model/` | the text of the templates for Claude Code: the user settings fragment, a rules file, a user memo; `windows/` for native Windows; `optional/` |
-| `vault-procedures.md` | for a vault's agent: how a vault's own procedure for its users is made from the guide and a file in `setup/` — the first setup and how a user reaches it, a later change, adding a git repository inside the vault |
+| `vault-procedures.md` | for a vault's agent: how a vault writes its own procedure for its users so that it holds for any environment — what the vault states of its needs, how a user reaches the procedure, a later change, adding a git repository inside the vault |
 
 ## License
 
@@ -100,12 +103,14 @@ Codex など、道具も OS も問いません。何に気をつけ、何をユ�
 とき、または標準のままでは「気づかないうちに起き、取り返しのつかない
 害」が残ると分かっているときだけにします。
 
-二つの環境については、手順も置いています。何を、どの順で設定するか、
-それぞれの値の理由、どこまで実際に試したか、です：macOS の ChatGPT デス
-クトップアプリの Codex と、macOS の Claude Code（`setup/`）。それ以外の
-環境では、エージェントが道具の公式ドキュメントから同じ段取りを組み立て
-ます。手順、環境ごとのノート、雛形はいずれも参考で、正は各ツールの公式
-ドキュメントです。下書きの段階です（2026年11月）。
+どの環境でも使えます。あなたのエージェントが、この手引きと道具の公式
+ドキュメントから、その道具に合ったハーネスを組み立てます。二つの環境に
+ついては、実際にうまくいった設定の記録も置いています。何を、どの順で、
+なぜ設定したか、どこまで試したか、です：macOS の ChatGPT デスクトップア
+プリの Codex と、macOS の Claude Code（`setup/`）。エージェントはそれを参
+考にし、いまの道具と照らして確かめます。道具は数週間で変わるからです。
+この記録、環境ごとのノート、雛形はいずれも参考で、正は各ツールの公式ド
+キュメントです。下書きの段階です（2026年11月）。
 
 **このフォルダにあるのは文章と雛形だけです。** 設定ファイルも、自動で実
 行されるもの（hook など）もありません。エージェントで開いても、何も実行
