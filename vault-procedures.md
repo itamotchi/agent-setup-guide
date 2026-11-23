@@ -335,11 +335,14 @@ the first setup (§ 1) carries nothing for them — no path, no line —
 and adding one is a document of the vault's that is complete by
 itself: a user who has a harness and the vault goes through it for one
 repository, from the first act to the check, with no reference to how
-the harness was first set up. The agent leads here as well (`guide.md`
-§ 4, "The agent leads"): in a session on the vault it reads the
-procedure, asks for the user's hand one act at a time — the lines in
-the settings where the tool leaves them to the user, the clone — and
-judges the check.
+the harness was first set up. It is not a sheet with a text to paste:
+the user's agent reads it in a session on the vault, led to it by the
+vault's own documents. The agent leads here as well (`guide.md` § 4,
+"The agent leads"): it asks for the user's hand one act at a time —
+the lines in the settings where the tool leaves them to the user, the
+clone — and judges the check; where a step needs a new session, the
+session that began keeps the lead, and the new one only tries and
+reports.
 
 ### Why the harness is concerned
 
@@ -415,7 +418,9 @@ repository that exists before its lines is open until they are written.
 1. **The place.** Where in the vault the repository goes is the vault's
    to say; it has no meaning to the harness. The procedure announces
    the repository's path from the vault's top, and whether the agent
-   or the user pulls and pushes it (5, below).
+   or the user pulls and pushes it (5, below). Where a new repository
+   is announced to the users — a list of the vault's repositories, its
+   log — is the vault's to say.
 2. **The vault's own Git ignores it.** An entry in the vault's
    `.gitignore`, committed with the vault, before the clone. Unignored,
    `git add` in the vault records the nested repository as a link, and
@@ -440,7 +445,11 @@ repository that exists before its lines is open until they are written.
    repositories (`find . -mindepth 2 -name .git -not -path './.git/*'
    -prune`) against what the user's harness protects, where the tool
    protects each by its path; and one write to Git's `config` in the
-   new repository refused, with its message.
+   new repository refused, with its message. Lines added to the
+   harness are recorded with their reason and the date where the user
+   keeps the harness's record (`guide.md` § 4, "Later"); where a
+   session on the vault cannot write there, the agent gives the entry
+   and the user adds it.
 7. **Moving, renaming, removing.** Where a tool protects a repository
    by its path, the new lines come first when it moves or is renamed. A
    harness may also keep the agent from moving or removing the folders

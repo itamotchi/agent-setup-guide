@@ -464,7 +464,10 @@ it is not meant to: the file is its own bounds. So the user applies it.
    yet, the app showed `failed to load workspace requirements: invalid
    input parameter` (seen once, 2026-11-22; the cause not established).
    The setup chat, opened before the paste, reads the file back and
-   compares it with what it gave.
+   compares it with what it gave — and reads back the file that
+   `GIT_CONFIG_GLOBAL` names as well: if that one is missing, Git
+   says nothing here, and the fault shows only later, in a chat inside
+   the profile that can neither mend it nor read this guide.
 4. **A profile put into a file that had none shows after the app is
    quit and started again**: its name appeared under the composer only
    after one restart (seen 2026-11-22, 26.1117.41037). Lines added to a
@@ -662,7 +665,6 @@ is stored, in a vault's installation:
 | `gh auth status` | reads the token from `~/.config/gh-codex`, masked |
 | `git ls-remote` on the vault's repository | passes |
 | `git push --force --dry-run origin main` | rejected by the rule, with its justification |
-| a page in the built-in browser; a web search | both work (the browser may ask first, by its own setting) |
 
 After step 8, in a new chat on the vault (the last two rows once a
 repository has been added inside it, step 4):
