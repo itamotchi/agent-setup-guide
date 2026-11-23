@@ -154,7 +154,8 @@ machine.
    `guide.md` § 4 for the tool it is — the application's own settings,
    the files, the check — reading, where there is one, the file in
    `setup/` for its environment. What of the vault's needs goes into
-   the harness's own files — the routine's programs and hosts — is in
+   the harness's own files — the routine's programs and hosts, on a
+   route that writes such files; some write none — is in
    this sheet's text, so that a settings file is written by a session
    that can still read it back; a session inside the bounds may not be
    able to read its own settings. The repositories nested in the vault
@@ -176,7 +177,11 @@ machine.
    session, the leading session gives the user a short text for that
    session, which only tries these things and reports — it does not
    take the lead — and the user brings its answer back. What is not
-   refused is mended and tried again.
+   refused is mended and tried again. And what must still work is seen
+   to work (`guide.md` § 4 step 7): in a session opened on a folder as
+   the work's sessions will be, one ordinary act, at its second
+   message — a harness can pass every refusal and leave the tool
+   unable to work.
 5. **It ends when the check has passed.** The agent says so in the
    user's words, and says what comes next in a way that needs no
    knowledge of the sheets: that there is a second page, by its title
@@ -191,13 +196,23 @@ session inside bounds that the first sheet put in and checked.
 1. **The user makes the vault's folder and opens the agent on it** —
    the sheet names the folder at its top. An act of the user's own: a
    command handed over for so small a thing is more trouble to a user
-   than the act.
-2. **The user pastes the sheet's text, and the agent leads**: the
-   credential the agent uses inside the bounds for the vault's
-   repository — the user's hands, never shown to the agent; the vault
+   than the act. **How the tool is opened on a folder is said in the
+   tool's own words**, for each route the vault has seen, as a dated
+   reference — in one desktop app it is "make a new project and choose
+   the folder as its source folder", which no newcomer finds from
+   "open the agent on that folder" (seen 2026-11-23). For a tool the
+   vault has not seen, the first sheet's agent says it before that
+   sheet ends.
+2. **The user pastes the sheet's text, and the agent leads**: a
+   credential of the agent's own for the vault's repository, where the
+   user's harness needs one — the user's hands, never shown to the
+   agent; on a route where a command the user allows runs with the
+   user's own login there is none to make, and the step is left out
+   (the file in `setup/` says which); the vault
    cloned into that folder by the user's own command (some harnesses
    keep the agent from creating a repository's Git files at all); the
-   check on the vault; then the vault's own first steps, by the vault's
+   check on the vault — its own start of session, to the end; then the
+   vault's own first steps, by the vault's
    documents, which are at hand from the clone on.
 3. **Its text is complete by itself.** It relies on nothing carried
    from the first sheet's session. And it carries what its agent needs
@@ -239,9 +254,15 @@ sheet had carried the
 lines of every repository nested in the vault, none of them on the
 machine: a user's clone starts with none and each user adds what they
 need, so they are left to the procedure for adding one (§ 3), which is
-apart from the first setup. In the present form the entry has not
-yet been run; the files in `setup/` mark what is untried on their
-routes.
+apart from the first setup. A fourth run (2026-11-23) took both sheets
+to their ends on that route, and ordinary use then failed: the route
+itself was left (`environments/codex.md`, "A profile that bounds reads
+gave way"). Of the sheets it showed two things, now above and below:
+"opens the agent on that folder" was not an act the user knew how to
+do in that app, and the second sheet's text, pasted, was turned into
+an attached file that the agent could not open. On the Codex route as
+it now stands (`setup/codex-macos.md`) the sheets have not been run;
+the files in `setup/` mark what is untried on their routes.
 
 ### The text to paste
 
@@ -269,6 +290,13 @@ How it speaks:
   part the user reads — the acts at its top — and that the text need
   not be read; and the text tells the agent which language to speak to
   the user.
+- **Short enough to stay text.** A tool may turn a long paste into an
+  attached file: in one desktop app a pasted text became a single
+  object in the composer, kept as a file in the tool's own folder,
+  and under a harness that bounded reads the agent could not open what
+  the user had just pasted (seen 2026-11-23). The text is kept short
+  enough not to meet it, or the sheet says at its top what the user
+  does then — expand the object into text, where the tool offers it.
 
 It holds:
 

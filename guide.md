@@ -3,7 +3,7 @@
 For a user and their coding agent — Claude Code, Codex or another — on
 any machine. The agent reads this file and talks with the user in the
 user's own language, one point at a time. Drafted 2026-11-09; revised
-2026-11-22.
+2026-11-23.
 
 This guide says how to judge a setting, what to watch for, what the
 user decides and in which order a harness is set up. It does not say
@@ -104,6 +104,28 @@ decides each — the tool, a model, or the user. Find that in the docs
 lines. Where `setup/` has a file for the tool, this work was done there
 as of its date: each of its values carries the ground it was added on. The points below are where to look; they are not a list of lines
 to add.
+
+**Before a set is proposed: the vendor's marks, the known problems,
+what users run.** The docs say what a feature is meant to do, not
+whether it holds. So before any line is proposed the agent looks at
+three things, and tells the user what it found:
+
+- the vendor's own mark on each feature the set would use — Beta,
+  experimental, deprecated. A bound built on a feature so marked can
+  give way at the tool's next update;
+- the tool's known problems for the user's version — its own open
+  reports;
+- what people who use the tool actually run.
+
+The set proposed is one found in use, chosen among those. A set
+composed from the docs alone has been run by no one, and its faults
+are met for the first time on the user's machine. Seen, in the making
+of this guide: a bound built on a Beta feature passed its check, and
+after an update of the app a session under it lost its folder at the
+second message; the fault stood in the tool's own tracker, which no
+step had sent the agent to (`environments/codex.md`). Where what the
+user wants can be had only by a feature so marked, the agent says so,
+and the user decides knowing it.
 
 1. **Written versus enforced.** An instruction is followed most of the
    time; a rule or a sandbox stops. A never-case belongs in an enforced
@@ -242,10 +264,11 @@ it (seen in a setup by this guide, 2026-11-20), and a yes given so
 decides nothing. A point is put to the user only if both hold: the
 answer changes what the agent can do, and it depends on the person.
 Everything else is not asked. The agent proposes the standard set for
-this tool — found by the test of § 2 from the tool's present docs,
-starting, where `setup/` has a file for it, from the set that file
-records — each line with its reason, and tells the user that any of it can be changed (§ 4
-step 4).
+this tool — one found in use, not composed from the docs (§ 2, "Before
+a set is proposed"), each line judged by the test of § 2, starting,
+where `setup/` has a file for it, from the set that file records —
+each line with its reason, and tells the user that any of it can be
+changed (§ 4 step 4).
 
 Each point below carries a proposed answer that this guide stands by,
 since the yes may be given without following. Put each with what it
@@ -255,14 +278,22 @@ conversation before anything is written.
 1. **Where the agent works.** Proposed: the folder it was opened on and
    nothing else — nothing outside is read or written unless the user
    asks for it in the conversation — held by the tool's own settings
-   where it has them (folder boundaries, a sandbox), not by a model's
-   judgement. It protects everything else on the machine from a mistake
-   or from text addressed to the agent. It costs: a folder needed from
-   outside is added by the user each time; and where the tool then
-   refuses the agent its own settings files, the user applies every
-   settings change by hand (§ 2.9). A user who is content that a model
-   judges an outside read or write says so, and those settings are left
-   out.
+   where it has a settled means for it (folder boundaries, a sandbox),
+   not by a model's judgement. It protects everything else on the
+   machine from a mistake or from text addressed to the agent. It
+   costs: a folder needed from outside is added by the user each time;
+   and where the tool then refuses the agent its own settings files,
+   the user applies every settings change by hand (§ 2.9). Where the
+   tool has no settled means for all of it — the bound would rest on a
+   feature its vendor marks unsettled, or one no one is found running
+   (§ 2, "Before a set is proposed") — the agent does not build one.
+   It says what the tool's own way leaves open — reads outside the
+   folder, say, or a way out of the sandbox that an approval opens —
+   and proposes that way with the approvals answered by the user, so
+   that leaving the folder is at least never a model's decision
+   (`setup/codex-macos.md` is such a route). A user who is content
+   that a model judges an outside read or write says so, and those
+   settings are left out.
 2. **How much it does unasked.** The approval mode. Ask how many prompts
    the user will actually read: a mode that prompts more than that is
    not safer. Who answers them — the user, or a reviewer the tool offers
@@ -395,11 +426,13 @@ leave any of it. The harness is the user's (§ 0).
 
 1. **Read.** This guide; the official docs of the tool for the user's
    version and platform — above all, what the tool does with no setting
-   in the approval mode the user will work in (§ 2, the test); and,
-   where there is one, the file for this tool and platform in `setup/`
-   with the note in `environments/` it points to. Write down which
-   version and platform, and where the present tool differs from what
-   those files record.
+   in the approval mode the user will work in (§ 2, the test); the
+   vendor's marks on the features a set would use, the tool's open
+   reports for this version, and what its users run (§ 2, "Before a
+   set is proposed"); and, where there is one, the file for this tool
+   and platform in `setup/` with the note in `environments/` it points
+   to. Write down which version and platform, and where the present
+   tool differs from what those files record.
 2. **Look at what is there.** Say which of the user's settings and
    instruction files will be read, read them, and say what they already
    set. Where the tool is a desktop app, its own settings screens are
@@ -463,7 +496,16 @@ leave any of it. The harness is the user's (§ 0).
    settings. Record each message as it stands. Where a vault the user
    works in holds a repository nested in it, try the protected files
    there too (§ 2.15). Anything not refused is said; the user decides
-   whether to fix it or accept it.
+   whether to fix it or accept it. **Then try what must still work**:
+   in a session opened as the work's sessions will be — on a folder
+   under version control that holds an instruction file — one ordinary
+   act of the work (a file changed and committed, say), at the
+   session's second message and not only its first. A harness can
+   pass every refusal and leave the tool unable to work: seen in a
+   setup run from this guide, where the refusals were tried in
+   sessions of one message, and a session on a vault then stopped at
+   its second (`environments/codex.md`). After an update of the tool
+   both halves are run again (§ 2.11).
 8. **Record** what was decided and why — for each line, the reason it is
    there — where the user keeps such notes: the setup session's folder
    is one place, beside this guide's copy and not inside it. A vault is
