@@ -69,10 +69,13 @@ what that vault needs. Otherwise:
    paste yourself, where the tool does not let the agent write its own
    settings. Refuse any approval prompt you do not understand; the agent
    then explains it.
-5. **Check.** At the end, in a new session, the agent tries what should
-   be refused — reading a secret, running a denied command, writing
-   outside the folder — and shows you each refusal. Only then is a vault
-   cloned and opened.
+5. **Check what was set.** Where settings files were written: at the
+   end, in a new session, the agent tries what should be refused —
+   reading a secret, running a denied command, writing outside the
+   folder — and shows you each refusal. Where your tool's route sets
+   nothing but a switch in the application, you look at what the
+   switch changed, and there is no further session. Only then is a
+   vault cloned and opened.
 6. **Report, if you like.** The agent writes a short report: what in the
    guide was unclear, wrong or missing, and what it found about your
    environment. You may post it as an issue on this repository — with
@@ -158,10 +161,12 @@ Codex など、道具も OS も問いません。何に気をつけ、何をユ�
    ージェントに自分の設定を書かせない場合は、あなた自身がファイルに貼り
    付けます。分からない確認画面は拒否して構いません。そのあとエージェン
    トが何の確認だったかを説明します。
-5. **確かめる。** 最後に、新しいセッションで、拒まれるべき操作 — 秘密
-   の読み取り、禁じたコマンド、フォルダの外への書き込み — が本当に拒ま
-   れるかを、エージェントが一つずつ試して見せます。vault を clone して開
-   くのは、そのあとです。
+5. **設定したものを確かめる。** 設定ファイルを書いた場合は、最後に、新
+   しいセッションで、拒まれるべき操作 — 秘密の読み取り、禁じたコマン
+   ド、フォルダの外への書き込み — が本当に拒まれるかを、エージェントが
+   一つずつ試して見せます。お使いの道具で設定するものがアプリのスイッチ
+   だけの場合は、そのスイッチで何が変わったかをあなたが見るだけで、別の
+   セッションは開きません。vault を clone して開くのは、そのあとです。
 6. **報告する（任意）。** エージェントが、手引きの分かりにくい点・誤り・
    不足と、あなたの環境で分かったことを短い報告にまとめます。よければ、
    このリポジトリの Issue に投稿してください。名前、パス、秘密情報は含め

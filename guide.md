@@ -340,15 +340,35 @@ is, the vault's own rules and hooks run, and text from others (issues,
 comments) may reach the session. If the user has already worked in
 vaults, proceed all the same; step 2 starts from what is there.
 
-**The session.** One of its own, for setting up. Not opened on a
-vault's folder (§ 2.5), and not on the folder that holds the user's
-vaults — the agent could then write under all of it. Where the tool
-starts a session with no folder chosen and gives it a working folder by
-itself, that will do, and the user has no folder to make or to
-understand; otherwise a folder of its own. This guide is brought there
-as a local copy. In the mode where the agent asks before it writes —
-not a mode that skips approvals: this session deals with the user's own
-settings.
+**No step for its own sake.** How much of what follows there is
+depends on what the user's route sets. Where it writes files —
+settings, rules, instructions — there is a session for writing them
+and a check of what they set. Where it writes none, and the tool's own
+way is taken as it stands, what is left is the application's own
+settings, set by the user's hand, and a look at what they changed: no
+session of its own, no file, no check in a further session. The agent
+says in a sentence that this route sets nothing more, and goes on to
+the user's work. A step in which nothing is done on this route is not
+gone through. Seen in a setup run from this guide (2026-11-23): a
+route had been changed to one that sets nothing, and the steps made
+for a route that writes files were kept. The user was led through a
+session and a check with nothing in them that they could see ("what
+did the setup do?"); the check, in a further chat, lost its lead and
+left a file outside the folder; and the one switch that route does
+need stood among the advice and was not set.
+
+**The session.** Where files are written, one of its own, for setting
+up. Not opened on a vault's folder (§ 2.5), and not on the folder that
+holds the user's vaults — the agent could then write under all of it.
+Where the tool starts a session with no folder chosen and gives it a
+working folder by itself, that will do, and the user has no folder to
+make or to understand; otherwise a folder of its own. This guide is
+brought there as a local copy. In the mode where the agent asks before
+it writes — not a mode that skips approvals: this session deals with
+the user's own settings. Where the route writes no file there is no
+such session: the application's settings are set by the user before
+the first session on a vault, and the vault's own procedure begins
+with them.
 
 **The agent leads.** The user's aim is to begin working with their
 agent — in a vault, say — not to set up a harness, and the words of
@@ -369,7 +389,28 @@ sessions none of which leads, and a user who does not ask stops there
 usual case: the session that set the files up keeps the lead through
 it — it alone can mend them.
 
-**The harness, then the vault.** Two procedures, kept apart. The
+Three things a leading session sees to, each learned from a run
+(2026-11-23):
+
+- **An act is whole.** Before the user opens a screen — a dialog, a
+  settings page — the agent says everything up to the point where that
+  screen is done, and asks to be told afterwards. A user asked to stop
+  at an open dialog and report went back to the chat, and the dialog
+  closed.
+- **An address is text.** A page the user is to open in their own
+  browser is handed as an address to copy, with where to paste it. A
+  link clicked inside a desktop app may open in the app's own browser,
+  which has none of the user's sign-ins: a private page then shows as
+  not found.
+- **A move to another session is prepared.** Before the user is sent
+  to one, they are told what it is for, what they will be asked there
+  and how to answer, and that they come back with the result — or the
+  leading session fetches the result itself, where the tool lets it. A
+  user who was not told asked the other session what to do next, and
+  no longer knew which one led.
+
+**The harness, then the vault.** Where the harness is built in files:
+two procedures, kept apart. The
 harness is the user's and is set up once for a machine: this section.
 Installing a vault — the credential for its repository, its clone, its
 own first steps — comes after, in a session inside bounds that are set
@@ -378,7 +419,10 @@ carried from the one to the other: the first is finished when its
 check has passed, and the second begins by its own text. Each then has one aim
 the user can follow, and less for its agent to read and do: the more a
 session reads and does, the more it fails and the less it attends to
-the user.
+the user. Where the route sets nothing but the application's own
+settings ("No step for its own sake"), there is one procedure: those
+settings are the first acts of the vault's installation, by the user's
+hand, before its session is opened.
 
 **Who builds it, and from what.** The user's agent, for the tool it is.
 The steps below hold for any tool; at each, the agent finds what this
@@ -410,7 +454,7 @@ puts what it found into the report (§ 5), so that the next user of that
 environment has something to consult.
 
 **The order.** The application's own settings; then the files; then the
-check. Lines for a repository nested in a vault are not among them: a
+check — each only where the route has it. Lines for a repository nested in a vault are not among them: a
 user's clone of a vault starts with no repository inside it, and each
 user adds the ones they need, later, by the vault's own procedure for
 adding one — where the tool needs lines for each repository, they are
@@ -421,8 +465,11 @@ holds at any depth by a pattern is part of the files.
 a list of orders, is put off or resented, and then nothing is set. So
 the agent tells apart what is needed for the set to hold — little —
 from what is recommended, as the files in `setup/` do for their routes,
-and keeps to that in what it says: the needed first, the advice in a sentence each, the user free to
-leave any of it. The harness is the user's (§ 0).
+and keeps to that in what it says: the needed first, the advice in a
+sentence each, the user free to leave any of it. What is needed is
+said as needed, by itself, and the agent sees it done; it is not
+placed among the advice, where it is passed over. The harness is the
+user's (§ 0).
 
 1. **Read.** This guide; the official docs of the tool for the user's
    version and platform — above all, what the tool does with no setting
@@ -469,19 +516,33 @@ leave any of it. The harness is the user's (§ 0).
    problem it answers or the silent harm it closes — and ask what the
    user wants changed. A line with no reason is not proposed.
 5. **The application's own settings**, first — and briefly: few are
-   needed for the set to hold, and the rest is advice. The agent names a switch and what it is for; the user sets
-   it if they agree, and what is only advice may wait. Settings and
+   needed for the set to hold, and the rest is advice. What is needed
+   comes first and is named as needed: the agent says the switch,
+   what it is for and what the set loses without it, and waits until
+   the user has set it. Advice is a sentence each; the user sets it
+   if they agree, and it may wait. Settings and
    their defaults move with each version: the agent checks what a
    switch does now, in the docs and by what the user's screen shows,
    and goes by that. One that is chosen anew for each chat or session
    is said to be a step at every start, since nothing keeps it.
-6. **The files.** Draft each file; show it whole; write it on the
+6. **The files**, where the route writes any. Draft each file; show
+   it whole; write it on the
    user's yes, or have the user apply it where the tool refuses the
    agent; read it back and compare. No line for a repository nested in
    a vault is written now ("The order"). Whether a session already
    open takes a change up differs by tool: after a change, the work
    goes on in a new one.
-7. **Check, in a new session**, so that the settings are tried as they
+7. **Check what was set.** The check is of the user's settings, not
+   of the tool: each thing set is tried as it will be used. Where
+   only a setting in the application's screens was changed, the user
+   looks at what it changed — a choice no longer offered, say — and
+   that is the check: no further session. That the tool's own way
+   works at all — that its sandbox stops a write, that its prompt
+   comes — is not each user's to try in a session made for it:
+   whoever made the route tried it (the file in `setup/` says how
+   far), and a route no one has tried is said to be so ("What is
+   already known"). Where files were written, the check is **in a
+   new session**, so that the settings are tried as they
    will be used — not one in which this guide's `AGENTS.md` is read at
    the start, which would lead it back into the setup. The session
    that leads stays the lead: it gives the user a short text for the
@@ -499,7 +560,9 @@ leave any of it. The harness is the user's (§ 0).
    whether to fix it or accept it.
 8. **Record** what was decided and why — for each line, the reason it is
    there — where the user keeps such notes: the setup session's folder
-   is one place, beside this guide's copy and not inside it. A vault is
+   is one place, beside this guide's copy and not inside it. On a
+   route that writes no file the record is a line: what was set in
+   the application, and when. A vault is
    cloned and first opened only now: the second procedure, the vault's.
 
 **Later: changing the harness.** Most lines of the user's own come after

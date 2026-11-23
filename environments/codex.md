@@ -7,8 +7,9 @@ to 2026-11-23). What was tried and what was only read — in the docs or
 in Codex's source — is marked. This note is the evidence: the route
 for the desktop app on macOS is `setup/codex-macos.md`, which points
 here by section. **Since 2026-11-23 that route is the app as it
-starts, on Ask for approval, with nothing set** ("The app as it
-starts: Ask for approval"). **The sections on a permission profile —
+starts, on Ask for approval, with no file set** ("The app as it
+starts: Ask for approval"; a run of a vault's sheets on it: "Two
+sheets run on that route"). **The sections on a permission profile —
 "A permission profile with the routine inside", "A repository nested
 in the opened folder", "A tracked file under a read-only folder", "A
 setup followed from its first step" — are the record of the route
@@ -942,6 +943,61 @@ written. Not tried: a real push; "allow similar commands"; a nested
 repository under this form; the General switch for Full access off in
 this state. The open reports for this version of prompts that do not
 appear (#32563, #63187) did not show here.
+
+## Two sheets run on that route (the desktop app on macOS, 2026-11-23)
+
+The same Mac and app, later the same day. A vault's two sheets
+(`vault-procedures.md` § 1, as it then stood: a first sheet for the
+harness, with its check, then the vault's installation), rewritten
+for the route above, were run by a user from their first act. The
+user stopped the run at the end of the first sheet; the second was not
+run. What the user said and what the setup chat reported at its end
+are told apart; the agent's raw output was not seen.
+
+- **Before the first act.** The app quit and `~/.codex` set aside by
+  a rename, so that no project of the earlier trial was in the app;
+  started again, **the app asked for the sign-in** (the user).
+- **The first sheet's chat**, opened with no folder chosen. The tools
+  and the GitHub login — `git`, `gh`, Python — were gone through in
+  the user's terminal one at a time, without trouble (the chat's
+  report).
+- **The app's own settings were not gone through** (the user): no
+  switch was named, the Full access switch among them. Why the chat
+  left them out was not established. They stood in the route's file
+  as recommendations, "none needed".
+- **The check, in a chat made for it.** The first chat had no folder,
+  so it had the user make a throwaway project on an empty folder:
+  - told to stop at the project's creation screen and report, the
+    user went back to the chat, **and the screen closed** (the chat's
+    report);
+  - in the check's chat the user asked what to do next, and no longer
+    knew which chat led (the chat's report); the user had not been
+    told, before moving, what the check was for or that a prompt was
+    to be refused;
+  - **the first try of a write outside the folder left an empty file
+    there.** The command was stopped inside the sandbox; a request to
+    leave it followed, and afterwards the file existed. What was
+    chosen at the prompt was not recorded, and the user does not
+    remember. Not established: allowed by the user, or made unasked.
+    A second try under another name was refused, the refusal was
+    recorded, and no file was made; a connection to an outside host,
+    refused, was not made (the chat's report);
+  - the first chat fetched the check chat's result from the app by
+    itself (the chat's report).
+  The user's words on the whole: that they could not tell what the
+  process was, or what the setup had done.
+- **The second sheet's address.** Given by the chat as a link; clicked,
+  it opened in the app's built-in browser and **showed 404** — the
+  page is in a private repository and that browser holds no GitHub
+  sign-in (the chat's report; the cause is its reading). The user
+  wanted their usual browser.
+
+So, on a route that sets nothing in a file: a sheet for the harness
+had no harness in it; a check in a chat of its own could not be
+followed and itself left a file outside the folder; and the one thing
+the route has for the user to set stood among the advice and was not
+set. `setup/codex-macos.md` and the base (`guide.md` § 4, "No step
+for its own sake"; `vault-procedures.md` § 1) were changed by this.
 
 ## From a research report made for this guide (2026-11-09)
 

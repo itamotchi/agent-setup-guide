@@ -1,8 +1,9 @@
 # Codex in the ChatGPT desktop app on macOS: the setup
 
 A worked route: how Codex in the ChatGPT desktop app on macOS is used
-on a vault with nothing set — the app as it starts, on its own
-permission choice "Ask for approval" — tried on one Mac on 2026-11-23.
+on a vault with no file set — the app as it starts, on its own
+permission choice "Ask for approval", with one switch of the app
+turned off — tried on one Mac on 2026-11-23.
 A reference for the user's agent, which builds the harness itself by
 `guide.md` § 4: read this first, check each point against the app as
 it is and its present docs — the app changes within weeks — take what
@@ -25,10 +26,15 @@ under "Other forms" at the end; what was found under it stays in
 
 ## What it is, and how far it was tried
 
-**The form.** Nothing is set. A newly installed app starts every Codex
-chat on the permission choice **Ask for approval**, and that choice is
-kept. No file of bounds is written, no token is made for the agent,
-no line is added for a vault.
+**The form.** A newly installed app starts every Codex chat on the
+permission choice **Ask for approval**, and that choice is kept. One
+switch in the app's settings is turned off, so that the choice with no
+sandbox and no prompt — Full access — is no longer offered (step 1).
+Nothing else is set: no file of bounds is written, no token is made
+for the agent, no line is added for a vault. So there is no session
+for setting up and no check in a session of its own (`guide.md` § 4,
+"No step for its own sake"): what a user does is under "What the user
+does, in order".
 
 **What the user gets.** Codex's own sandbox, which the operating
 system enforces: a command the agent runs writes inside the folder the
@@ -69,7 +75,16 @@ commit and push. → *The app as it starts: Ask for approval*.
 
 A session with a start, one commit and one push was four prompts.
 
-**Not tried**: a real push (a dry run passed); the prompt's "allow
+**A vault's sheets on this route** were run once, the same day, in
+the form made for a route that writes files — a first sheet for the
+harness with a check in a further chat, then the vault's — and the
+user stopped the run at the end of the first: it had nothing of a
+harness in it, its check could not be followed, and the app's own
+settings were passed over. The route's steps below are changed by
+what that run showed. → *Two sheets run on that route*.
+
+**Not tried**: the acts under "What the user does, in order" as one
+run from the first to ordinary work; a real push (a dry run passed); the prompt's "allow
 similar commands" (below, step 3); a repository nested in the opened
 folder under this form; the General switch for Full access turned off
 in this state; a user who starts with no GitHub login on the Mac; the
@@ -90,14 +105,62 @@ knowledge base with a Git routine. Of the two choices in use, Ask for
 approval is the one under which leaving the folder is never a model's
 decision. → *What users of the app are found doing*.
 
+## What the user does, in order
+
+The whole of a first setup on this route, for a user who is to work in
+a vault. Each act was seen on the Mac of the trial; the order as one
+run, from the first act into ordinary work, has not been run yet. A
+vault's sheet hands these to its users as a dated reference
+(`vault-procedures.md` § 1).
+
+By the user's own hand, before any chat:
+
+1. **In the app's settings, General: Full access off** (section 1 below).
+2. **The vault's folder made, empty, and a new project made with that
+   folder as its source folder** (section 2 below).
+3. **A look under the composer: Ask for approval** (section 1 below).
+
+Then, in that project's chat, the agent leads — one chat, from here
+to the vault's first session:
+
+4. **The tools and the login** the vault's routine needs (`git`, `gh`,
+   what its scripts run on; `gh auth login`) — by the user's own
+   terminal, one command at a time, the agent giving each (section 4 below).
+5. **The clone**, by the user's own command in their terminal, into
+   that folder (section 2 below).
+6. **What will be asked, and how to answer** — said before the vault's
+   first act (section 3 below): the routine's acts allowed once; anything
+   outside the folder, or not asked for, or not understood, refused.
+7. **The vault's own start of session.** Its first act that leaves the
+   sandbox — the pull — raises a prompt. A pull that passes with no
+   prompt means the chat is not on Ask for approval: the work stops
+   there and the choice under the composer is looked at (section 6 below).
+
+No other chat is opened, no page is opened from a link in the chat
+(section 2 below), and the user's agent is not sent to read `guide.md`.
+
 ## 1. The app's own settings
 
 The agent cannot see these screens: it names a thing and says what it
 is for; the user looks. Names move between versions and languages;
 the user's agent goes by what the user's screen shows.
 
-**Needed — one look, and nothing changed.**
+**Needed — one switch, and one look.**
 
+- **General, Full access: off.** Full access is the one choice with no
+  sandbox and no prompt, and in a newly installed app the switch is on
+  (seen 2026-11-22), so the choice stands in the menu under the
+  composer beside the one the user works on. With the switch off it is
+  absent from that menu (seen 2026-11-19) and cannot be picked by a
+  slip. On this route nothing but the user keeps the choice under the
+  composer; this switch is the one thing at the user's hand that takes
+  the worst choice away. It is a need of the route, not advice: until
+  2026-11-23 this file had it among the recommendations, and in a run
+  from it the switch was never mentioned to the user. A lock that the
+  user cannot undo is not at the user's hand: a workspace's
+  administrators can set requirements that bind its members (the
+  docs, read; not tried here → *A setup followed from its first
+  step*, "Configuration from the workspace").
 - **The permission choice under the composer shows Ask for approval.**
   In a newly installed app it does, in a new chat and in a new project
   alike (seen 2026-11-23; in the Japanese interface 「承認を依頼」 under
@@ -114,11 +177,10 @@ the user's agent goes by what the user's screen shows.
     it, knowing that.
   - *Full access*: no sandbox and no approvals.
 
-**Recommended** — none is needed for the form to hold:
+**Recommended** — advice; none is needed for the form to hold:
 
 | switch | why |
 |---|---|
-| General, Full access: off | With the switch off that choice is absent from the menu under the composer (seen 2026-11-19), so it cannot be picked by a slip. In a newly installed app the switch was on (seen 2026-11-22). |
 | Codex memories off (the docs: off by default) | The docs: "a helpful recall layer, not ... the only source for rules that must always apply". |
 | The "Codex" custom-instructions field empty | Undocumented, and it also reaches Codex Cloud; the documented place for the user's own instructions is `~/.codex/AGENTS.md`. |
 | Notifications for permission requests and questions on | A prompt that reaches the user is seen. |
@@ -145,14 +207,26 @@ Codex".
   Japanese interface 「ソースフォルダ」). "Open the agent on that
   folder" is not an act a newcomer knows how to do in this app: say it
   in these words.
+- **The screen that makes a project closes when the user leaves it.**
+  A user told to stop at that screen and report went back to the
+  chat, and the screen was gone (seen 2026-11-23). The agent says the
+  whole of that screen's acts — the name, the folder — before the user
+  opens it (`guide.md` § 4, "An act is whole").
+- **A link in a chat opens in the app's built-in browser**, which has
+  none of the user's sign-ins: the page of a private repository showed
+  as not found there (seen 2026-11-23, by the setup chat's report). An
+  address the user is to open is given as text to copy into their own
+  browser (`guide.md` § 4, "An address is text").
 - **A chat with no folder chosen** is given a working folder by the
   app, under `~/Documents/Codex/` (seen 2026-11-22). It will do for a
   session that sets nothing up in a vault.
 - **When the folder is trusted** the app adds a `[projects."<path>"]`
   entry to `~/.codex/config.toml` by itself (seen 2026-11-19).
 - **A vault is cloned by the user's own command** in their terminal,
-  with their own login, then opened so. Under this form nothing has to
-  be set before the clone.
+  with their own login, into the folder the project was made on: the
+  empty folder is opened first, and the clone goes into it (seen
+  under the earlier route, 2026-11-23). Before it, on this route,
+  only the switch of step 1 is set.
 
 ## 3. The prompts: what the user answers
 
@@ -227,7 +301,8 @@ route.
    and connects anywhere, with the user's rights. The prompt is the
    only stop, and it stops only when read.
 3. **The choice under the composer.** On Approve for me or Full access
-   the stop is no longer the user (step 1). A model chosen in the app
+   the stop is no longer the user (step 1); Full access is off the
+   menu only while its switch is off. A model chosen in the app
    may move the choice by itself (the docs, read 2026-11-19): look at
    it when a chat starts.
 4. **A commit runs the vault's Git hooks outside the sandbox.** The
@@ -262,22 +337,34 @@ route.
 
 ## 6. The check
 
-Nothing was set, so there is no file to compare: the check is of the
-app as it is on the user's Mac — at the first setup, and again after
-an update. In a chat opened on a folder under version control, the
-agent runs each and shows the output; the user looks at the screen.
+What was set is one switch, so the check is two looks by the user, at
+the first setup and again after an update of the app. No chat is
+opened for it.
 
 | what | the pass |
 |---|---|
+| the menu under the composer | Full access is not in it |
 | the permission choice under the composer | shows Ask for approval |
-| a new file beside the folder (outside it) | a prompt comes to the user; refused, the agent reports the refusal, and the user finds no such file |
 
-A prompt that does not come where it should — the file outside made
-unasked — is said to the user, and the vault is not opened until it is
-understood: it is the kind of fault the open reports describe ("What
-to watch", 7). That the routine itself runs is not part of each
-user's check: it was tried when this route was made (the table at the
-head), and a commit that fails shows itself at once.
+**In ordinary work, one thing to notice**: the vault's first act that
+leaves the sandbox — the pull at a session's start — raises a prompt
+(the table at the head). A pull that passes with no prompt means the
+chat is not on Ask for approval; the user stops there and looks at
+the choice under the composer. It is the kind of fault the open
+reports describe ("What to watch", 7).
+
+**No trial of a refusal in a chat made for it.** That a write outside
+the folder is asked of the user and, refused, is not made was tried
+when this route was made (the table at the head); it is the maker's
+trial, not a step of each user's setup. Until 2026-11-23 this check
+had it as a row, and in the run of that day it was what the user
+could not follow: the setup chat, opened on no folder, had the user
+make a throwaway project on an empty folder and move to a second
+chat; the user did not know what it was for or which chat led; and
+at the first try a file was made outside the folder — whether the
+user allowed it without having been told to refuse, or it was made
+unasked, was not established (the second try was refused and nothing
+was made). → *Two sheets run on that route*.
 
 ## 7. Later: the entry for each occasion
 
