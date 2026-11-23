@@ -682,7 +682,32 @@ was seen, by the user's reports and screens:
   allowance was used up in about half an hour. One run each: no more
   is known.
 
-From the docs and the source, read the same day through a research
+A third run, 2026-11-23, the same app, in the form of two sheets (the
+model GPT-6.2 Sol, reasoning set to its highest by the user; the app's
+default is medium):
+
+- The first sheet — the app's settings and the harness — was led from
+  a chat with no folder chosen to its end, the GitHub login included,
+  from a logged-out state.
+- The `config.toml` it left parsed, and held the profile and four
+  lines for each of eleven nested repositories as the sheet gave them;
+  the app's own keys were kept; the agent kept a backup beside it.
+- The agent departed from the tried set in two places: no lines for
+  the built-in browser (the OpenSSL read, the socket folder's read and
+  allow), and `GIT_CONFIG_GLOBAL` in `[shell_environment_policy.set]`,
+  naming a Git configuration file in the token's folder, in place of
+  the `GIT_CONFIG_COUNT` / `KEY` / `VALUE` pairs. Neither is tried
+  here.
+- A fresh `config.toml` written by the app enables, among its plugins,
+  computer use and the browser, and gives the bundled CLI's place as
+  `/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex`.
+- At the first sheet's end the agent told the user to go on by the
+  second sheet, named by its title alone, and wrote a text of its own
+  to hand over; the user, not knowing where that sheet was, stood
+  still. And with the refusals left to the second sheet, a fault found
+  there could not be mended by the chat that found it.
+
+From the docs and the source, read on 2026-11-22 through a research
 agent and not tried:
 
 - **Configuration from the workspace.** Requirements bind the user

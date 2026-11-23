@@ -330,13 +330,17 @@ the new session carries it to the end — and tells the user, once, that
 the lead has moved. A session handed a single request takes its part to
 be that request; the user is then left carrying messages between
 sessions none of which leads, and a user who does not ask stops there
-(seen in a setup run from this guide).
+(seen in a setup run from this guide). The check of step 7 is the
+usual case: the session that set the files up keeps the lead through
+it — it alone can mend them.
 
 **The harness, then the vault.** Two procedures, kept apart. The
 harness is the user's and is set up once for a machine: this section.
 Installing a vault — the credential for its repository, its clone, its
-own first steps — comes after, in a session already inside the bounds,
-and is the vault's (`vault-procedures.md` § 1). Each then has one aim
+own first steps — comes after, in a session inside bounds that are set
+and checked, and is the vault's (`vault-procedures.md` § 1). Nothing is
+carried from the one to the other: the first is finished when its
+check has passed, and the second begins by its own text. Each then has one aim
 the user can follow, and less for its agent to read and do: the more a
 session reads and does, the more it fails and the less it attends to
 the user.
@@ -428,7 +432,11 @@ leave any of it. The harness is the user's (§ 0).
    up differs by tool: after a change, the work goes on in a new one.
 7. **Check, in a new session**, so that the settings are tried as they
    will be used — not one in which this guide's `AGENTS.md` is read at
-   the start, which would lead it back into the setup. Try what should
+   the start, which would lead it back into the setup. The session
+   that leads stays the lead: it gives the user a short text for the
+   new session, which only tries and reports, and judges what comes
+   back; what is not refused it mends, and the check is run again. The
+   setup is not finished before the check has passed. Try what should
    be refused — read a secret, run a denied command or write outside
    the folder — and show each refusal. A refusal counts by its message,
    which says what refused: a permission rule, the sandbox, a hook, the

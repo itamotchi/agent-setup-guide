@@ -58,11 +58,27 @@ and the first table of step 7 are the harness; steps 5 and 8 and the
 second table are a vault's installation. A step a run corrected says
 so.
 
+**A third run, 2026-11-23**, in the two-sheet form (the same app; the
+model GPT-6.2 Sol with reasoning set to its highest, the app's default
+being medium): the harness's half was led from a chat with no folder
+chosen to its end — the tools and the GitHub login from a logged-out
+state, the file applied, the rules file written. Read afterwards, the
+file parsed and held the profile and the lines of every nested
+repository as given. The agent had departed from the set below in two
+places, neither tried here: the built-in browser's three lines were
+left out, and Git's credential helper was set by `GIT_CONFIG_GLOBAL`
+naming a file in the token's folder, in place of the `GIT_CONFIG_*`
+pairs. At the end the agent named the next sheet by its title alone,
+and the user did not know where to go; the refusals had been left to
+the second sheet. Both changed the entry: the check is now part of the
+harness's half, led by the chat that set the file up, and nothing is
+carried between the halves (`vault-procedures.md` § 1).
+
 **Not tried**:
 
 - this file followed to its end by a user who starts with nothing, in
-  the present form: the chat with no folder chosen (step 1), the
-  clone, a nested repository, the check on the vault. On the test bed
+  the present form: the check led by the chat that set the file up,
+  the clone, a nested repository, the check on the vault. On the test bed
   the settings were reached over two days, in another order, and the
   configuration of step 3 was written by a session of another tool;
 - a real push (a dry run passed); a pull or a push with a member's
@@ -109,8 +125,8 @@ settles them with their agent.
    made for the purpose was a notion the user did not follow. Not the
    vault's folder: a vault is opened only when there is a harness. Not
    the folder that holds the user's vaults: an agent opened there may
-   write into every vault under it. Not tried: these steps led from
-   such a chat.
+   write into every vault under it. The harness's half was led from
+   such a chat on 2026-11-23.
 2. **The first chat.** A folder that is not under version control opens
    read-only (the docs; → *From the Codex docs*). Not tried: how many
    approvals this step then takes, and which permission choice under the
@@ -552,8 +568,11 @@ commit` with `--no-verify` or `-n`, which skips a vault's pre-commit.
 In a new chat, opened after steps 3 to 6. The agent runs each and shows
 the message; a refusal counts by its message (`guide.md` § 4 step 7).
 
-In a chat that is not on the vault — the token's two lines once the
-token is stored, in a vault's installation:
+In a chat that is not on the vault, before the harness's half ends —
+the chat that set the file up keeps the lead, gives the user a short
+text for the new chat and judges what comes back
+(`vault-procedures.md` § 1). The token's two lines come once the token
+is stored, in a vault's installation:
 
 | what | the pass |
 |---|---|

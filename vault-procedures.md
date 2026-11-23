@@ -50,8 +50,8 @@ When: before the user's agent is first opened on the vault (`guide.md`
 Two short sheets from which a user's agent can lead the user from
 nothing to work in the vault, whatever its tool and platform: first the
 agent tool's own settings and the harness, once for a machine; then the
-vault's installation, in a session already inside the bounds ("How a
-user reaches it", below). The steps of the first and their order are
+vault's installation, in a session inside bounds already set and
+checked ("How a user reaches it", below). The steps of the first and their order are
 those of `guide.md` § 4, which hold for any tool; what the sheets add
 is what only the vault knows. They are written in no tool's terms and
 carry no tool's settings. What is handed to the user's agent is small;
@@ -128,9 +128,10 @@ and its words are not theirs. The procedure cannot begin inside the
 vault: the vault is opened last.
 
 It is in two sheets. A sheet is a short document the user reads in the
-browser — the invitation accepted, the owner gives a link to it, and a
-README at the top of the vault's repository leads to it; an invited
-person reads it there, so it may live inside the vault. It holds a few
+browser — the invitation accepted, whoever invited the user gives the
+links to them (a README at the top of the vault's repository may lead
+to them as well); an invited person reads them there, so they may live
+inside the vault. It holds a few
 acts of the user's own, said at its top, then a text to copy and paste
 to their agent. From there the agent leads (`guide.md` § 4, "The agent
 leads").
@@ -157,25 +158,44 @@ machine.
    text, so that a settings file is written once, by a session that
    can still read it back; a session inside the bounds may not be able
    to read its own settings.
-4. **It ends when the bounds are in force**, as the tool shows it, and
-   the agent says so in the user's words. The vault is not yet on the
+4. **The check is part of this sheet.** Before it ends, what should be
+   refused — a write outside the folder a session is opened on, a
+   connection to a host that is not allowed — is seen refused, and the
+   leading session keeps the lead through it: it alone can mend the
+   settings, and between the two sheets there must be no stretch with
+   no one leading. Where the tool tries new settings only in a new
+   session, the leading session gives the user a short text for that
+   session, which only tries these things and reports — it does not
+   take the lead — and the user brings its answer back. What is not
+   refused is mended and tried again.
+5. **It ends when the check has passed.** The agent says so in the
+   user's words, and says what comes next in a way that needs no
+   knowledge of the sheets: that there is a second page, by its title
+   and its address, which the user opens to do the acts at its top.
+   Nothing is carried from this session to the next — it writes no
+   text for the user to hand over. The vault is not yet on the
    machine.
 
 **Sheet 2 — the vault's installation.** Once for each vault, in a
-session already inside the bounds.
+session inside bounds that the first sheet put in and checked.
 
 1. **The user makes the vault's folder and opens the agent on it** —
    the sheet names the folder at its top. An act of the user's own: a
    command handed over for so small a thing is more trouble to a user
    than the act.
-2. **The user pastes the sheet's text, and the agent leads**: a look
-   that the bounds hold; the credential the agent uses inside the
-   bounds for the vault's repository — the user's hands, never shown to
-   the agent; the vault cloned into that folder by the user's own
-   command (some harnesses keep the agent from creating a repository's
-   Git files at all); the check on the vault; then the vault's own
-   first steps, by the vault's documents, which are at hand from the
-   clone on.
+2. **The user pastes the sheet's text, and the agent leads**: the
+   credential the agent uses inside the bounds for the vault's
+   repository — the user's hands, never shown to the agent; the vault
+   cloned into that folder by the user's own command (some harnesses
+   keep the agent from creating a repository's Git files at all); the
+   check on the vault; then the vault's own first steps, by the vault's
+   documents, which are at hand from the clone on.
+3. **Its text is complete by itself.** It relies on nothing carried
+   from the first sheet's session. And it carries what its agent needs
+   for its own steps on a route the vault has seen — how the credential
+   is stored under that harness, say — as a dated reference: a session
+   inside the bounds may be unable to reach the copy of this guide that
+   the first session brought.
 
 Why two, and why in this order. Before the harness, an agent that
 cloned the vault would be one with no bounds, using the user's
@@ -185,6 +205,9 @@ leads it from its first act to its last; and each agent has less to
 read and do — the more a session reads and does, the more it fails and
 the less it attends to the user. The cut falls where the session
 changes anyway: bounds hold only in a session begun after they are set.
+The step from the first sheet to the second is not a hand-over of the
+lead: the first is finished and checked, the second begins by its own
+text.
 
 An earlier form of this entry (2026-11-21) — one text, a setup folder
 of its own, the check in further sessions, the vault cloned at the end
@@ -192,14 +215,43 @@ of the same procedure — was run once by a user, on Codex in the ChatGPT
 desktop app on macOS (2026-11-22), and not to its end: the first
 session led; the sessions the work then moved to were handed single
 requests and led nothing, and the user carried messages between them.
-The form above answers that. It was settled on 2026-11-23 and has not
-yet been run; the files in `setup/` mark what is untried on their
-routes.
+The two sheets answer that (settled 2026-11-22). They were run the
+next day on the same route as far as the end of the first sheet, and
+that run changed two things, now above: the first sheet's agent named
+the second by its title alone, and the user did not know where to go;
+and the refusals had been left to the start of the second sheet, where
+the session that finds a fault cannot mend it and no one leads between
+the two. In the present form the entry has not yet been run; the files
+in `setup/` mark what is untried on their routes.
 
 ### The text to paste
 
 Each sheet's text is the vault's word, handed to the user, who gives it
-to their own agent. It is short. It holds:
+to their own agent. It is short.
+
+How it speaks:
+
+- **Not in the user's first person.** Its head says that it was
+  prepared on the vault's side, that the person who pastes it did not
+  write it, and that this person may neither know what it asks nor ask
+  when something is unclear. A text that says "I" leaves open who
+  speaks, and read as the user's own words it tells the agent that
+  this person knows what they want — the opposite of what an agent
+  that is to lead should assume.
+- **It names no person of the vault's side.** To the agent it does not
+  matter who they are; on a problem the user asks whoever invited them.
+- **Of the user it states only what is fact.** What it takes for
+  granted — that the first sheet is done, that the user is a member of
+  the repository's organization — it states as what it assumes, and
+  the agent says where an assumption does not hold. It does not
+  assume that the user knows the sheets' titles, or the words of the
+  text itself.
+- **It need not be in the user's language.** The sheet then says which
+  part the user reads — the acts at its top — and that the text need
+  not be read; and the text tells the agent which language to speak to
+  the user.
+
+It holds:
 
 - the aim, in the user's terms: to begin working in a named vault —
   and, for sheet 1, that this part readies the agent tool itself,
@@ -213,9 +265,12 @@ to their own agent. It is short. It holds:
   facts, in no tool's terms; that the set the agent proposes may be
   taken as it stands or gone through point by point, and that any
   value may be changed by the user;
+- sheet 1, at its end: the second sheet's title and address, for the
+  agent to give to the user;
 - sheet 2: the vault's repository and who owns it, what the routine
-  needs of it, the folder, and which of the vault's documents the
-  agent goes by once the clone is there;
+  needs of it, the folder, which of the vault's documents the agent
+  goes by once the clone is there, and what its agent needs on a route
+  the vault has seen (above);
 - what the agent does not do: clone the vault, write what its tool
   leaves to the user's hands, post anything;
 - nothing secret: no token, no password. A token is made by the user and
