@@ -496,16 +496,7 @@ leave any of it. The harness is the user's (§ 0).
    settings. Record each message as it stands. Where a vault the user
    works in holds a repository nested in it, try the protected files
    there too (§ 2.15). Anything not refused is said; the user decides
-   whether to fix it or accept it. **Then try what must still work**:
-   in a session opened as the work's sessions will be — on a folder
-   under version control that holds an instruction file — one ordinary
-   act of the work (a file changed and committed, say), at the
-   session's second message and not only its first. A harness can
-   pass every refusal and leave the tool unable to work: seen in a
-   setup run from this guide, where the refusals were tried in
-   sessions of one message, and a session on a vault then stopped at
-   its second (`environments/codex.md`). After an update of the tool
-   both halves are run again (§ 2.11).
+   whether to fix it or accept it.
 8. **Record** what was decided and why — for each line, the reason it is
    there — where the user keeps such notes: the setup session's folder
    is one place, beside this guide's copy and not inside it. A vault is

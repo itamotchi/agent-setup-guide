@@ -47,6 +47,15 @@ The rest of this file is for anyone else.
   point whether it was tried or only read; where a note and the tool's
   official docs differ, the docs win. A file in `setup/` states as
   tried only what was tried, with its conditions.
+- A route in `setup/` is given as tried only after ordinary work has
+  been done under it on the tool's present version — a session on a
+  folder that holds an instruction file, past its first message — and
+  not after its check of refusals alone. That test is the maker's,
+  made before a user is given the route; a fault it finds changes the
+  route, and is not answered by a further step in every user's check.
+  Before a route is built on a feature, its vendor's own mark (Beta,
+  experimental), the tool's open reports and what its users run are
+  looked at (`guide.md` § 2).
 - A value in `setup/` or a line in a template has a reason — a problem
   that arose, or a silent harm the standard leaves (`guide.md` § 2) —
   or it is not there.

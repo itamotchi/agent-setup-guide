@@ -120,6 +120,18 @@ user to it.
   environment with no file in `setup/` has not been tried by anyone
   yet (2026-11-22).
 
+**Tried by its maker first.** There are two checks, and they are not
+the same. One is each user's: what their own environment needs — that
+what should be stopped is stopped there. The other is the maker's:
+that the procedure works to its end. Before a user is given the
+sheets, whoever writes them runs them to their end on the route they
+name, and goes on into ordinary work — a session on the vault, past
+its first message. A fault found there is a defect of the procedure,
+and the procedure is changed; it is not answered by a further step in
+every user's check (seen 2026-11-23: a route passed every refusal its
+check tried, in sessions of one message, and a session on the vault
+then stopped at its second).
+
 ### How a user reaches it
 
 A new user has the invitation to the vault's repository and an agent
@@ -177,11 +189,7 @@ machine.
    session, the leading session gives the user a short text for that
    session, which only tries these things and reports — it does not
    take the lead — and the user brings its answer back. What is not
-   refused is mended and tried again. And what must still work is seen
-   to work (`guide.md` § 4 step 7): in a session opened on a folder as
-   the work's sessions will be, one ordinary act, at its second
-   message — a harness can pass every refusal and leave the tool
-   unable to work.
+   refused is mended and tried again.
 5. **It ends when the check has passed.** The agent says so in the
    user's words, and says what comes next in a way that needs no
    knowledge of the sheets: that there is a second page, by its title

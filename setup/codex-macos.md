@@ -270,14 +270,14 @@ agent runs each and shows the output; the user looks at the screen.
 | what | the pass |
 |---|---|
 | the permission choice under the composer | shows Ask for approval |
-| a new file inside the folder | made, with no prompt |
 | a new file beside the folder (outside it) | a prompt comes to the user; refused, the agent reports the refusal, and the user finds no such file |
-| `git add` and `git commit` of the file inside | a prompt; allowed once, the commit is made |
 
-A prompt that does not come where one should — the file outside made
-unasked, or the commit refused with nothing shown — is said to the
-user, and the vault is not opened until it is understood: it is the
-kind of fault the open reports describe ("What to watch", 7).
+A prompt that does not come where it should — the file outside made
+unasked — is said to the user, and the vault is not opened until it is
+understood: it is the kind of fault the open reports describe ("What
+to watch", 7). That the routine itself runs is not part of each
+user's check: it was tried when this route was made (the table at the
+head), and a commit that fails shows itself at once.
 
 ## 7. Later: the entry for each occasion
 
