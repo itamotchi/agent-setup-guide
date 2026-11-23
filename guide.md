@@ -342,33 +342,35 @@ vaults, proceed all the same; step 2 starts from what is there.
 
 **No step for its own sake.** How much of what follows there is
 depends on what the user's route sets. Where it writes files —
-settings, rules, instructions — there is a session for writing them
-and a check of what they set. Where it writes none, and the tool's own
-way is taken as it stands, what is left is the application's own
-settings, set by the user's hand, and a look at what they changed: no
-session of its own, no file, no check in a further session. The agent
-says in a sentence that this route sets nothing more, and goes on to
-the user's work. A step in which nothing is done on this route is not
-gone through. Seen in a setup run from this guide (2026-11-23): a
-route had been changed to one that sets nothing, and the steps made
-for a route that writes files were kept. The user was led through a
-session and a check with nothing in them that they could see ("what
-did the setup do?"); the check, in a further chat, lost its lead and
-left a file outside the folder; and the one switch that route does
-need stood among the advice and was not set.
+settings, rules, instructions — the files are written and what they
+set is checked. Where it writes none, and the tool's own way is taken
+as it stands, the setup is short: the application's own settings, set
+by the user's hand, and a look at what they changed — no file, and no
+check in a further session, since nothing was set that a session
+could try. The agent puts that to the user as the set it proposes
+(step 4). Taken, there is nothing more to set, the agent says so in
+a sentence, and the setup ends there. Not taken, what the user wants
+set is built like any other line and, being set, is checked. A step
+in which nothing is done on this route is not gone through, and a
+check is of what was set (step 7). Seen in a setup run from this
+guide (2026-11-23): a route had been changed to one that sets no
+file, and
+a check was run all the same — in a further chat, which lost its lead
+and left a file outside the folder. The user could not see what the
+setup had done ("what did the setup do?"), and the one switch that
+route does need stood among the advice and was not set.
 
-**The session.** Where files are written, one of its own, for setting
-up. Not opened on a vault's folder (§ 2.5), and not on the folder that
-holds the user's vaults — the agent could then write under all of it.
+**The session.** One of its own, for setting up. Not opened on a
+vault's folder (§ 2.5), and not on the folder that holds the user's
+vaults — the agent could then write under all of it.
 Where the tool starts a session with no folder chosen and gives it a
 working folder by itself, that will do, and the user has no folder to
 make or to understand; otherwise a folder of its own. This guide is
 brought there as a local copy. In the mode where the agent asks before
 it writes — not a mode that skips approvals: this session deals with
-the user's own settings. Where the route writes no file there is no
-such session: the application's settings are set by the user before
-the first session on a vault, and the vault's own procedure begins
-with them.
+the user's own settings. Where the route writes no file the session
+is short, and it is still this one: the application's settings, and
+nothing after them.
 
 **The agent leads.** The user's aim is to begin working with their
 agent — in a vault, say — not to set up a harness, and the words of
@@ -409,20 +411,21 @@ Three things a leading session sees to, each learned from a run
   user who was not told asked the other session what to do next, and
   no longer knew which one led.
 
-**The harness, then the vault.** Where the harness is built in files:
-two procedures, kept apart. The
+**The harness, then the vault.** Two procedures, kept apart. The
 harness is the user's and is set up once for a machine: this section.
 Installing a vault — the credential for its repository, its clone, its
 own first steps — comes after, in a session inside bounds that are set
 and checked, and is the vault's (`vault-procedures.md` § 1). Nothing is
 carried from the one to the other: the first is finished when its
-check has passed, and the second begins by its own text. Each then has one aim
+check has passed — or, where nothing was set that a check could try,
+when the application's settings are set — and the second begins by
+its own text. Each then has one aim
 the user can follow, and less for its agent to read and do: the more a
 session reads and does, the more it fails and the less it attends to
-the user. Where the route sets nothing but the application's own
-settings ("No step for its own sake"), there is one procedure: those
-settings are the first acts of the vault's installation, by the user's
-hand, before its session is opened.
+the user. This holds as well where the route sets nothing but the
+application's own settings ("No step for its own sake"): the first
+procedure is then short — those settings, once for the machine — and
+it is still the first, not a step of a vault's installation.
 
 **Who builds it, and from what.** The user's agent, for the tool it is.
 The steps below hold for any tool; at each, the agent finds what this

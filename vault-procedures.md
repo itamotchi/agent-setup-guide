@@ -16,7 +16,7 @@ knows — what its routine needs — in no tool's terms. The settings of a
 tool are not in it: the user's agent finds them for the tool it is,
 and where something is already known for that environment (`setup/`,
 `environments/`) it consults that as a dated reference. This file says
-what a vault states and what it leaves to the user's agent, and the
+what a vault states and what it leaves to the user's agent, and the two
 sheets a user is handed (§ 1), how the procedure serves a later change
 (§ 2), and what adding a repository inside the vault needs (§ 3). Dated
 2026-11-23.
@@ -47,16 +47,18 @@ When: before the user's agent is first opened on the vault (`guide.md`
 
 ### What the procedure is
 
-Short sheets from which a user's agent can lead the user from nothing
-to work in the vault, whatever its tool and platform. How many there
-are for a user depends on what that user's route sets (`guide.md`
-§ 4, "No step for its own sake"). Where the harness is built in files,
-two: first the agent tool's own settings and the harness, once for a
-machine; then the vault's installation, in a session inside bounds
-already set and checked. Where the route sets nothing but the
-application's own settings, one: the vault's installation, which then
-begins with those settings, by the user's hand ("How a user reaches
-it", below). The steps of the first and their order are
+Two short sheets from which a user's agent can lead the user from
+nothing to work in the vault, whatever its tool and platform: first the
+agent tool's own settings and the harness, once for a machine; then the
+vault's installation, in a session inside bounds already set ("How a
+user reaches it", below). How much the first holds depends on what the
+user's route sets (`guide.md` § 4, "No step for its own sake"): where
+the harness is built in files, the files and a check of them; where
+the route sets nothing but the application's own settings, those
+settings and nothing more — and no check in a further session, since
+a check is of what was set. It is the first sheet all the same, for
+every tool: what is set on the machine is set once, before any vault.
+The steps of the first and their order are
 those of `guide.md` § 4, which hold for any tool; what the sheets add
 is what only the vault knows. They are written in no tool's terms and
 carry no tool's settings. What is handed to the user's agent is small;
@@ -145,7 +147,7 @@ begin working in the vault; a harness is not a thing they asked for,
 and its words are not theirs. The procedure cannot begin inside the
 vault: the vault is opened last.
 
-It is in sheets. A sheet is a short document the user reads in the
+It is in two sheets. A sheet is a short document the user reads in the
 browser — the invitation accepted, whoever invited the user gives the
 links to them (a README at the top of the vault's repository may lead
 to them as well); an invited person reads them there, so they may live
@@ -154,21 +156,21 @@ acts of the user's own, said at its top, then a text to copy and paste
 to their agent. From there the agent leads (`guide.md` § 4, "The agent
 leads").
 
-**Which sheet a user begins at.** The page a new user is first given
-says it, by the name of the user's tool, for each route the vault has
-seen — a dated reference: the first sheet where that route builds a
-harness in files; the second where it sets nothing but the
-application's own settings. A user of a tool the vault has not seen
-begins at the first, whose agent finds what its tool has. A user is
-not sent through a sheet in which their route has nothing to do (seen
-2026-11-23, below).
-
 **Sheet 1 — the agent tool's own settings and the harness.** Once for a
-machine, for a user whose route builds a harness in files — and for a
-tool the vault has not seen, where the agent finds out which is the
-case: if it finds nothing to write, it says so, names what the
-application's settings need, sees them set, and the sheet ends there,
-with no check in a further session.
+machine, for every user whatever their tool. On a route that builds a
+harness in files, all of the steps below. On a route whose proposed
+set writes no file: first the application's settings that route
+needs — named as needed, in the tool's own words, a dated reference
+for each such route the vault has seen (the file in `setup/` says
+what they are) — which the agent sees set; then the harness, which
+the agent puts to the user as the set it proposes: on this route,
+nothing more. The user takes it or not (`guide.md` § 4 step 4).
+Taken, there is nothing to do, and the sheet ends with no check in a
+further session (step 4). Not taken — the user wants a line of their
+own, or another of the tool's choices — it is built by `guide.md`
+§ 4 like any other, each line with its reason and what it opens;
+then something was set, and it is checked. What is only advice on
+that route is said as advice, a sentence each, and may be left.
 
 1. **The user starts a session that is not on the vault's folder** —
    where the tool starts one with no folder chosen and gives it a
@@ -199,8 +201,12 @@ with no check in a further session.
    left out the lines for the tool's built-in browser, and the browser
    no longer started).
 4. **The check is part of this sheet, and it tries what this sheet
-   set** (`guide.md` § 4 step 7). Before it ends, what the harness is
-   to refuse — a write outside the folder a session is opened on, a
+   set** (`guide.md` § 4 step 7). Where nothing was set in files there
+   is no such check: the user looks at what the application's setting
+   changed, and that is all (seen 2026-11-23: a check run where
+   nothing had been set — the user could not tell what it was for,
+   and it left a file outside the folder). Otherwise, before the
+   sheet ends, what the harness is to refuse — a write outside the folder a session is opened on, a
    connection to a host that is not allowed — is seen refused, and the
    leading session keeps the lead through it: it alone can mend the
    settings, and between the two sheets there must be no stretch with
@@ -212,7 +218,8 @@ with no check in a further session.
    asked and how to answer (`guide.md` § 4, "A move to another
    session is prepared"). What is not
    refused is mended and tried again.
-5. **It ends when the check has passed.** The agent says so in the
+5. **It ends when the check has passed** — or, where nothing was set
+   in files, when the application's settings are set. The agent says so in the
    user's words, and says what comes next in a way that needs no
    knowledge of the sheets: that there is a second page, by its title
    and its address — handed as text to copy into the user's own
@@ -225,14 +232,8 @@ with no check in a further session.
 **Sheet 2 — the vault's installation.** Once for each vault, in a
 session inside bounds: those the first sheet put in and checked, or,
 on a route that sets nothing in files, the tool's own, with the
-application's settings that route needs set first.
+application's settings that the first sheet saw set.
 
-0. **On a route that sets nothing in files, the application's own
-   settings come first**, at the sheet's top, by the user's hand,
-   before any session: what that route needs, named as needed, in the
-   tool's own words — a dated reference for each such route the vault
-   has seen (the file in `setup/` says what they are). They are few.
-   What is only advice stays in the route's file.
 1. **The user makes the vault's folder and opens the agent on it** —
    the sheet names the folder at its top. An act of the user's own: a
    command handed over for so small a thing is more trouble to a user
@@ -243,10 +244,7 @@ application's settings that route needs set first.
    "open the agent on that folder" (seen 2026-11-23). For a tool the
    vault has not seen, the first sheet's agent says it before that
    sheet ends.
-2. **The user pastes the sheet's text, and the agent leads**: the
-   tools the routine needs and the user's own login, where no first
-   sheet has seen to them — by the user's terminal, one command at a
-   time; a
+2. **The user pastes the sheet's text, and the agent leads**: a
    credential of the agent's own for the vault's repository, where the
    user's harness needs one — the user's hands, never shown to the
    agent; on a route where a command the user allows runs with the
@@ -269,13 +267,11 @@ application's settings that route needs set first.
    inside the bounds may be unable to reach the copy of this guide that
    the first session brought.
 
-Why the harness comes first, and why it is a sheet apart where it is
-one. Before the harness, an agent that
+Why two, and why in this order. Before the harness, an agent that
 cloned the vault would be one with no bounds, using the user's
-credential, with the vault in its hands: so the harness first — a
-sheet of its own where it is built in files; the application's
-settings at the head of the one sheet where the tool's own bounds are
-taken as they stand. Kept
+credential, with the vault in its hands: so the harness first — and
+where the tool's own bounds are taken as they stand, the
+application's settings that keep them. Kept
 apart, each sheet has one aim the user can follow and one session that
 leads it from its first act to its last; and each agent has less to
 read and do — the more a session reads and does, the more it fails and
@@ -315,16 +311,18 @@ do in that app, and the second sheet's text, pasted, was turned into
 an attached file that the agent could not open. A fifth run, the same
 day, took the two sheets onto the route that replaced it, which sets
 nothing in files (`setup/codex-macos.md`), and its user stopped it at
-the end of the first sheet. That sheet had nothing of a harness left
-in it, and its steps were gone through all the same: a session of its
-own, and a check in a further chat that the user could not follow and
-that left a file outside the folder; the application's settings, the
-one place where that route has something to do, were passed over; and
+the end of the first sheet. On that route the first sheet sets no
+file, and a check was run all the same: in a further chat, which the
+user could not follow and which left a file outside the folder; the
+application's settings, the one thing the sheet has to see to on that
+route, were passed over; and
 the second sheet's address, given as a link, opened in the app's own
 browser and showed as not found (`environments/codex.md`, "Two sheets
-run on that route"). Hence the sheets as they stand above: as many as
-the user's route has work for, the application's settings named as
-needed at the head. **In this form they have not been run**; the
+run on that route"). Hence the first sheet as it stands above: it
+holds what the user's route has to set and no more, the application's
+settings named as needed; its check is of what was set, and where
+nothing was set there is none. **In this form they have not been
+run**; the
 files in `setup/` mark what is untried on their routes.
 
 ### The text to paste
@@ -369,14 +367,12 @@ It holds:
 - the agent's part: it leads to the end of this sheet, in the user's
   words, one act at a time; if the work moves to another session, the
   lead is handed over as the lead (`guide.md` § 4);
-- where the detail is: this guide's public address — for an agent that
-  has to build (the first sheet; a tool the vault has not seen). The
-  text names no tool: the agent that receives it works for the tool it
-  is. On a route the vault has seen that sets nothing in files, the
-  second sheet's text carries what that route's agent does, as a dated
-  reference, and its agent is not sent to read this guide: an agent
-  that composed the steps from the general text passed over what
-  mattered (seen 2026-11-23);
+- where the detail is: this guide's public address. The text names no
+  tool: the agent that receives it works for the tool it is. For a
+  route the vault has seen, the first sheet's text also carries what
+  that route needs — the application's settings, named as needed — as
+  a dated reference: an agent that composed the steps from the general
+  text alone passed over what mattered (seen 2026-11-23);
 - sheet 1: the vault's needs that go into the harness (above), as plain
   facts, in no tool's terms — and that they are what the vault adds,
   not the measure of the set; that the set the agent proposes may be

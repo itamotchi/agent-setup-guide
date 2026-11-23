@@ -31,10 +31,11 @@ permission choice **Ask for approval**, and that choice is kept. One
 switch in the app's settings is turned off, so that the choice with no
 sandbox and no prompt — Full access — is no longer offered (step 1).
 Nothing else is set: no file of bounds is written, no token is made
-for the agent, no line is added for a vault. So there is no session
-for setting up and no check in a session of its own (`guide.md` § 4,
-"No step for its own sake"): what a user does is under "What the user
-does, in order".
+for the agent, no line is added for a vault. So the setup is short —
+the switch, a look — and it has no check in a session of its own,
+since no setting was written that a session could try (`guide.md`
+§ 4, "No step for its own sake"): what a user does is under "What
+the user does, in order".
 
 **What the user gets.** Codex's own sandbox, which the operating
 system enforces: a command the agent runs writes inside the folder the
@@ -75,13 +76,12 @@ commit and push. → *The app as it starts: Ask for approval*.
 
 A session with a start, one commit and one push was four prompts.
 
-**A vault's sheets on this route** were run once, the same day, in
-the form made for a route that writes files — a first sheet for the
-harness with a check in a further chat, then the vault's — and the
-user stopped the run at the end of the first: it had nothing of a
-harness in it, its check could not be followed, and the app's own
-settings were passed over. The route's steps below are changed by
-what that run showed. → *Two sheets run on that route*.
+**A vault's two sheets on this route** were run once, the same day,
+and the user stopped the run at the end of the first: nothing had
+been set, and a check was run all the same, in a further chat, which
+could not be followed; and the app's own settings were passed over.
+The route's steps below are changed by what that run showed.
+→ *Two sheets run on that route*.
 
 **Not tried**: the acts under "What the user does, in order" as one
 run from the first to ordinary work; a real push (a dry run passed); the prompt's "allow
@@ -110,34 +110,44 @@ decision. → *What users of the app are found doing*.
 The whole of a first setup on this route, for a user who is to work in
 a vault. Each act was seen on the Mac of the trial; the order as one
 run, from the first act into ordinary work, has not been run yet. A
-vault's sheet hands these to its users as a dated reference
+vault's sheets hand these to its users as a dated reference
 (`vault-procedures.md` § 1).
 
-By the user's own hand, before any chat:
+Once for the machine — the first sheet of a vault's procedure, in a
+chat opened on no folder:
 
-1. **In the app's settings, General: Full access off** (section 1 below).
-2. **The vault's folder made, empty, and a new project made with that
-   folder as its source folder** (section 2 below).
-3. **A look under the composer: Ask for approval** (section 1 below).
-
-Then, in that project's chat, the agent leads — one chat, from here
-to the vault's first session:
-
-4. **The tools and the login** the vault's routine needs (`git`, `gh`,
+1. **In the app's settings, General: Full access off** (section 1
+   below). Needed.
+2. **A look under the composer: Ask for approval** (section 1 below).
+3. **The tools and the login** the vault's routine needs (`git`, `gh`,
    what its scripts run on; `gh auth login`) — by the user's own
-   terminal, one command at a time, the agent giving each (section 4 below).
+   terminal, one command at a time, the agent giving each (section 4
+   below).
+
+Then the harness: the agent puts this route to the user as the set it
+proposes — nothing more is set; the other switches of section 1 are
+advice. Taken, there is nothing to do, and no check is run in a chat
+made for it (section 6 below). A user who does not take it — who
+wants a command forbidden whoever allows it, or another permission
+choice — has that built by `guide.md` § 4, with what it opens
+(section 7; "Other forms"); what is then set is checked. The second
+sheet's address is given as text to copy (section 2 below).
+
+Then for a vault — its second sheet, in a chat on the vault's folder:
+
+4. **The vault's folder made, empty, and a new project made with that
+   folder as its source folder** (section 2 below).
 5. **The clone**, by the user's own command in their terminal, into
    that folder (section 2 below).
 6. **What will be asked, and how to answer** — said before the vault's
-   first act (section 3 below): the routine's acts allowed once; anything
-   outside the folder, or not asked for, or not understood, refused.
+   first act (section 3 below): the routine's acts allowed once;
+   anything outside the folder, or not asked for, or not understood,
+   refused.
 7. **The vault's own start of session.** Its first act that leaves the
    sandbox — the pull — raises a prompt. A pull that passes with no
    prompt means the chat is not on Ask for approval: the work stops
-   there and the choice under the composer is looked at (section 6 below).
-
-No other chat is opened, no page is opened from a link in the chat
-(section 2 below), and the user's agent is not sent to read `guide.md`.
+   there and the choice under the composer is looked at (section 6
+   below).
 
 ## 1. The app's own settings
 

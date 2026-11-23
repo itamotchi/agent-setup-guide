@@ -992,12 +992,14 @@ are told apart; the agent's raw output was not seen.
   sign-in (the chat's report; the cause is its reading). The user
   wanted their usual browser.
 
-So, on a route that sets nothing in a file: a sheet for the harness
-had no harness in it; a check in a chat of its own could not be
+So, on a route that sets nothing in a file: a check was run though
+nothing had been set, in a chat of its own, and it could not be
 followed and itself left a file outside the folder; and the one thing
 the route has for the user to set stood among the advice and was not
 set. `setup/codex-macos.md` and the base (`guide.md` § 4, "No step
-for its own sake"; `vault-procedures.md` § 1) were changed by this.
+for its own sake"; `vault-procedures.md` § 1) were changed by this:
+the first sheet stays, holds what the route has to set, and has a
+check only of what was set.
 
 ## From a research report made for this guide (2026-11-09)
 
