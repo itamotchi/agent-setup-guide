@@ -391,9 +391,18 @@ sessions none of which leads, and a user who does not ask stops there
 usual case: the session that set the files up keeps the lead through
 it — it alone can mend them.
 
-Three things a leading session sees to, each learned from a run
+Four things a leading session sees to, each learned from a run
 (2026-11-23):
 
+- **A look at the screen is asked in plain text.** When the user is
+  to look at the application's own window, or act in it, the agent
+  says what to do in the body of its reply and ends the reply there;
+  the user acts after it and answers in the same chat. Not through
+  the tool's question box: it may cover what is shown around the
+  message box — the very thing the user was sent to look at
+  (reported from a setup run in one desktop app). Told "it is not
+  shown" or "it is gone", the agent first suspects the box it has
+  just raised, and asks again in plain text.
 - **An act is whole.** Before the user opens a screen — a dialog, a
   settings page — the agent says everything up to the point where that
   screen is done, and asks to be told afterwards. A user asked to stop
