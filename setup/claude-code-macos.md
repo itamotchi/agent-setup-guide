@@ -32,13 +32,17 @@ the user's yes. Few prompts: the routine runs in Auto.
 
 **Tried**: on one Mac, in the desktop app's Code tab, Claude Code
 v2.1.2xx to v2.1.3xx, between 2026-11-01 and 2026-11-20 — one user's
-settings, in daily use in several vaults.
+settings, in daily use in several vaults, and still so on 2026-11-23
+(the desktop app 6.28899.6).
 
 **Not tried**:
 
-- this file followed from its first step by a user who starts with
-  nothing: on the test bed the settings were reached over three weeks,
-  by another procedure;
+- the steps as one run, from the first to ordinary work in a vault.
+  Until 2026-11-24 this file had the vault's clone at the end of one
+  procedure; the order below, the guide's two procedures, has been run
+  by no one. On the test bed the settings were reached over three
+  weeks, by another procedure;
+- the first session in Manual, and its count of prompts (step 1);
 - the two deny lines `Bash(gh auth:*)` and `Bash(git credential:*)`:
   they are in the template and were not in the settings tried;
 - the CLI; another platform (native Windows has no tool file: its note
@@ -49,39 +53,29 @@ Each further untried point is marked where it stands. Say this to the
 user before they choose how to proceed (`guide.md` § 4).
 
 **What is needed, and what is advice.** The set holds with the settings
-of step 3 and the check of step 6. The rest — the bypass switch of
+of step 3 and the check of step 5. The rest — the bypass switch of
 step 2, the rules file and the memo of step 4 — is recommended, each
 with its reason, and can wait. Nothing here is forced: the harness is
 the user's.
 
-**The user's own hands**, even when the rest is left to the agent: the
-permission mode and the bypass switch in the app (step 2); every change
-to a settings file once the write block is on (step 3); adding a folder
-to a session; the clone of the vault (step 7).
+## Two procedures
 
-## Where a vault's needs go on this route
+The steps below are in the order of a first setup. Steps 1 to 5 are
+the first procedure, once for the machine — the first sheet of a
+vault's procedure (`vault-procedures.md` § 1). It ends when the check
+has passed; no vault is on the machine yet, and nothing is carried on.
+Step 6 is what this route has for the second, the vault's
+installation, in a session on the vault's folder. Step 7 is for later.
 
-A vault states its needs in no tool's terms (`vault-procedures.md`
-§ 1); on this route they went here. A user with no vault's procedure
-settles them with their agent.
+## 1. The first session
 
-| value | where it is used |
-|---|---|
-| the folder the setup session is opened on | step 1 |
-| the commands of the vault's routine that need a credential or a host | step 3, the excluded commands |
-| the tools the routine needs that the sandbox stops | step 8 |
-| the vault's repository, for the clone | step 7 |
-| where the record is kept | step 7 |
-
-A repository nested in the vault needs no value: step 5.
-
-## 1. Before the harness
-
-1. **A setup folder.** The session is opened on a folder of its own,
-   kept for setting up. Not the vault's folder: a vault is opened only
-   when there is a harness. Not the folder that holds the user's vaults:
-   an agent opened there may write into every vault under it. A later
-   change is made in the same folder (step 8).
+1. **A folder of its own.** A Claude Code session is opened on a
+   folder; whether one can start with none chosen is not said in the
+   part of the docs read (2026-11-23), and was not tried. So the first
+   procedure has a folder, made by the user and kept for setting up —
+   not a vault's, nor the folder that holds the user's vaults
+   (`guide.md` § 4, "The session"). A later change is made in the same
+   folder (step 7).
 2. **The session's mode, and few prompts.** The app's default mode
    (Manual) will do; never bypass. What protects the user here is not
    the number of prompts but the agent's word before each write — what
@@ -98,21 +92,16 @@ A repository nested in the vault needs no value: step 5.
 
    Auto is not advised for this one session: there a write under
    `~/.claude` went through with no prompt at all (tried 2026-11-01), so
-   nothing would stand behind the agent's word. Not tried: this session
-   in Manual, and its count of prompts — the test bed's setup sessions
-   ran in Accept edits, where a write into a folder added to the session
-   passed with no prompt until the ask rule of step 3 was in (seen
-   2026-11-01). → *What the standard does with no setting*; *Other
-   things seen*.
-3. **Say what will happen**, and offer the two ways: leave it to the
-   agent, or point by point (`guide.md` § 4).
-4. **The tools and the GitHub login**: `git`, `gh`, `gh auth login` —
+   nothing would stand behind the agent's word. Not tried in Manual:
+   the test bed's setup sessions ran in Accept edits. → *What the
+   standard does with no setting*; *Other things seen*.
+3. **The tools and the GitHub login**: `git`, `gh`, `gh auth login` —
    run by the user in their own terminal, one command at a time, the
    agent giving each. Git's credential comes through `gh`.
-5. **This guide, as a local copy** in the setup folder — a clone of the
+4. **This guide, as a local copy** inside that folder — a clone of the
    public repository, or its ZIP downloaded in the browser and unzipped:
    the templates' text matters to the letter.
-6. **`~/.claude` added to the session by the user** (in the app: add a
+5. **`~/.claude` added to the session by the user** (in the app: add a
    folder to the session). The agent says first which files it will read
    there — the user's settings, memo and rules files, if any — reads
    them, and says what they already set.
@@ -121,16 +110,14 @@ A repository nested in the vault needs no value: step 5.
 
 The agent cannot turn these; the user does, the agent naming each and
 what it is for. Neither is needed for the settings of step 3 to hold:
-they bind in every mode. Names and defaults move with each version: the
-agent goes by the docs for the user's version and by what the user's
-screen shows.
+they bind in every mode.
 
 | where | set | reason |
 |---|---|---|
-| the mode selector, for each folder | **Auto** for the folders the user works in | Rules are judged first; reads and edits inside the folder pass; the rest goes to Claude Code's classifier, so prompts are rare and still read (`guide.md` § 2.10, § 3.2). Its cost: the classifier is a model and can be wrong — what must hold is in the settings of step 3, which bind in every mode. |
+| the mode selector, for each folder | **Auto** for the folders the user works in | Rules are judged first; reads and edits inside the folder pass; the rest goes to Claude Code's classifier, so prompts are rare and still read (`guide.md` § 2.10, § 3.2). Its cost: the classifier is a model and can be wrong — what must hold is in the settings of step 3, which bind in every mode. The app keeps a chosen mode for each folder (the docs): the selector is looked at before a session's first message. |
 | the app's settings, Claude Code | "Allow bypass permissions mode": off (recommended) | Bypass switches the prompts and the classifier off; it is meant for isolated machines. Turned off on the test bed (2026-11-02). |
 
-For this setup session the selector is as step 1 says. Nothing else in
+For the first session the selector is as step 1 says. Nothing else in
 the app's screens is part of this set.
 
 ## 3. The settings: `~/.claude/settings.json`
@@ -158,7 +145,9 @@ template's, the other keys of the user's file as they are.
 `sudo`, an installer, `curl`, `ssh`, or another agent's CLI: such a line
 stops one spelling of an act, and the sandbox bounds what any command
 writes and reaches whatever its name (`guide.md` § 2.2). No hooks.
-→ *Deny rules by command name*.
+→ *Deny rules by command name*. And no line for a vault: the four
+exclusions carry a vault's pull and push, and a routine that needs
+more is an entry of step 7, when the need is met.
 
 **Writing it.**
 
@@ -176,8 +165,6 @@ writes and reaches whatever its name (`guide.md` § 2.2). No hooks.
 4. The agent reads the file back and compares it with what it showed.
    If the file is not valid JSON, its deny rules and its blocks may not
    be in force at all.
-5. The check of step 6 runs in a new session, whatever a session
-   already open has taken up.
 
 Tried: the user's paste of the whole file, more than once, each read
 back and compared. Not tried in this order: on the test bed the write
@@ -215,27 +202,15 @@ Neither is a settings file: the agent writes both, in the folder the
 user added, each at the ask rule's prompt. They take effect in a new
 session.
 
-## 5. A repository nested in a vault
+## 5. The check, and the end of the first procedure
 
-Nothing is added for each repository. The two `Edit` denies and the
-three `denyWrite` entries of step 3 are patterns that hold at any depth:
-a repository cloned into the vault later is covered with no new line
-(tried, one repository nested in another).
-
-What they leave: skills in a nested `.claude`; hook programs a vault
-keeps in ordinary folders; a submodule or a worktree (not tried); a push
-of the nested repository by the agent after a `cd` — an instruction and
-the classifier stand against it, not a setting, and a repository an
-agent must never push is protected at its remote. → *A repository
-nested in the opened folder*.
-
-## 6. The check
-
-In a new session, in Auto, opened by the user — a session started from
-the setup session would inherit its added folder — on another folder
-than the copy of this guide: a vault once it is cloned, or any folder of
-the user's. `~/.claude` is not added. The agent tries each and shows the
-message; a refusal counts by its message (`guide.md` § 4 step 7).
+Of what was set, in a new session; the first keeps the lead and judges
+what the user brings back (`guide.md` § 4 step 7). The new session is
+opened by the user — one started from the first would inherit its
+added folder — in Auto, on the setup folder: the guide's copy lies
+inside it, so the copy's `AGENTS.md` is not read at the start.
+`~/.claude` is not added. The agent there tries each and shows the
+message; a refusal counts by its message.
 
 | what | the pass |
 |---|---|
@@ -243,38 +218,61 @@ message; a refusal counts by its message (`guide.md` § 4 step 7).
 | a Write of a new file outside the folder | refused, no prompt |
 | `touch` on a path outside the folder | "Operation not permitted", no prompt — the sandbox; the session is told not to retry it outside |
 | `security list-keychains` | refused by the deny rule |
-| an Edit of `.git/config`, and a Write of a new file in `.git/hooks/` — in a nested repository too, where there is one | refused, no prompt: "File is in a directory that is denied by your permission settings" |
-| in a nested repository, `touch .claude/settings.json` | "Operation not permitted" |
+| where the guide's copy is a clone: an Edit of its `.git/config`, and a Write of a new file in its `.git/hooks/` | refused, no prompt: "File is in a directory that is denied by your permission settings" |
+| `touch .claude/settings.json` in a subfolder | "Operation not permitted" |
 | the session asked to start another session elsewhere | a permission prompt; the user refuses it |
-| the session asked which instructions it has | the memo's and the rules file's lines |
-| the vault's routine: its pull, its script, its push | each passes |
+| the session asked which instructions it has | the memo's and the rules file's lines, where they were taken |
 
 Then one more, for the ask rule: in a session in Auto to which the user
 has added `~/.claude`, a Write of a new file there raises a permission
 prompt, which the user refuses — the prompt is the pass.
 
-Anything not refused is said to the user, who decides.
+Anything not refused is said to the user, who decides. Tried 2026-11-20,
+on a folder that held this guide's clone, in a session started from
+the one that set the files (so with its added folder); not tried as it
+stands here.
 
-## 7. The clone, and the record
+**The end.** The record — what was set, each value with its reason,
+and that the set was taken as proposed or what was changed — is kept
+in the setup folder, beside the guide's copy. The second sheet's
+address is given as text to copy (`guide.md` § 4).
 
-- **The vault is cloned after the harness, by the user's own command**
-  in their terminal, and first opened then, in Auto. A clone by a
-  sandboxed command would need a host and a credential the sandbox hides
-  (inferred from what a push met; not tried).
-- **Read the vault's project settings before trusting the folder**
-  (`guide.md` § 2.8): its allow rules and hooks take effect on the
-  user's machine.
-- **The record**: what was set, each value with its reason, and that the
-  set was taken as proposed or what was changed — kept where the vault's
-  procedure says, outside the vault.
+## 6. Then, for a vault
 
-## 8. Later: the entry for each occasion
+The vault's installation is the vault's own procedure
+(`vault-procedures.md` § 1). What this route has for it:
+
+- **No credential is made for the agent.** A pull, a push and `gh` run
+  outside the sandbox with the login the user made in their own
+  terminal (step 3, the exclusions).
+- **The vault is cloned by the user's own command** in their terminal.
+  A clone by a sandboxed command would need a host and a credential
+  the sandbox hides (inferred from what a push met; not tried).
+- **The vault's project settings are read before the folder is
+  trusted** (`guide.md` § 2.8): its allow rules and hooks take effect
+  on the user's machine. Then Claude Code is opened on the folder,
+  the selector on Auto (step 2).
+- **What the user will meet in ordinary work**, said before the
+  vault's first act: prompts are few, and one that is not understood
+  is refused; a folder outside the vault is added by the user, each
+  time; a settings change is pasted by the user's hand; a `gh` call
+  with a filter may prompt even in Auto (→ *The three options*).
+- **The vault's own start of session** — its pull, its scripts, its
+  push — passed on the test bed, daily, in several vaults. A pull or
+  a push that fails as if inside the sandbox: → *Open reports*.
+- **A repository added inside the vault later needs no line**: the
+  patterns of step 3 hold at any depth (tried, one repository nested
+  in another). What they leave: → *A repository nested in the opened
+  folder*.
+
+## 7. Later: the entry for each occasion
 
 A change is made by `guide.md` § 4, "Later": the smallest entry that
 answers what arose, or none. It is made in a session on the setup
-folder, with `~/.claude` added by the user — the agent may write the
-memo and the rules file there, and the rules file tells every other
-session not to. A settings change is pasted by the user (step 3).
+folder, in Manual, with `~/.claude` added by the user — the agent may
+write the memo and the rules file there, and the rules file tells
+every other session not to. A settings change is pasted by the user
+(step 3).
 
 | what arose | the entry | what else it opens |
 |---|---|---|
@@ -286,8 +284,8 @@ session not to. A settings change is pasted by the user (step 3).
 | a folder outside is needed | no entry: the user adds it to that session | subagents and sessions started from it inherit the folder |
 | the same prompt keeps coming | look first at what it is; "Yes, and don't ask again" writes an allow line into the folder's `.claude/settings.local.json`, the command verbatim — read that file from time to time | whatever the line names, unasked |
 | a named command should never run | a `Bash(<name>:*)` deny, knowing it stops one spelling | — |
-| a repository is added inside a vault | no entry (step 5) | — |
-| Claude Code was updated | no entry: the check of step 6 again | — |
+| a repository is added inside a vault | no entry (step 6) | — |
+| Claude Code was updated | no entry: the check of step 5 again | — |
 
 A line is taken out the same way when its reason is gone.
 → *Other things seen*.

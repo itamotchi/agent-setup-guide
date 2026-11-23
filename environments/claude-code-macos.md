@@ -300,6 +300,27 @@ Read 2026-11-20 unless marked.
   2026-11; the file is git-ignored by default). Read that file from
   time to time.
 
+## Open reports
+
+Read 2026-11-23 in the tool's issue tracker
+(`github.com/anthropics/claude-code`), the newest version then being
+v2.1.330; none was tried here, and none carried a maintainer's reply.
+
+- **An excluded command still runs sandboxed** (#89931, opened
+  2026-08-26, open, marked a regression 2026-11-20; #95813, open): on
+  macOS, with `sandbox.excludedCommands` naming `git` and `gh`, `gh`
+  failed on TLS and a push over SSH broke, as inside the sandbox;
+  reported from v2.1.232 to v2.1.294. Not seen on the Mac of this
+  note, where the four exclusions carried a push and a pull daily. The
+  reports' own way round was the retry outside the sandbox, which
+  raises a prompt.
+- **The read block prompts for some `gh` calls in Auto** (#91479,
+  open; v2.1.258 to v2.1.312): a `--jq` filter — "names a path that is
+  computed at run time". Seen here too ("The three options").
+- **The read block does not count folders added in a project's or a
+  local settings file** (#92582, open): a folder the user adds to the
+  session, or names in the user settings, is counted.
+
 ## Not known here
 
 Whether a program started through an excluded command (a `gh` alias, a
