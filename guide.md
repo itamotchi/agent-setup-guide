@@ -540,8 +540,8 @@ not post it itself.
   `model/windows/` for native Windows): the user settings fragment, a
   rules file, a user memo with placeholders (`model/user-memo.md`). One
   user's result of the test of § 2; one way to set it, not a
-  requirement. For Codex the configuration's text is in
-  `setup/codex-macos.md` itself.
+  requirement. For Codex the worked route sets no file
+  (`setup/codex-macos.md`).
 - `vault-procedures.md` — for a vault's agent: how a vault writes its
   own procedure for its users so that it holds for any environment —
   what the vault states of its needs, in no tool's terms, how a user

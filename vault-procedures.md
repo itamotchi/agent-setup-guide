@@ -81,7 +81,7 @@ is read again at a later change (§ 2).
   `.agents/`). A harness may keep such a folder read-only to the agent,
   and a pull that brings a change there can then fail half-way: the
   vault says how its routine pulls in that case (seen under one tool:
-  `setup/codex-macos.md`, step 3);
+  `environments/codex.md`, "A tracked file under a read-only folder");
 - the vault's repository and the folder it is cloned into; where the
   record is kept — outside the vault;
 - anything it asks a user to add to their settings beyond what the
@@ -380,17 +380,18 @@ any other tool, the test below.
 - **Claude Code on native Windows.** No sandbox: the two deny rules bind
   the file tools, and a command can still write these files (read, not
   tried).
-- **Codex with a permission profile** (the ChatGPT desktop app on
-  macOS). Four literal `read` lines for each nested repository — five
-  where the user keeps `.claude` read-only (`setup/codex-macos.md`,
-  steps 3 and 4) — written before it is cloned. No pattern can stand in for them: a `read` glob
-  is rejected (read), and a `deny` glob with `**` stops the agent from
-  removing or moving any folder in the vault (tried). A repository with
-  no lines is open, with no sign.
-- **Codex under a preset, with no profile.** Its own protection is at
-  the top only (the source, read; not tried under a preset), and a
-  preset has no place for a line: a nested repository is open. Say so to
-  the user.
+- **Codex in the ChatGPT desktop app on macOS, on its own permission
+  choices** (the route of `setup/codex-macos.md` since 2026-11-23).
+  Its own protection is at the top only (the source, read; not tried
+  under a preset), and a preset has no place for a line: a nested
+  repository is open. Say so to the user.
+- **Codex with a permission profile** — a Beta feature, the route
+  until 2026-11-23 and no longer (`environments/codex.md`, "A profile
+  that bounds reads gave way"). Under it, four literal `read` lines for
+  each nested repository, written before it is cloned; no pattern can
+  stand in for them: a `read` glob is rejected (read), and a `deny`
+  glob with `**` stops the agent from removing or moving any folder in
+  the vault (tried). A repository with no lines is open, with no sign.
 - **Another tool.** Run the test below; do not assume.
 
 ### The test at depth

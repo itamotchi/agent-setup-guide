@@ -2,15 +2,20 @@
 
 What has been found here about Codex, dated and sourced: the docs as
 read on 2026-11-09 and 2026-11-20, a vault's setup on Windows
-(2026-11-09), trials in the ChatGPT desktop app on macOS (2026-11-19,
-2026-11-20). What was tried and what was only read — in the docs or in
-Codex's source — is marked. This note is the evidence: the set proposed
-for the desktop app on macOS, in order and each value with its reason,
-is `setup/codex-macos.md`, which points here by section. **Codex's own
-protection of Git's files and of its project settings, and the profile
-tried here, hold at the top of the opened folder only**; a repository
-nested below it needs lines of its own ("A repository nested in the
-opened folder"). Which settings and guardrails a user has is theirs to
+(2026-11-09), trials in the ChatGPT desktop app on macOS (2026-11-19
+to 2026-11-23). What was tried and what was only read — in the docs or
+in Codex's source — is marked. This note is the evidence: the route
+for the desktop app on macOS is `setup/codex-macos.md`, which points
+here by section. **Since 2026-11-23 that route is the app as it
+starts, on Ask for approval, with nothing set** ("The app as it
+starts: Ask for approval"). **The sections on a permission profile —
+"A permission profile with the routine inside", "A repository nested
+in the opened folder", "A tracked file under a read-only folder", "A
+setup followed from its first step" — are the record of the route
+before it**, kept for what they found; why it was left is in "A
+profile that bounds reads gave way". Codex's own protection of Git's
+files and of its project settings holds at the top of the opened
+folder only. Which settings and guardrails a user has is theirs to
 decide with their agent (`guide.md`). Where a note and the docs differ,
 the docs win; Codex changes with each version.
 
@@ -319,8 +324,9 @@ The same Mac and app. A profile written into `config.toml` with the app
 quit, then checked in new chats on the vault: Codex ran set commands and
 reported their raw output. The syntax is from the docs' Permissions page
 (marked Beta; `learn.chatgpt.com/docs/permissions`, read 2026-11-20).
-The configuration itself, each line with its reason:
-`setup/codex-macos.md`, step 3.
+The configuration itself, each line with its reason, was step 3 of
+`setup/codex-macos.md` as it stood before 2026-11-23 (this
+repository's history).
 
 - **A fence with no folder named.** `:workspace_roots` stands for the
   session's folders (the folder opened, and the chat's
@@ -557,8 +563,11 @@ rights: Git's `config` (it can name commands — `core.fsmonitor`,
 
 Raised by a vault's agent writing its procedure: the vault tracks files
 under `.claude/` (a settings file, skills), the profile kept `.claude`
-read-only, and a session's routine pulls at its start. What to do about
-it: `setup/codex-macos.md`, step 3.
+read-only, and a session's routine pulls at its start. What was done
+about it under the profile — a pull in three steps — was in step 3 of
+`setup/codex-macos.md` before 2026-11-23 (this repository's history).
+On the present route a pull the user allows runs outside the sandbox,
+where these folders are not read-only (inferred; not tried).
 
 - **The pull does not fail cleanly (tried, not under Codex).** Git
   2.54.0 (Apple), a throwaway origin and clone; tracked files in two
@@ -770,6 +779,169 @@ agent and not tried:
   `/Applications/Codex.app/Contents/Resources/codex`.
 - No command sets a key of `config.toml` in general (`codex features`
   and `codex mcp` write their own).
+
+## A profile that bounds reads gave way (the desktop app on macOS, 2026-11-23)
+
+The same Mac, the app 26.1117.41037 (its bundled Codex CLI 0.171.0).
+A fourth run of the setup from its first step, in two sheets, under
+the profile of "A permission profile with the routine inside": the
+harness's sheet to the end of its check, then a vault's installation —
+the token, the clone, the check on the vault — each to its end. Read
+afterwards, the configuration held the set whole. Then, in ordinary
+use:
+
+- **A chat opened on a repository lost the opened folder at its second
+  message (seen).** On a throwaway repository with no instruction
+  file: at the first message the working folder and the writable roots
+  were the repository; at the second, the working folder and the only
+  root listed were the chat's own folder under
+  `~/.codex/visualizations/`, and a file "made in the working folder"
+  landed there. Nothing was shown: the agent went on in another
+  folder. The profile names no folder — it reaches the opened one
+  through `:workspace_roots` — so its bounds moved with the roots.
+- **With an `AGENTS.md` in the folder the second message stopped**:
+  `failed to load AGENTS.md instructions for environment `local`:
+  Operation not permitted (os error 1)` — twice, in two new chats on
+  the vault. Read in Codex's source (`codex-rs/core/src/agents_md.rs`,
+  main branch): where a profile does not give read access to the whole
+  disk, the instruction file is read through the sandbox and any error
+  but "not found" ends the turn; under the app's presets the same
+  error is only logged. So the stop is one that only a profile with
+  restricted reads can have.
+- **A chat with no folder chosen kept its roots** at its second
+  message. Such a chat is given the whole of `~/Documents/Codex` as a
+  workspace root beside its own folder, so that under the set's
+  `"." = "write"` chats of this kind could write each other's folders;
+  the setup agent added a `deny` on that folder by itself, and the
+  chat's own folder still took a write.
+- **A large pasted text was kept by the app as an attachment under
+  `~/.codex/attachments/`**, which the profile closes to the agent:
+  the text of the second sheet, pasted, became one object in the
+  composer and the agent answered that it could not open the attached
+  file; expanded into text by hand, it went through.
+- **Not explained**: the chat that carried the vault's installation,
+  begun on the folder while it was still empty, kept its folder to its
+  end.
+
+Reported in the tool's issue tracker (`openai/codex`; open, no
+maintainer's comment seen; read through a research summary on
+2026-11-23, not checked here): the loss of a project's root at a
+follow-up turn with this error on the desktop app (#59438); the
+instruction file's read failing closed under a profile since 0.149
+(#40937); under `:root = "deny"`, every command refused after the
+first in a chat with no project (#45953), a helper failing where the
+profile cannot read Codex's own binary (#41493), a wrong root when a
+chat starts in a subfolder (#54110), every sandboxed command aborting
+where `:minimal` is not readable (#63214). The docs, re-read the same
+day: permission profiles are Beta ("under active development and may
+change"); the network proxy the domain list rests on
+(`features.network_proxy`) is experimental and off by default.
+
+What it shows: the profile was built on the part of Codex its vendor
+marks unsettled, and an update of the app took a chat's folder from
+under it. No way round was tried.
+
+## What users of the app are found doing (read, 2026-11-23)
+
+From a research summary made for this guide of public accounts —
+vendor pages, guides, forum threads, published configuration files,
+the tool's issue tracker; read on 2026-11-23, nothing tried, not
+checked here; some sources could not be reached, and first-person
+accounts of the desktop app over weeks were few.
+
+- **Ask for approval**: what the vendor's page gives as the start
+  ("For most work, start with Ask for approval",
+  `learn.chatgpt.com/codex/permission-modes`) and what the guides for
+  newcomers found give; no account was found of someone who stays on
+  it over time.
+- **Approve for me**: by the vendor's own account most of its internal
+  desktop use, with the reviewer described as "not a security
+  guarantee"; a handful of users' accounts.
+- **Full access**: recommended by no one for daily use, kept for a
+  disposable container or virtual machine.
+- **A configuration of one's own**: a minority. What is published is
+  `sandbox_mode = "workspace-write"` with `approval_policy =
+  "on-request"`, the sandbox's network sometimes switched on so that
+  `gh` and a push work. Of a profile that bounds reads: one person's
+  test, and otherwise fault reports.
+- **Git in the app**: the accounts found of a routine that works are
+  of Git run by the user's own hand in a terminal; none of the app's
+  own commit and push controls, none of a team, none of the app on a
+  notes or knowledge-base repository with a stated permission choice.
+- **Teams**: the vendor's admin guide (requirements a workspace's
+  admin can fix: the permission choices allowed, who may answer
+  approvals, profiles); no team's own account of running it.
+
+The route of `setup/codex-macos.md` was chosen among these, not
+derived: of the two choices found in use, Ask for approval is the one
+under which leaving the folder is not a model's decision.
+
+## The app as it starts: Ask for approval (the desktop app on macOS, 2026-11-23)
+
+The same Mac, the app 26.1117.41037, a Business workspace. The user's
+`~/.codex` and the folder of the earlier trials' token were set aside
+by a rename with the app quit; the app was started again. Nothing was
+set afterwards. The user ran each act and reported the screen and the
+agent's raw output.
+
+- **The choice a new install starts on.** A new Codex chat showed Ask
+  for approval under the composer (the Japanese interface: 「承認を
+  依頼」 there, 「承認を求める」 in the menu); the menu listed Ask for
+  approval, Approve for me and Full access, and no "Custom". A new
+  project made afterwards started on Ask for approval too.
+- **Opening a folder.** The user made a new project and chose the
+  folder as its "source folder" (「ソースフォルダ」).
+- **A throwaway repository, first message.** `pwd`: the repository. A
+  new file in it: made, no prompt. `git add` and `git commit`: inside
+  the sandbox `fatal: Unable to create '…/.git/index.lock': Operation
+  not permitted`; then one prompt, in the agent's words, asking to
+  allow writing to `.git` and to run the two again; allowed once, the
+  commit was made.
+- **Second message, a write outside.** `pwd`: still the repository. A
+  new file in the folder above it: a prompt asking whether to allow a
+  write outside the workspace, naming the path, with the buttons
+  refuse (「拒否」) and allow once; refused, the agent reported
+  `exec_command failed: CreateProcess { message: "Rejected(\"rejected
+  by user\")" }`, and the user, looking in their own terminal, found
+  no such file. The request came before any attempt inside the
+  sandbox.
+- **A clone of a vault, the start of a session.** Asked to do the
+  vault's start-of-session steps without committing or pushing, the
+  agent raised two prompts: for `git pull --ff-only` (`.git/FETCH_HEAD`
+  not writable inside) and for `gh api` on the repository's open
+  issues (no connection inside). Each was allowed once and passed. The
+  vault's script that builds its index ran with no prompt.
+- **The prompt.** A sentence written by the agent ("As the vault's
+  start procedure, allow writing to .git/FETCH_HEAD and run git pull
+  --ff-only?"), the command under it, and two buttons: refuse (Esc)
+  and allow once (「一度だけ許可」, Return). An arrow beside the second
+  opens two choices, allow once and "allow similar commands"
+  (「類似コマンドを許可」), the latter explained as allowing, in this
+  conversation, commands that begin with a prefix the app names — `git
+  pull --ff-only` for the pull, `gh api` for the reading of issues.
+  Not pressed.
+- **The login.** `gh auth status`, run by the agent inside the
+  sandbox with no prompt: "Failed to log in to github.com account …
+  (default)", "The token in default is invalid." Asked to be run
+  outside it, with one prompt: logged in to the user's account
+  "(keyring)", an OAuth token (`gho_…`) with the scopes `gist`,
+  `read:org`, `repo`, `workflow` — the Mac's own login from `gh auth
+  login`, not a token made for the agent. Git's credential helper, by
+  `git config --show-origin`: `osxkeychain`, from the Command Line
+  Tools' own configuration.
+- **A push.** `git push --dry-run`: one prompt, saying that inside the
+  sandbox the name `github.com` could not be resolved; inside, `Could
+  not resolve host: github.com`; outside, `Everything up-to-date`.
+- **Later messages.** The chat on the vault, whose folder holds an
+  `AGENTS.md`, answered its second, third and fourth messages — the
+  case that stopped under the profile.
+
+So: a session with a start, a commit and a push is four prompts; a
+write outside the folder is one more, and refusing it leaves nothing
+written. Not tried: a real push; "allow similar commands"; a nested
+repository under this form; the General switch for Full access off in
+this state. The open reports for this version of prompts that do not
+appear (#32563, #63187) did not show here.
 
 ## From a research report made for this guide (2026-11-09)
 
