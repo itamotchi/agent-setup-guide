@@ -226,10 +226,14 @@ to add.
     it, each in its own way (`environments/`). So try the protected
     files at depth; do not assume. Whether the gap closes by a pattern
     that holds at any depth or needs lines for each repository differs
-    by tool; where it is per repository, the lines come before the
-    clone, and a repository with no lines is open with no sign. A vault
-    that holds such repositories keeps a procedure for adding one;
-    `vault-procedures.md` is the base for writing it.
+    by tool; where it is per repository, the lines of a repository come
+    before its clone, and a repository with no lines is open with no
+    sign. Such repositories are added one at a time, by each user as
+    they need them — a user's clone of a vault starts with none, and
+    the vault's list grows — so their lines are no part of a first
+    setup (§ 4): a vault that holds such repositories keeps a procedure
+    of its own for adding one; `vault-procedures.md` is the base for
+    writing it.
 
 ## 3. What the user decides
 
@@ -351,6 +355,16 @@ tool has — in its present docs, and by asking what the user's screen
 shows — judges it by the test of § 2, and proposes it with its reason.
 That is the base, and nothing more is required for it.
 
+**What the harness leaves working.** The tool goes on doing what it
+does by itself — a built-in browser, a web search. The harness is the
+user's and holds in everything they do with the tool, not in one
+vault's work; so where a bound the user sets would take such a
+function away, the lines that keep it are part of the bound, and they
+are not weighed against what a vault's routine uses. Nothing said this
+before, and an agent given one vault's routine as what the settings
+were for left out the lines its tool's built-in browser needs: the
+browser no longer started (seen in a setup run from this guide).
+
 **What is already known.** Where `setup/` has a file for the user's
 tool and platform, the agent reads it first: a route that worked, what
 was set at each step and why, the traps met on the way — some of them
@@ -365,8 +379,12 @@ puts what it found into the report (§ 5), so that the next user of that
 environment has something to consult.
 
 **The order.** The application's own settings; then the files; then the
-lines for each repository nested in a vault, where the tool needs them;
-then the check.
+check. Lines for a repository nested in a vault are not among them: a
+user's clone of a vault starts with no repository inside it, and each
+user adds the ones they need, later, by the vault's own procedure for
+adding one — where the tool needs lines for each repository, they are
+written then, before that repository is cloned (§ 2.15). What a tool
+holds at any depth by a pattern is part of the files.
 
 **Short, and nothing forced.** A setup that takes long, or that reads as
 a list of orders, is put off or resented, and then nothing is set. So
@@ -426,10 +444,10 @@ leave any of it. The harness is the user's (§ 0).
    is said to be a step at every start, since nothing keeps it.
 6. **The files.** Draft each file; show it whole; write it on the
    user's yes, or have the user apply it where the tool refuses the
-   agent; read it back and compare. Then, where the tool needs lines
-   for each repository nested in a vault (§ 2.15), those — before the
-   repository is cloned. Whether a session already open takes a change
-   up differs by tool: after a change, the work goes on in a new one.
+   agent; read it back and compare. No line for a repository nested in
+   a vault is written now ("The order"). Whether a session already
+   open takes a change up differs by tool: after a change, the work
+   goes on in a new one.
 7. **Check, in a new session**, so that the settings are tried as they
    will be used — not one in which this guide's `AGENTS.md` is read at
    the start, which would lead it back into the setup. The session
@@ -508,9 +526,9 @@ not post it itself.
   `codex-macos.md` (Codex in the ChatGPT desktop app on macOS),
   `claude-code-macos.md` (Claude Code on macOS). Each says what it sets
   and how far it was tried, then the steps as they went — the
-  application's own settings, the files, the lines for a nested
-  repository, the check — each value with its reason, and the entries
-  that answered a later change. To be consulted and checked against the
+  application's own settings, the files, the check — each value with
+  its reason, the lines for a repository added inside a vault later,
+  and the entries that answered a later change. To be consulted and checked against the
   present tool, not applied unread (§ 4). There is none for Claude Code
   on native Windows — never run on a machine; its note and template
   stay as what was read in the docs — nor for any other environment:

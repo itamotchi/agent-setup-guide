@@ -72,9 +72,10 @@ is read again at a later change (§ 2).
   user can make for an agent (`environments/github.md`); a vault whose
   users are collaborators on another person's repository says which way
   it offers them;
-- the git repositories nested in the vault, each by its path from the
-  vault's top, and for each whether the agent or the user pulls and
-  pushes it (§ 3);
+- whether the vault holds git repositories nested in it. They are not
+  listed here and nothing is written for them at the first setup: a
+  user's clone of the vault starts with none, each user adds the ones
+  they need, and the list grows — a procedure of its own (§ 3);
 - whether the vault's repository tracks files under a folder that an
   agent tool loads its own settings from (`.claude/`, `.codex/`,
   `.agents/`). A harness may keep such a folder read-only to the agent,
@@ -106,9 +107,9 @@ user to it.
   any line: what the vault advises is offered;
 - that the agent leads the user, and that a session which leads is
   never missing (`guide.md` § 4, "The agent leads");
-- the order — the application's own settings, the files, the lines for
-  each nested repository where the tool needs them, the check — and the
-  vault cloned only after the harness;
+- the order — the application's own settings, the files, the check —
+  and the vault cloned only after the harness; no line for a
+  repository nested in the vault (§ 3);
 - the choice offered first, to leave it to the agent or to go point by
   point, and what still holds when it is left (`guide.md` § 4 step 4);
 - the split between what is needed and what is advice, and the tone: a
@@ -153,11 +154,19 @@ machine.
    `guide.md` § 4 for the tool it is — the application's own settings,
    the files, the check — reading, where there is one, the file in
    `setup/` for its environment. What of the vault's needs goes into
-   the harness's own files — the routine's programs and hosts, the
-   lines for each repository nested in the vault — is in this sheet's
-   text, so that a settings file is written once, by a session that
-   can still read it back; a session inside the bounds may not be able
-   to read its own settings.
+   the harness's own files — the routine's programs and hosts — is in
+   this sheet's text, so that a settings file is written by a session
+   that can still read it back; a session inside the bounds may not be
+   able to read its own settings. The repositories nested in the vault
+   are not in it: none is on the machine yet, and each is added later
+   by its own procedure (§ 3). The vault's needs are what is added for
+   the vault. They are not the measure of the harness, which is the
+   user's and holds in everything they do with the tool: a line that
+   keeps a function of the tool working is not left out because the
+   vault's routine does not use it (`guide.md` § 4, "What the harness
+   leaves working"; seen 2026-11-23: an agent given a vault's routine
+   left out the lines for the tool's built-in browser, and the browser
+   no longer started).
 4. **The check is part of this sheet.** Before it ends, what should be
    refused — a write outside the folder a session is opened on, a
    connection to a host that is not allowed — is seen refused, and the
@@ -221,8 +230,18 @@ that run changed two things, now above: the first sheet's agent named
 the second by its title alone, and the user did not know where to go;
 and the refusals had been left to the start of the second sheet, where
 the session that finds a fault cannot mend it and no one leads between
-the two. In the present form the entry has not yet been run; the files
-in `setup/` mark what is untried on their routes.
+the two. The settings that run left were then tried, and a third thing
+followed: measured by the vault's routine alone, they had lost a
+function of the tool — nothing had said that the tool's own functions
+are kept, and the vault's needs are not the measure of the harness
+(`guide.md` § 4, "What the harness leaves working"). And the first
+sheet had carried the
+lines of every repository nested in the vault, none of them on the
+machine: a user's clone starts with none and each user adds what they
+need, so they are left to the procedure for adding one (§ 3), which is
+apart from the first setup. In the present form the entry has not
+yet been run; the files in `setup/` mark what is untried on their
+routes.
 
 ### The text to paste
 
@@ -262,7 +281,8 @@ It holds:
 - where the detail is: this guide's public address. The text names no
   tool: the agent that receives it works for the tool it is;
 - sheet 1: the vault's needs that go into the harness (above), as plain
-  facts, in no tool's terms; that the set the agent proposes may be
+  facts, in no tool's terms — and that they are what the vault adds,
+  not the measure of the set; that the set the agent proposes may be
   taken as it stands or gone through point by point, and that any
   value may be changed by the user;
 - sheet 1, at its end: the second sheet's title and address, for the
@@ -307,6 +327,19 @@ and says so at its top. For that it holds:
 A vault may hold another git repository in a subfolder — a site's code,
 say — so that the vault's work can read and edit it inside the same
 bounds as the vault.
+
+**A procedure of its own, apart from the first setup.** Such
+repositories grow in number, and a user's clone of the vault starts
+with none: each user adds the ones they need, when they need them. So
+the first setup (§ 1) carries nothing for them — no path, no line —
+and adding one is a document of the vault's that is complete by
+itself: a user who has a harness and the vault goes through it for one
+repository, from the first act to the check, with no reference to how
+the harness was first set up. The agent leads here as well (`guide.md`
+§ 4, "The agent leads"): in a session on the vault it reads the
+procedure, asks for the user's hand one act at a time — the lines in
+the settings where the tool leaves them to the user, the clone — and
+judges the check.
 
 ### Why the harness is concerned
 
@@ -381,7 +414,8 @@ repository that exists before its lines is open until they are written.
 
 1. **The place.** Where in the vault the repository goes is the vault's
    to say; it has no meaning to the harness. The procedure announces
-   the repository's path from the vault's top.
+   the repository's path from the vault's top, and whether the agent
+   or the user pulls and pushes it (5, below).
 2. **The vault's own Git ignores it.** An entry in the vault's
    `.gitignore`, committed with the vault, before the clone. Unignored,
    `git add` in the vault records the nested repository as a link, and

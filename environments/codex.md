@@ -692,12 +692,46 @@ default is medium):
 - The `config.toml` it left parsed, and held the profile and four
   lines for each of eleven nested repositories as the sheet gave them;
   the app's own keys were kept; the agent kept a backup beside it.
-- The agent departed from the tried set in two places: no lines for
-  the built-in browser (the OpenSSL read, the socket folder's read and
-  allow), and `GIT_CONFIG_GLOBAL` in `[shell_environment_policy.set]`,
-  naming a Git configuration file in the token's folder, in place of
-  the `GIT_CONFIG_COUNT` / `KEY` / `VALUE` pairs. Neither is tried
-  here.
+- The agent departed from the set of `setup/codex-macos.md` in two
+  places, and said neither to the user before the file was saved; its
+  record of the setup had a line for each. What each brought was then
+  tried in a new chat under those settings, and the agent was asked
+  why:
+  - **No lines for the built-in browser** (the OpenSSL read, the
+    socket folder's read and its `unix_sockets` allow). Tried: the
+    built-in browser did not start — `node_repl kernel exited
+    unexpectedly`, its diagnostics showing `OpenSSL configuration
+    error … Operation not permitted … fopen(/System/Library/OpenSSL//openssl.cnf)`;
+    a web search worked. The agent's account: the vault's routine, as
+    it was given, had no browser in it, so it took the lines for an
+    added permission and left them out; it did not try the browser.
+    They are not the routine's: they put back a function of the app
+    that the profile's own denies take away, in every chat.
+  - **`GIT_CONFIG_GLOBAL` in place of the `GIT_CONFIG_COUNT` pairs**:
+    `[shell_environment_policy.set]` named a file in the token's
+    folder, holding `[include] path = ~/.gitconfig` and the two helper
+    lines for `https://github.com`. Tried, inside the profile: Git
+    read the name, the mail address and `core.excludesfile` from
+    `~/.gitconfig` and the helper from that file; with a member's
+    fine-grained token stored, `gh auth status` read it and `git
+    ls-remote` on the private repository passed. Not tried: a commit,
+    a pull, a push. The agent's account: the app already passes
+    `GIT_CONFIG_COUNT` and pairs of its own to the commands it runs
+    (ten, for ChatGPT's Sites), and the set's `GIT_CONFIG_COUNT = "2"`
+    would have replaced them. Seen in the same chat: Git listed
+    settings of scope `command` that the app had handed it — an empty
+    helper, a helper `codex git-credential` and `usehttppath` for
+    `https://chatgpt.com/backend-api/codex/sites/git/` and a staging
+    host. Not tried: which side is replaced where both set those
+    variables. Tried outside the profile (Git 2.54): where the named
+    file is missing Git says nothing and no longer reads
+    `~/.gitconfig` either — a commit then stops with "Author identity
+    unknown".
+- The lines for the vault's eleven nested repositories were written at
+  the first setup, as the entry then had it, with none of them on the
+  machine. A user's clone of that vault starts with no repository
+  inside it and each user adds the ones they need: the lines of one
+  are now written when it is added (`vault-procedures.md` § 3).
 - A fresh `config.toml` written by the app enables, among its plugins,
   computer use and the browser, and gives the bundled CLI's place as
   `/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex`.

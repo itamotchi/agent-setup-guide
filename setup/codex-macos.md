@@ -53,10 +53,11 @@ address passed (step 7). What the runs showed of the route itself — a
 setup folder the user did not follow, the leading lost as the work
 moved from chat to chat — changed the entry: a setup is now two
 procedures (`guide.md` § 4, "The agent leads" and "The harness, then
-the vault"; `vault-procedures.md` § 1). Of the steps below, 1 to 4, 6
+the vault"; `vault-procedures.md` § 1). Of the steps below, 1 to 3, 6
 and the first table of step 7 are the harness; steps 5 and 8 and the
-second table are a vault's installation. A step a run corrected says
-so.
+second table are a vault's installation; step 4 is neither — it is
+done later, each time the user adds a repository inside the vault. A
+step a run corrected says so.
 
 **A third run, 2026-11-23**, in the two-sheet form (the same app; the
 model GPT-6.2 Sol with reasoning set to its highest, the app's default
@@ -64,15 +65,27 @@ being medium): the harness's half was led from a chat with no folder
 chosen to its end — the tools and the GitHub login from a logged-out
 state, the file applied, the rules file written. Read afterwards, the
 file parsed and held the profile and the lines of every nested
-repository as given. The agent had departed from the set below in two
-places, neither tried here: the built-in browser's three lines were
-left out, and Git's credential helper was set by `GIT_CONFIG_GLOBAL`
-naming a file in the token's folder, in place of the `GIT_CONFIG_*`
-pairs. At the end the agent named the next sheet by its title alone,
-and the user did not know where to go; the refusals had been left to
-the second sheet. Both changed the entry: the check is now part of the
-harness's half, led by the chat that set the file up, and nothing is
-carried between the halves (`vault-procedures.md` § 1).
+repository as given. The agent had departed from the set as it then
+stood in two places, unsaid before the save; each was tried afterwards
+in a new chat under those settings (→ *A setup followed from its first
+step*, the third run). **The built-in browser's three lines were left
+out**, measured by the vault's routine, which has no browser in it:
+the built-in browser did not start, and web search worked. They are in
+the set for the app, not for a routine (step 3). **Git's credential
+helper was given by a file that `GIT_CONFIG_GLOBAL` names**, in place
+of `GIT_CONFIG_COUNT` pairs, because the app passes pairs of its own
+in those variables: Git read the user's name and mail address and the
+helper, and `git ls-remote` on the private repository passed with a
+member's token. That form is the set's since (step 3). At the end the
+agent named the next sheet by its title alone, and the user did not
+know where to go; the refusals had been left to the second sheet. Both
+changed the entry: the check is now part of the harness's half, led by
+the chat that set the file up, and nothing is carried between the
+halves (`vault-procedures.md` § 1). And the lines of a vault's nested
+repositories, which that run wrote at the first setup — forty-four,
+for eleven repositories, none on the machine — are no longer part of
+it: a user's clone starts with none, and the lines of one are written
+when the user adds it (step 4).
 
 **Not tried**:
 
@@ -82,16 +95,20 @@ carried between the halves (`vault-procedures.md` § 1).
   the settings were reached over two days, in another order, and the
   configuration of step 3 was written by a session of another tool;
 - a real push (a dry run passed); a pull or a push with a member's
-  token;
+  token; a commit, a pull or a push with Git's helper given by the
+  file of step 3 (the pull and the push dry run of 2026-11-20 were
+  made with the pairs);
 - the CLI, another platform, another version of the app.
 
 Each further untried point is marked where it stands. Say this to the
 user before they choose how to proceed (`guide.md` § 4).
 
 **What is needed, and what is advice.** The set holds with these: one
-switch in the app (step 2), the profile (step 3), the lines for a
-nested repository where the vault has one (step 4), the token (step 5),
-the check (step 7). The rest — the other switches of step 2, the
+switch in the app (step 2), the profile (step 3) — whole: its lines
+are the bounds and what keeps the app's own functions working inside
+them, and neither kind is measured by a vault's routine — the token
+(step 5), the check (step 7); and, later, the lines of a repository
+when the user adds one inside the vault (step 4). The rest — the other switches of step 2, the
 forbidden rules of step 6 — is recommended, each with its reason, and
 can wait. Nothing here is forced: the harness is the user's.
 
@@ -111,7 +128,7 @@ settles them with their agent.
 |---|---|
 | the programs the vault's routine runs (`git`, `gh`, a script's interpreter) | step 3, the named reads |
 | the hosts the routine reaches | step 3, the network |
-| the git repositories nested in the vault, each by its path from the vault's top | step 4 |
+| a git repository added inside the vault, by its path from the vault's top — when a user adds it, not at the first setup | step 4 |
 | the repository the agent's token covers, who owns it (the user, an organization whose members the users are, or another personal account), and the permissions the routine needs on it | step 5 |
 | the vault's repository, for the clone | step 8 |
 | where the record is kept | step 8 |
@@ -224,7 +241,8 @@ Codex".
 ## 3. `~/.codex/config.toml`: the profile
 
 The set proposed: the test bed's, less one line (`.claude` read-only,
-now optional — below). The paths are that Mac's:
+now optional — below), and with Git's credential helper given by a
+file since 2026-11-23 (below). The paths are that Mac's:
 the agent finds each on the user's — where `git`, `gh` and the routine's
 other programs are, which Git configuration files exist — and puts in
 the user's home folder for `<name>`.
@@ -254,7 +272,8 @@ approvals_reviewer = "auto_review"
 ".git/hooks" = "read"
 ".codex" = "read"
 ".agents" = "read"
-# step 4: four lines for each git repository nested in the folder
+# none at the first setup. Later, step 4: four lines for each git
+# repository the user adds inside the folder
 
 [permissions.workspace-fence.network]
 enabled = true
@@ -271,11 +290,18 @@ network_proxy = true
 
 [shell_environment_policy.set]
 GH_CONFIG_DIR = "/Users/<name>/.config/gh-codex"
-GIT_CONFIG_COUNT = "2"
-GIT_CONFIG_KEY_0 = "credential.https://github.com.helper"
-GIT_CONFIG_VALUE_0 = ""
-GIT_CONFIG_KEY_1 = "credential.https://github.com.helper"
-GIT_CONFIG_VALUE_1 = "!/opt/homebrew/bin/gh auth git-credential"
+GIT_CONFIG_GLOBAL = "/Users/<name>/.config/gh-codex/gitconfig"
+```
+
+and the file that last line names, `~/.config/gh-codex/gitconfig`:
+
+```
+[include]
+    path = ~/.gitconfig
+
+[credential "https://github.com"]
+    helper =
+    helper = !/opt/homebrew/bin/gh auth git-credential
 ```
 
 The reasons:
@@ -297,12 +323,22 @@ The reasons:
   program, escalated or not. → *An agent wrote outside its folder*;
   *A permission profile with the routine inside*, "A fence with no
   folder named".
-- **The named reads** are what the routine's programs need: the Command
-  Line Tools (`git`), Homebrew (`python3`, `gh`), the OpenSSL file the
-  built-in browser's helper reads, Git's own configuration for the
-  commit author. The agent reads the user's `~/.gitconfig` first and
-  says so if it holds a credential or a helper: the file becomes
-  readable to every chat.
+- **The named reads** are of two kinds. What the routine's programs
+  need: the Command Line Tools (`git`), Homebrew (`python3`, `gh`),
+  Git's own configuration for the commit author. The agent reads the
+  user's `~/.gitconfig` first and says so if it holds a credential or
+  a helper: the file becomes readable to every chat. And what the app
+  itself needs: the OpenSSL file, which the built-in browser's helper
+  reads.
+- **The built-in browser's three lines are the app's, not a
+  routine's**: the OpenSSL read, the read on
+  `/private/tmp/codex-browser-use` and the `unix_sockets` allow on it.
+  They add no permission to a vault's work; they put back a function
+  of the app that this profile's own denies take away — in every chat
+  on the Mac, whatever folder it is opened on. So they are not weighed
+  against what a vault's routine uses. Left out, the built-in browser
+  did not start, the helper stopping at the OpenSSL file; web search
+  worked (tried 2026-11-23, 26.1117.41037).
 - **The temp folders denied**: other programs' files sit there. The
   cost: `git` prints a warning at each command (harmless). The one
   folder opened, `/private/tmp/codex-browser-use` — read, and its
@@ -377,9 +413,36 @@ The reasons:
   leaves".
 - **`[shell_environment_policy.set]`**: only Codex's commands get the
   token's folder and the credential helper; the user's own terminal and
-  `~/.gitconfig` are untouched. The empty helper first clears the macOS
-  Keychain helper, which fails inside the sandbox. → "A credential
-  inside".
+  `~/.gitconfig` are untouched. `GIT_CONFIG_GLOBAL` names a file that
+  Git, in Codex's commands, reads as its global configuration in place
+  of `~/.gitconfig`. The file takes `~/.gitconfig` in by its include —
+  the name, the mail address and a global ignore file hold as before —
+  and adds the helper for `https://github.com`; the empty helper first
+  clears the macOS Keychain helper, which fails inside the sandbox.
+  Tried inside the profile on 2026-11-23: Git read all of these, and
+  `git ls-remote` on a private repository passed with a member's
+  token.
+  **Until 2026-11-23 the set gave the helper as pairs**
+  (`GIT_CONFIG_COUNT = "2"`, `GIT_CONFIG_KEY_<n>`,
+  `GIT_CONFIG_VALUE_<n>`): the test bed's form, with which `git
+  ls-remote`, a pull and a push dry run passed on 2026-11-20. The app
+  passes pairs of its own in those variables to the commands it runs
+  (the setup agent's account on 2026-11-23, for ChatGPT's Sites; Git
+  inside the profile listed the app's settings at scope `command`), so
+  the set's pairs and the app's cannot both stand. Which side is
+  replaced was not tried; the file leaves the app's alone.
+  **The file is made before the profile is in force** — its folder is
+  the token's (step 5), read-only to the agent afterwards: in the first
+  chat, by the agent with an approval it explains first, or by the
+  user's hand, as for the rules file (step 6). The command that stores
+  the token later writes beside it and leaves it as it is (seen
+  2026-11-23).
+  **Its cost**: where the file is missing — the token's folder removed
+  or renamed — Git says nothing and reads no `~/.gitconfig` either: a
+  commit stops with "Author identity unknown", which points at the
+  name and not at the file (tried with Git 2.54, outside the profile).
+  → "A credential inside"; *A setup followed from its first step*, the
+  third run.
 
 **Writing it.** Under the profile the agent cannot write this file, and
 it is not meant to: the file is its own bounds. So the user applies it.
@@ -388,7 +451,9 @@ it is not meant to: the file is its own bounds. So the user applies it.
    under the presets the sandbox reads anywhere) and composes the whole
    merged file — the user's other keys kept, top-level keys before any
    table, no table twice.
-2. The user makes a backup copy of the file: the way back.
+2. The user makes a backup copy of the file: the way back. The file
+   that `GIT_CONFIG_GLOBAL` names is made now, before the profile is in
+   force (above).
 3. The agent gives the whole file — in one block, or as a file in its
    working folder that the user opens and copies. The user opens
    `~/.codex/config.toml` in a plain-text editor — the folder is hidden:
@@ -417,10 +482,17 @@ open chat as a step of its own; the app writing the file on its own
 while an editor holds it open, where the later save would win. → *A repository nested in the opened folder*, "Who writes
 the lines".
 
-## 4. The lines for each nested repository
+## 4. When a repository is added inside the vault: its lines
+
+**Not part of the first setup.** A user's clone of a vault starts with
+no repository inside it; each user adds the ones they need, and the
+vault's list grows. So the file of step 3 carries no such line. The
+lines of one repository are written when the user adds it, before it
+is cloned, by the vault's own procedure for adding one
+(`vault-procedures.md` § 3) — a procedure apart from the setup.
 
 The profile's protection of Git's files and the tools' folders reaches
-the top of the opened folder only. For each git repository nested in the
+the top of the opened folder only. For a git repository nested in the
 vault, four lines under
 `[permissions.workspace-fence.filesystem.":workspace_roots"]`, with
 `<R>` its path from the vault's top:
@@ -445,17 +517,23 @@ read-only (step 3, the optional line).
 - **Before the clone.** A line may name a path that does not exist yet.
   A repository that exists before its lines is open until they are
   written, with no sign; so is one moved or renamed.
-- At the first setup they are part of the file of step 3. Later, for a
-  repository added to the vault, the user pastes them under the
-  table's last line (tried).
+- **Who writes them.** Under the profile the agent cannot write this
+  file. In a chat on the vault it prepares the four lines; the user
+  makes a backup and pastes them under the table's last line (tried);
+  they hold from the next new chat, with no restart (step 3, "Writing
+  it"). Then the user clones the repository.
 - **What they cost**: the agent cannot create a repository at a listed
   path — the clone is the user's — and cannot remove or move the folders
   that lead to it. If the agent pulls a nested repository that tracks
   files under its `.codex/` or `.agents/`, the pull meets what step 3
   describes.
 
-Tried in two repositories of several, with all five lines. Not tried: a
-submodule or a worktree. → *A repository nested in the opened folder*.
+Tried in two repositories of several, with all five lines. In the runs
+of 2026-11-22 and 2026-11-23 this entry still had the lines of every
+repository of a vault written at the first setup; that was wrong for a
+vault whose users each add what they need. Not tried: the lines of one
+repository added by a user led by a chat on the vault; a submodule or
+a worktree. → *A repository nested in the opened folder*.
 
 ## 5. The token
 
@@ -586,7 +664,8 @@ is stored, in a vault's installation:
 | `git push --force --dry-run origin main` | rejected by the rule, with its justification |
 | a page in the built-in browser; a web search | both work (the browser may ask first, by its own setting) |
 
-After step 8, in a new chat on the vault:
+After step 8, in a new chat on the vault (the last two rows once a
+repository has been added inside it, step 4):
 
 | what | the pass |
 |---|---|
@@ -610,9 +689,9 @@ the same).
   files (tried at a listed path).
 - **Codex is then opened on the vault's folder.** When the folder is
   trusted, the app adds a `[projects."<path>"]` entry to `config.toml`
-  by itself (seen). From there the vault's own first steps follow, the
-  nested repositories among them — each cloned by the user, its lines
-  already in (step 4).
+  by itself (seen). From there the vault's own first steps follow. A
+  repository inside the vault comes later, when the user needs it: its
+  lines first, then its clone by the user (step 4).
 - **The record**: what was set, each value with its reason, and that the
   set was taken as proposed or what was changed — kept where the vault's
   procedure says, outside the vault.
