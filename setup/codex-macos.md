@@ -76,15 +76,14 @@ commit and push. → *The app as it starts: Ask for approval*.
 
 A session with a start, one commit and one push was four prompts.
 
-**A vault's two sheets on this route** were run once, the same day,
-and the user stopped the run at the end of the first: nothing had
+**A vault's two sheets on this route** were first run the same day,
+and the user stopped that run at the end of the first: nothing had
 been set, and a check was run all the same, in a further chat, which
 could not be followed; and the app's own settings were passed over.
 The route's steps below are changed by what that run showed.
 → *Two sheets run on that route*.
 
-**Not tried**: the acts under "What the user does, in order" as one
-run from the first to ordinary work; a real push (a dry run passed); the prompt's "allow
+**Not tried**: a real push (a dry run passed); the prompt's "allow
 similar commands" (below, step 3); a repository nested in the opened
 folder under this form; the General switch for Full access turned off
 in this state; a user who starts with no GitHub login on the Mac; the
@@ -108,10 +107,9 @@ decision. → *What users of the app are found doing*.
 ## What the user does, in order
 
 The whole of a first setup on this route, for a user who is to work in
-a vault. Each act was seen on the Mac of the trial; the order as one
-run, from the first act into ordinary work, has not been run yet. A
-vault's sheets hand these to its users as a dated reference
-(`vault-procedures.md` § 1).
+a vault. Each act was seen on the Mac of the trial. A vault's sheets
+hand these to its users as a dated reference (`vault-procedures.md`
+§ 1).
 
 Once for the machine — the first sheet of a vault's procedure, in a
 chat opened on no folder:
@@ -144,10 +142,9 @@ Then for a vault — its second sheet, in a chat on the vault's folder:
    anything outside the folder, or not asked for, or not understood,
    refused.
 7. **The vault's own start of session.** Its first act that leaves the
-   sandbox — the pull — raises a prompt. A pull that passes with no
-   prompt means the chat is not on Ask for approval: the work stops
-   there and the choice under the composer is looked at (section 6
-   below).
+   sandbox — the pull — raises a prompt. Where it does not — the pull
+   stops and no prompt comes, or it passes unasked — the work stops
+   there (section 6 below).
 
 ## 1. The app's own settings
 
@@ -332,13 +329,14 @@ route.
    browser's browsing default on "always allow", a session can put
    what it has read into a URL and visit it unasked.
 7. **The app changes, and this version has open reports.** In the
-   tool's issue tracker (`openai/codex`), open on 2026-11-23 and read
-   through a research summary, not checked here: under Ask for
-   approval, requests to leave the sandbox rejected before any prompt
-   (#32563); a commit failing on Git's lock file with no prompt
-   offered (#63187, this version; #61936); the choice made under the
-   composer not reaching a chat (#63033, #62975, this version). None
-   showed on the Mac of the trial. After an update of the app, the
+   tool's issue tracker (`openai/codex`), open on 2026-11-23, read
+   that day on the tracker through a summarising fetch, nothing
+   tried: under Ask for approval, requests to leave the sandbox
+   rejected before any prompt (#32563); a fetch or a commit stopping
+   on Git's own files with no prompt offered (#61936; #63187, this
+   version); the choice made under the composer not reaching a chat
+   (#63033, #62975, this version). None showed on the Mac of the
+   trial. After an update of the app, the
    check of step 6 is run again.
 8. **`~/.codex/config.toml` is left alone.** A permission set written
    there shows as a fourth choice, "Custom", and the older keys and a
@@ -358,10 +356,27 @@ opened for it.
 
 **In ordinary work, one thing to notice**: the vault's first act that
 leaves the sandbox — the pull at a session's start — raises a prompt
-(the table at the head). A pull that passes with no prompt means the
-chat is not on Ask for approval; the user stops there and looks at
-the choice under the composer. It is the kind of fault the open
-reports describe ("What to watch", 7).
+(the table at the head). It may fail to in two ways, and in both the
+user stops there.
+
+- **The pull stops and no prompt comes.** Inside the sandbox a pull
+  cannot pass; it passes when the agent then asks to run it outside,
+  and whether it asks is the model's choice. Seen once on another
+  version, 2026-11-19: the agent reported a limit of its environment
+  and did not ask. Open reports for this version describe the same,
+  and a request refused before any prompt ("What to watch", 7); not
+  seen on the Mac of the trial. The vault is then not synced, whatever
+  the session goes on to say. What the reporters do is run the Git
+  command by their own hand in a terminal. An instruction in the
+  vault's own file saying when to ask is the vault's to have; no
+  account of one was found. → *A command stopped in the sandbox:
+  whether the agent asks*.
+- **The pull passes with no prompt.** Then it ran outside the sandbox
+  unasked. Never seen, and no report of it was found; inferred from
+  the sandbox: either the choice under the composer is not Ask for
+  approval, or "allow similar commands" was taken earlier in the same
+  conversation (section 3). The user looks at the choice under the
+  composer.
 
 **No trial of a refusal in a chat made for it.** That a write outside
 the folder is asked of the user and, refused, is not made was tried

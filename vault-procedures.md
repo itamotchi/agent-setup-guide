@@ -321,9 +321,8 @@ browser and showed as not found (`environments/codex.md`, "Two sheets
 run on that route"). Hence the first sheet as it stands above: it
 holds what the user's route has to set and no more, the application's
 settings named as needed; its check is of what was set, and where
-nothing was set there is none. **In this form they have not been
-run**; the
-files in `setup/` mark what is untried on their routes.
+nothing was set there is none. The files in `setup/` mark what is
+untried on their routes.
 
 ### The text to paste
 

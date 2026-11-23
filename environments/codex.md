@@ -1001,6 +1001,42 @@ for its own sake"; `vault-procedures.md` § 1) were changed by this:
 the first sheet stays, holds what the route has to set, and has a
 check only of what was set.
 
+## A command stopped in the sandbox: whether the agent asks (read, 2026-11-23)
+
+Raised by a chat on a vault whose start-of-session pull stopped on
+`.git/FETCH_HEAD`. Read on 2026-11-23 through a summarising fetch —
+the tool's issue tracker (`openai/codex`), its repository, the docs,
+two forum threads; nothing tried. What was seen is above: a chat that
+did not ask ("The ChatGPT desktop app on macOS", 2026-11-19), chats
+that asked ("The app as it starts").
+
+- **Nothing read says the agent must ask.** The built-in instructions
+  in the repository
+  (`codex-rs/protocol/src/prompts/base_instructions/default.md` and
+  two model prompts under `codex-rs/core/`, main branch) say only that
+  a call can be escalated to the user; the docs' pages on approvals
+  and the sandbox describe no second try after a failure. The tool's
+  schema and source were not read.
+- **Open reports of a Git command stopped on `.git` with no prompt**,
+  none answered by a maintainer: a fetch stopped on `.git/FETCH_HEAD`
+  and the chat ended without a request, under Approve for me (#61936;
+  a commenter on 26.1117.41037); a commit stopped on the lock file and
+  the request to leave the sandbox refused before any prompt (#63187,
+  26.1117.41037); such a request refused before any prompt, not Git
+  (#32563, from 26.707 on).
+- **No report was found of the opposite** — a command that needs
+  approval under Ask for approval running outside the sandbox unasked.
+  The reports of a choice that does not reach a chat run the other
+  way: Full access chosen, the session sandboxed (#63033, #63078).
+- **What the reporters do**: Git by their own hand in a terminal
+  (#30102, a comment; #54574); a separate CLI session on the same
+  clone (a comment on #62975).
+- **An instruction in `AGENTS.md`**: no account was found of one that
+  tells the agent to ask and run again. One report has an `AGENTS.md`
+  that authorized Git commands and was not followed — the agent asked
+  all the same (#51641, the desktop app 26.1002); a commenter there:
+  the file instructs the model and grants nothing.
+
 ## From a research report made for this guide (2026-11-09)
 
 Citing the Codex docs of 2026; not checked here:
