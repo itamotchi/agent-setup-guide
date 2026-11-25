@@ -87,7 +87,7 @@ what that vault needs. Otherwise:
 |---|---|
 | `guide.md` | the guide, and the procedure, for any tool: what a harness is, the layers, what to watch for, what the user decides, the steps of a setup and of a later change, the report back |
 | `setup/` | a worked route for one tool and platform, dated — what was set, in order, each value with its reason, how far it was tried: Codex in the ChatGPT desktop app on macOS, Claude Code on macOS. A reference to consult and check, not a procedure to apply unread |
-| `environments/` | the dated findings those routes rest on: Claude Code on macOS, Claude Code on native Windows (from the docs alone), Codex, GitHub |
+| `environments/` | the dated findings those routes rest on: Claude Code on macOS, Claude Code on native Windows (from the docs, and one run of a vault's procedure there), Codex, GitHub |
 | `model/` | the text of the templates for Claude Code: the user settings fragment, a rules file, a user memo; `windows/` for native Windows; `optional/` |
 | `vault-procedures.md` | for a vault's agent: how a vault writes its own procedure for its users so that it holds for any environment — what the vault states of its needs, how a user reaches the procedure, a later change, adding a git repository inside the vault |
 

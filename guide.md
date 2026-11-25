@@ -643,9 +643,11 @@ not post it itself.
   its reason, the lines for a repository added inside a vault later,
   and the entries that answered a later change. To be consulted and checked against the
   present tool, not applied unread (§ 4). There is none for Claude Code
-  on native Windows — never run on a machine; its note and template
-  stay as what was read in the docs — nor for any other environment:
-  there the agent builds by § 4 alone.
+  on native Windows — its template was never run on a machine and
+  stays as what was read in the docs; its note holds one run of a
+  vault's sheets there (2026-11-25), in which what was set was not
+  seen — nor for any other environment: there the agent builds by
+  § 4 alone.
 - `environments/` — what has been found about particular tools and
   platforms; partial, dated, sourced; tried and read told apart. The
   evidence the files in `setup/` point to.

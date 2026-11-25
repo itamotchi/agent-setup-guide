@@ -248,10 +248,19 @@ The vault's installation is the vault's own procedure
 - **The vault is cloned by the user's own command** in their terminal.
   A clone by a sandboxed command would need a host and a credential
   the sandbox hides (inferred from what a push met; not tried).
+- **After the clone, a session is opened anew on the folder.** Claude
+  Code loads a folder's `CLAUDE.md` "at launch" (the memory page,
+  read 2026-11-25); nothing in the docs says that one which appears
+  later is picked up by a running session. So a session opened on the
+  vault's still empty folder, as the vault's second sheet has it,
+  leads as far as the clone and then hands the lead to a new session
+  on the same folder (`vault-procedures.md` § 1, sheet 2). Seen
+  2026-11-25 on Windows; not tried on macOS in the two-sheet form.
+  → `environments/claude-code-windows.md`, "Run on a machine".
 - **The vault's project settings are read before the folder is
   trusted** (`guide.md` § 2.8): its allow rules and hooks take effect
-  on the user's machine. Then Claude Code is opened on the folder,
-  the selector on Auto (step 2).
+  on the user's machine. The new session is opened with the selector
+  on Auto (step 2).
 - **What the user will meet in ordinary work**, said before the
   vault's first act: prompts are few, and one that is not understood
   is refused; a folder outside the vault is added by the user, each

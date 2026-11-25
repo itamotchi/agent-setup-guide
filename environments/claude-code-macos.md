@@ -299,6 +299,13 @@ Read 2026-11-20 unless marked.
   verbatim — a secret typed in the command included (reported publicly,
   2026-11; the file is git-ignored by default). Read that file from
   time to time.
+- **A cloud session's clone was shallow** (seen 2026-11-25, Claude
+  Code on the web: `git rev-parse --is-shallow-repository` gave
+  `true`). A vault's check that looked up an older commit failed
+  there until `git fetch --unshallow origin main`, which passed. The
+  docs say only "a fresh clone of your repository"; the depth is not
+  stated (read 2026-11-25). A vault whose routine needs history says
+  so in its instructions for a cloud session.
 
 ## Open reports
 

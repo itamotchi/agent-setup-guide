@@ -1,9 +1,11 @@
 # Claude Code on native Windows
 
 What has been found here, as of 2026-11-09 (Claude Code v2.1.31x), from
-the official docs read by WebFetch; nothing below has been run on a
-Windows machine yet. Templates: `model/windows/` (`settings.json`,
-`rules/harness.md`).
+the official docs read by WebFetch. Since 2026-11-25 there is one run
+on a Windows machine ("Run on a machine", below); it tried a vault's
+hooks, Git and `gh`, and not the template: the template `model/windows/`
+(`settings.json`, `rules/harness.md`) and the checks at the end of
+this note are still untried.
 
 Native Windows with Git for Windows (Git Bash), the desktop app assumed;
 a user of the CLI extends this note. `~/.claude` is
@@ -71,6 +73,62 @@ a user of the CLI extends this note. `~/.claude` is
 - **Local settings** load from the opened folder's own
   `.claude/settings.local.json` on Windows, not the repository root's
   (the settings page).
+
+## Run on a machine (2026-11-25)
+
+A vault's two sheets (`vault-procedures.md` § 1) were run by a user to
+their ends on Windows 11 Pro: Claude Code's desktop app (its version
+not recorded), Git for Windows with Git Bash, Python 3.15.2, gh
+2.105.0 — the first sheet's harness, then the clone, the vault's
+hooks, a new writer's first commit and push. The source is the log
+that the session on that machine wrote in the vault, and what the user
+told a session that supported him from elsewhere; no one but the user
+saw the Windows screen. **What the first sheet's agent set there — its
+settings file, which of the template's lines it took, the result of
+its check of refusals, its record — was seen by no one but the user.**
+
+Seen:
+
+- **A vault's hooks ran.** Wired in the vault's `.claude/settings.json`
+  as `python3 …` commands, under Git Bash: a write the vault forbids
+  was refused by the PreToolUse hook's own message, made with the
+  Write tool and with a shell redirect alike; at a Read, the
+  PostToolUse hook's output reached the session. Not tried:
+  `onFailure` (the hooks started).
+- **Japanese through `gh api`.** A title and a body passed as `-F
+  body=@<file>` arrived intact in an Issue. Not tried: the text given
+  on the command line (`-f body='…'`).
+- **Git.** A clone made with `-c core.autocrlf=false`; a pre-commit
+  hook behind `core.hooksPath` (a Python program); three commits and
+  pushes, with the user's own `gh auth login` — no credential made
+  for the agent.
+- **A session opened on an empty folder did not have the root
+  `CLAUDE.md` after the clone**; one opened anew on the folder did.
+  The docs: "CLAUDE.md and CLAUDE.local.md files in the directory
+  hierarchy above the working directory are loaded at launch"; that
+  one which appears later is picked up is not stated, the one re-read
+  described being after `/compact` (the memory page, read 2026-11-25).
+  Of settings the docs say otherwise: "Claude Code watches your
+  settings files and reloads them when they change", a project's
+  `.claude/` made during the session included (the settings page),
+  with hooks held back "until you accept the workspace trust dialog
+  for the folder" (the hooks reference). Whether the vault's hooks
+  would have run in the first session was not tried.
+- **A sub-folder's `AGENTS.md`.** In the session started on the empty
+  folder, a Read of a file under a sub-folder brought that folder's
+  `AGENTS.md` with it; in the session started on the clone, with the
+  root `CLAUDE.md` loaded, it did not (seen the same on macOS that
+  day). The docs: with a `CLAUDE.md` in the working directory or
+  above it, "Your `CLAUDE.md` files only", under the default value
+  `claude-md-or-agents-md` of "Project instructions" (the memory
+  page). A vault that holds both files has its root file tell the
+  session which folder files to open.
+- **Local or cloud.** The desktop app starts both from one place:
+  "use the environment selector, the first control in the row, to
+  choose where Claude runs" — Local, "runs on your machine", or Cloud
+  (the desktop page, read 2026-11-25). The user asked, before
+  beginning, which was meant. Whether a Local session starts with no
+  folder chosen is not stated.
 
 ## Checks on Windows
 

@@ -124,8 +124,9 @@ user to it.
   or reads as a list of orders is put off or resented (`guide.md` § 4);
 - the marks of what was tried: the procedure states as tried only what
   was tried, on which environment and when. Setting up from it on an
-  environment with no file in `setup/` has not been tried by anyone
-  yet (2026-11-22).
+  environment with no file in `setup/` has been tried once
+  (2026-11-25, Claude Code on Windows; "How a user reaches it",
+  the last paragraph).
 
 **Tried by its maker first.** There are two checks, and they are not
 the same. One is each user's: what their own environment needs — that
@@ -178,7 +179,14 @@ that route is said as advice, a sentence each, and may be left.
    where the tool starts one with no folder chosen and gives it a
    working folder by itself, that: the user has no setup folder to make
    or to understand. Not the folder that holds the user's vaults: an
-   agent opened there may write into every vault under it.
+   agent opened there may write into every vault under it. It is a
+   session that runs on the user's own machine: where the application
+   can also start one that runs elsewhere — a cloud session — the
+   sheet's act says which is meant, and, for a route the vault has
+   seen, names the choice in the tool's own words as a dated reference
+   (seen 2026-11-25: a user about to begin asked whether the session
+   was to be a cloud one; in that desktop app both are started from
+   the same place).
 2. **The user pastes the sheet's text.** Pasted into a chat that cannot
    work on the user's machine, it has that agent say that one which
    can is needed — Claude Code, Codex or another — and how to go on:
@@ -262,6 +270,23 @@ application's settings that the first sheet saw set.
    check on the vault — its own start of session, to the end; then the
    vault's own first steps, by the vault's
    documents, which are at hand from the clone on.
+   **Where the tool loads a folder's instruction file when a session
+   starts, and not after**, the session opened on the empty folder is
+   without the vault's instructions once the clone is there. What
+   follows the clone — the check on the vault, its first steps — is
+   then done in a session opened anew on the same folder, and the
+   leading session hands the lead over as the lead (`guide.md` § 4):
+   it gives the user a text for the new session — the aim, what is
+   done, what remains, that the new session carries it to the end.
+   The sheet's text says so for each such route the vault has seen, as
+   a dated reference; under a tool whose agent reads the instruction
+   file when told to, and where the vault sets nothing that the tool
+   loads only at a start, the same session goes on. (Seen 2026-11-25,
+   Claude Code's desktop app on Windows: after the clone the session
+   did not have the root instruction file; the vault's hooks, its
+   table of writers and the end of its first session were done in a
+   session opened anew, which held a report from the first —
+   `environments/claude-code-windows.md`, "Run on a machine".)
 3. **Its text is complete by itself.** It relies on nothing carried
    from the first sheet's session. And it carries what its agent needs
    for its own steps on a route the vault has seen — how the credential
@@ -325,6 +350,15 @@ holds what the user's route has to set and no more, the application's
 settings named as needed; its check is of what was set, and where
 nothing was set there is none. The files in `setup/` mark what is
 untried on their routes.
+
+A run of a second vault's two sheets (2026-11-25), on an environment
+with no file in `setup/` — Claude Code's desktop app on Windows — took
+both to their ends, with a new writer's first commit and push. It
+showed two things, now above: the first sheet's act did not say that
+the session runs on the user's own machine, and the session opened on
+the empty folder was without the vault's instruction file after the
+clone. What that run's first sheet set was seen by no one but its
+user (`environments/claude-code-windows.md`, "Run on a machine").
 
 ### The text to paste
 
