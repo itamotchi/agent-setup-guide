@@ -2,7 +2,8 @@
 
 Personal rules, loaded into every session on this machine: how Claude
 Code itself is handled here. About the person: the user memo. About a
-vault: its AGENTS.md.
+vault: its own instruction file (`CLAUDE.md`, or `AGENTS.md` where it
+has none).
 
 - Never `cd` in Bash: it moves the session's working directory. Name
   another place by its path.
