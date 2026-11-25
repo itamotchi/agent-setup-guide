@@ -191,8 +191,8 @@ every session on the machine:
 | a session says where and how before it starts another | The ask rule's prompt shows the call as raw text; the user answers on the session's word. |
 
 **`model/user-memo.md` → `~/.claude/CLAUDE.md`**: lines about the person
-— the language, how questions are put, a word before a write, how a
-disagreement is settled (`guide.md` § 3.4). It is the one file not
+— the language, how questions are put, a word before a write
+(`guide.md` § 3.4). It is the one file not
 applied as it stands, even when the rest is left to the agent: the
 template's lines are one user's. The agent says each in a sentence and
 keeps those the user says are true of them, with their name and

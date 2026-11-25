@@ -312,8 +312,7 @@ conversation before anything is written.
    settings stop outright only the few that must never happen; a prompt
    for every one wears attention down (§ 2.10).
 4. **How the agent deals with the user.** The language; how questions
-   are asked; what is said before a write; how a disagreement is
-   settled. Proposed: start from `model/user-memo.md` and keep, change
+   are asked; what is said before a write. Proposed: start from `model/user-memo.md` and keep, change
    or drop each line. These go in the user-level instruction file, which
    holds lines about the person — not about a vault, not about the tool.
 5. **What is the user's own.** Anything on this machine the standard

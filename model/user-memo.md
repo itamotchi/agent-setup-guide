@@ -22,14 +22,4 @@ you.
   why.
 - Before a write — a vault, an issue, GitHub, a settings file — the agent
   says in the conversation what it will write and why.
-- A question to <name> is asked in the conversation, in plain text, and
-  never with buttons or in a box (in the Claude desktop app: not the
-  question dialog `AskUserQuestion`, not the end-of-turn box's question
-  and buttons, not a card that waits for a choice).
-- Where <name>'s judgement and the agent's reading differ, what is
-  written is settled by dialogue until the agent can agree; "<name>
-  decided so" is never the ground.
-- <name> asks for a correct understanding, and prefers it told frankly,
-  without reserve, even when it does not suit them.
-- <name> prefers the accurate word to a local one: the established term
-  of the thing's own field or source, looked up when it is not known.
+- A question to <name> is asked in the conversation, in plain text.
