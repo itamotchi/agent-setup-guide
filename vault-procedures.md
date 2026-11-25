@@ -163,10 +163,12 @@ set writes no file: first the application's settings that route
 needs — named as needed, in the tool's own words, a dated reference
 for each such route the vault has seen (the file in `setup/` says
 what they are) — which the agent sees set; then the harness, which
-the agent puts to the user as the set it proposes: on this route,
-nothing more. The user takes it or not (`guide.md` § 4 step 4).
-Taken, there is nothing to do, and the sheet ends with no check in a
-further session (step 4). Not taken — the user wants a line of their
+the agent puts to the user as the set it proposes: on such a route
+nothing more, or one line in the user's own instruction file — where
+the agent works (`guide.md` § 3, 1) — put in by the user's hand in
+the application and looked at there. The user takes it or not
+(`guide.md` § 4 step 4). Taken, there is nothing else to do, and the
+sheet ends with no check in a further session (step 4). Not taken — the user wants a line of their
 own, or another of the tool's choices — it is built by `guide.md`
 § 4 like any other, each line with its reason and what it opens;
 then something was set, and it is checked. What is only advice on

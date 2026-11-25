@@ -291,7 +291,12 @@ conversation before anything is written.
    folder, say, or a way out of the sandbox that an approval opens —
    and proposes that way with the approvals answered by the user, so
    that leaving the folder is at least never a model's decision
-   (`setup/codex-macos.md` is such a route). A user who is content
+   (`setup/codex-macos.md` is such a route). What no setting holds
+   there is then said to the agent in a line of the user-level
+   instruction file — the one instruction that reaches every folder
+   the user opens — put in by the user's hand where the agent's own
+   write would be a write outside its folder. It is guidance and
+   stops nothing (§ 1), and the user is told so. A user who is content
    that a model judges an outside read or write says so, and those
    settings are left out.
 2. **How much it does unasked.** The approval mode. Ask how many prompts

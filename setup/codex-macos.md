@@ -1,9 +1,11 @@
 # Codex in the ChatGPT desktop app on macOS: the setup
 
 A worked route: how Codex in the ChatGPT desktop app on macOS is used
-on a vault with no file set — the app as it starts, on its own
-permission choice "Ask for approval", with one switch of the app
-turned off — tried on one Mac on 2026-11-23.
+on a vault with no file of bounds set — the app as it starts, on its
+own permission choice "Ask for approval", with one switch of the app
+turned off and one line in the user's own instruction file — tried on
+one Mac on 2026-11-23, before that line was part of it (added
+2026-11-25; not yet run with it).
 A reference for the user's agent, which builds the harness itself by
 `guide.md` § 4: read this first, check each point against the app as
 it is and its present docs — the app changes within weeks — take what
@@ -30,11 +32,15 @@ under "Other forms" at the end; what was found under it stays in
 permission choice **Ask for approval**, and that choice is kept. One
 switch in the app's settings is turned off, so that the choice with no
 sandbox and no prompt — Full access — is no longer offered (step 1).
+One line goes into the user's own instruction file, by the user's
+hand in the app's settings: where the agent works (section 1, "The
+set proposed"; since 2026-11-25).
 Nothing else is set: no file of bounds is written, no token is made
 for the agent, no line is added for a vault. So the setup is short —
-the switch, a look — and it has no check in a session of its own,
-since no setting was written that a session could try (`guide.md`
-§ 4, "No step for its own sake"): what a user does is under "What
+the switch, a look, the line — and it has no check in a session of
+its own, since no setting was written that a session could try: the
+line is guidance, looked at where it was put (`guide.md`
+§ 4, "No step for its own sake"). What a user does is under "What
 the user does, in order".
 
 **What the user gets.** Codex's own sandbox, which the operating
@@ -50,7 +56,8 @@ command.
 whole of it under "What to watch"):
 
 - reads are not bounded: the agent can read whatever the user can, on
-  the whole Mac;
+  the whole Mac — the line in the user's instruction file tells it
+  not to, and nothing stops it;
 - a command the user allows runs outside every bound, with the user's
   own rights and the user's own GitHub login;
 - the stop is the user: a prompt allowed without being read stops
@@ -83,7 +90,10 @@ could not be followed; and the app's own settings were passed over.
 The route's steps below are changed by what that run showed.
 → *Two sheets run on that route*.
 
-**Not tried**: a real push (a dry run passed); the prompt's "allow
+**Not tried**: the route with the line in `~/.codex/AGENTS.md` (the
+trial ran with the user's `~/.codex` set aside, so with no such
+file), and the app's editor for that file on this version (seen
+2026-11-19 on 26.1118.11504); a real push (a dry run passed); the prompt's "allow
 similar commands" (below, step 3); a repository nested in the opened
 folder under this form; the General switch for Full access turned off
 in this state; a user who starts with no GitHub login on the Mac; the
@@ -122,26 +132,33 @@ chat opened on no folder:
    terminal, one command at a time, the agent giving each (section 4
    below).
 
-Then the harness: the agent puts this route to the user as the set it
-proposes — nothing more is set; the other switches of section 1 are
-advice. Taken, there is nothing to do, and no check is run in a chat
-made for it (section 6 below). A user who does not take it — who
-wants a command forbidden whoever allows it, or another permission
-choice — has that built by `guide.md` § 4, with what it opens
-(section 7; "Other forms"); what is then set is checked. The second
-sheet's address is given as text to copy (section 2 below).
+4. **The harness, put to the user as the set this route proposes: one
+   line in the user's own instruction file** (`~/.codex/AGENTS.md`) —
+   outside the folder a chat is opened on, the agent reads and writes
+   only when the user asks for it in the conversation. Put in by the
+   user's own hand in the app's settings, and seen saved (section 1
+   below, "The set proposed"). Guidance: it stops nothing. Added
+   2026-11-25; not yet run in this form.
+
+Nothing more is set; the other switches of section 1 are advice, and
+no check is run in a chat made for it (section 6 below). A user who
+does not take the line leaves it out. One who wants more — a command
+forbidden whoever allows it, or another permission choice — has that
+built by `guide.md` § 4, with what it opens (section 7; "Other
+forms"); what is then set is checked. The second sheet's address is
+given as text to copy (section 2 below).
 
 Then for a vault — its second sheet, in a chat on the vault's folder:
 
-4. **The vault's folder made, empty, and a new project made with that
+5. **The vault's folder made, empty, and a new project made with that
    folder as its source folder** (section 2 below).
-5. **The clone**, by the user's own command in their terminal, into
+6. **The clone**, by the user's own command in their terminal, into
    that folder (section 2 below).
-6. **What will be asked, and how to answer** — said before the vault's
+7. **What will be asked, and how to answer** — said before the vault's
    first act (section 3 below): the routine's acts allowed once;
    anything outside the folder, or not asked for, or not understood,
    refused.
-7. **The vault's own start of session.** Its first act that leaves the
+8. **The vault's own start of session.** Its first act that leaves the
    sandbox — the pull — raises a prompt. Where it does not — the pull
    stops and no prompt comes, or it passes unasked — the work stops
    there (section 6 below).
@@ -183,6 +200,41 @@ the user's agent goes by what the user's screen shows.
     the user (→ *An agent wrote outside its folder*). A user may choose
     it, knowing that.
   - *Full access*: no sandbox and no approvals.
+
+**The set proposed — one line in the user's own instruction file**
+(since 2026-11-25; not yet run in this form).
+
+- **The line**, in `~/.codex/AGENTS.md`, in the user's own language
+  if they wish: *outside the folder a chat is opened on, read and
+  write only when the user asks for it in the conversation.* Codex
+  reads this file into every chat, before a project's own `AGENTS.md`
+  (the docs → *From the Codex docs*, "Instructions").
+- **Why it is here.** It is the proposed answer to where the agent
+  works (`guide.md` § 3, 1), and on this route no setting holds it:
+  reads are open ("What to watch", 1), and the way out of the sandbox
+  is a prompt the user may allow unread. The line is the one thing
+  that tells the agent, and it reaches every folder the user opens. A
+  vault's own instruction file is not its place: it is about the
+  user's machine outside the vault.
+- **What it is worth.** Guidance: instructions guide and do not stop
+  (`guide.md` § 1). On one Mac, 2026-11-20, under Approve for me, a
+  chat wrote into another repository past a line of this kind in this
+  very file (→ *An agent wrote outside its folder*). Under Ask for
+  approval a write outside still comes to the user as a prompt; a
+  read outside comes to no one.
+- **By the user's own hand.** The app's settings have an editor for
+  this file (seen 2026-11-19 on 26.1118.11504 → *The ChatGPT desktop
+  app on macOS*, "Where Codex is"; its place and name on the present
+  version were not looked at): the user pastes the line there and
+  sees it saved. Where no such editor is found, one command of the
+  user's own in their terminal, given by the agent, adds the line to
+  the file. The agent does not write it from a chat: that is a write
+  outside the folder, and the first prompt the user met would be one
+  to allow — the opposite of what section 3 tells them.
+- **Said by itself, not among the advice.** The user may leave it
+  out, as any line (`guide.md` § 3); but it is put to them as an act
+  and the agent sees it done. What stands among the advice is passed
+  over (the Full access switch, above).
 
 **Recommended** — advice; none is needed for the form to hold:
 
@@ -302,8 +354,9 @@ route.
    the Mac — other projects, other vaults, files of secrets. Codex's
    settled part has no bound on reads; the one feature that has is
    marked Beta by the vendor and gave way on this version ("Other
-   forms"). A secret is kept where the user would not want any program
-   to read it.
+   forms"). The line in the user's instruction file (section 1) tells
+   the agent not to; nothing enforces it. A secret is kept where the
+   user would not want any program to read it.
 2. **An allowed command is outside every bound.** It writes anywhere
    and connects anywhere, with the user's rights. The prompt is the
    only stop, and it stops only when read.
@@ -345,14 +398,15 @@ route.
 
 ## 6. The check
 
-What was set is one switch, so the check is two looks by the user, at
-the first setup and again after an update of the app. No chat is
-opened for it.
+What was set is one switch and one line, so the check is three looks
+by the user, at the first setup and again after an update of the app.
+No chat is opened for it.
 
 | what | the pass |
 |---|---|
 | the menu under the composer | Full access is not in it |
 | the permission choice under the composer | shows Ask for approval |
+| the user's instruction file, where the line was put in | the line is there, saved |
 
 **In ordinary work, one thing to notice**: the vault's first act that
 leaves the sandbox — the pull at a session's start — raises a prompt

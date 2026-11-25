@@ -7,9 +7,10 @@ to 2026-11-23). What was tried and what was only read — in the docs or
 in Codex's source — is marked. This note is the evidence: the route
 for the desktop app on macOS is `setup/codex-macos.md`, which points
 here by section. **Since 2026-11-23 that route is the app as it
-starts, on Ask for approval, with no file set** ("The app as it
-starts: Ask for approval"; a run of a vault's sheets on it: "Two
-sheets run on that route"). **The sections on a permission profile —
+starts, on Ask for approval, with no file of bounds set** ("The app
+as it starts: Ask for approval"; a run of a vault's sheets on it:
+"Two sheets run on that route"); since 2026-11-25 it puts one line
+into the user's own instruction file, a form not yet run. **The sections on a permission profile —
 "A permission profile with the routine inside", "A repository nested
 in the opened folder", "A tracked file under a read-only folder", "A
 setup followed from its first step" — are the record of the route
